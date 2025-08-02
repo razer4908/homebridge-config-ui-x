@@ -9,6 +9,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the `th.json` language file (#2528) (@tomzt)
 - updates to the `uk.json` language file (#2532) (@xrust83)
 - refreshed icons: security system
+- refreshed icons: lock mechanism
 
 ### Homebridge Dependencies
 
