@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common'
 import { Component, Input } from '@angular/core'
 
 import { ServiceTypeX } from '@/app/core/accessories/accessories.interfaces'
@@ -7,6 +8,9 @@ import { ServiceTypeX } from '@/app/core/accessories/accessories.interfaces'
   templateUrl: './humidity-sensor.component.html',
   styleUrls: ['./humidity-sensor.component.scss'],
   standalone: true,
+  imports: [
+    NgClass,
+  ],
 })
 export class HumiditySensorComponent {
   @Input() public service: ServiceTypeX
