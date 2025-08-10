@@ -82,4 +82,6 @@ export interface Widget {
   location?: {
     id: string // weather widget
   }
+  showNpmVersion?: boolean // update info widget
+  dockerExpanded?: boolean // update info widget
 }

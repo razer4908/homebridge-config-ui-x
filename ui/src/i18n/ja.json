@@ -575,6 +575,7 @@
   "status.widget.clock": "時計",
   "status.widget.clock_dateformat": "日付表示形式",
   "status.widget.clock_timeformat": "時刻表示形式",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "文字の大きさ",
   "status.widget.font_weight": "文字の太さ",
   "status.widget.hide_node_info": "Hide Node.js Updates",

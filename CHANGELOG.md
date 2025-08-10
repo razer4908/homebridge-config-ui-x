@@ -12,6 +12,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - refreshed icons: lock mechanism
 - refreshed icons: irrigation system + valves
 - refreshed icons: light, leak, motion, occ., hum. sensor
+- expand/collapse state saving for update information - docker information (#2529) (@NorthernMan54)
 
 ### Homebridge Dependencies
 

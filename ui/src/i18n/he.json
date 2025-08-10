@@ -575,6 +575,7 @@
   "status.widget.clock": "שעון",
   "status.widget.clock_dateformat": "פורמט תאריך",
   "status.widget.clock_timeformat": "פורמט זמן",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "גודל פונט",
   "status.widget.font_weight": "משקל פונט",
   "status.widget.hide_node_info": "הסתר עדכוני Node.js",

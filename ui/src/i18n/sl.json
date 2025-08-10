@@ -575,6 +575,7 @@
   "status.widget.clock": "Ura",
   "status.widget.clock_dateformat": "Format datuma",
   "status.widget.clock_timeformat": "Format časa",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "Velikost pisave",
   "status.widget.font_weight": "Teža pisave",
   "status.widget.hide_node_info": "Hide Node.js Updates",

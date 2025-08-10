@@ -575,6 +575,7 @@
   "status.widget.clock": "นาฬิกา",
   "status.widget.clock_dateformat": "รูปแบบวันที่",
   "status.widget.clock_timeformat": "รูปแบบเวลา",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "ขนาดตัวอักษร",
   "status.widget.font_weight": "น้ำหนักตัวอักษร",
   "status.widget.hide_node_info": "ซ่อนการอัปเดต Node.js",

@@ -575,6 +575,7 @@
   "status.widget.clock": "시계",
   "status.widget.clock_dateformat": "날짜 형식",
   "status.widget.clock_timeformat": "시간 형식",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "글꼴 크기",
   "status.widget.font_weight": "글꼴 굵기",
   "status.widget.hide_node_info": "Hide Node.js Updates",

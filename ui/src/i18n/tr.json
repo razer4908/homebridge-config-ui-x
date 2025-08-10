@@ -575,6 +575,7 @@
   "status.widget.clock": "Saat",
   "status.widget.clock_dateformat": "Tarih Biçimi",
   "status.widget.clock_timeformat": "Saat Biçimi",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "Yazı Boyutu",
   "status.widget.font_weight": "Yazı Kalınlığı",
   "status.widget.hide_node_info": "Hide Node.js Updates",

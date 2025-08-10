@@ -575,6 +575,7 @@
   "status.widget.clock": "Zegar",
   "status.widget.clock_dateformat": "Format daty",
   "status.widget.clock_timeformat": "Format czasu",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "Rozmiar czcionki",
   "status.widget.font_weight": "Grubość czcionki",
   "status.widget.hide_node_info": "Ukryj aktualizacje Node.js",

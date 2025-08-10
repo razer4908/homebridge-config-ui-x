@@ -575,6 +575,7 @@
   "status.widget.clock": "時鐘",
   "status.widget.clock_dateformat": "日期格式",
   "status.widget.clock_timeformat": "時間格式",
+  "status.widget.expand_docker": "Expand Docker Container Information",
   "status.widget.font_size": "字型大小",
   "status.widget.font_weight": "字型寬度",
   "status.widget.hide_node_info": "Hide Node.js Updates",
