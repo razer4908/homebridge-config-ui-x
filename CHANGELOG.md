@@ -8,6 +8,10 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - refreshed icons: lightbulb, switch, outlet + unknown
 
+### Other Changes
+
+- minor performance updates
+
 ### Homebridge Dependencies
 
 - `@homebridge/hap-client` @ `v3.1.1`
