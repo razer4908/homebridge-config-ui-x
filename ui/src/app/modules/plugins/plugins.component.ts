@@ -303,7 +303,7 @@ export class PluginsComponent implements OnInit, OnDestroy {
             plugin.isConfigured = configBlocks.length > 0
             plugin.isConfiguredDynamicPlatform = plugin.isConfigured && Object.prototype.hasOwnProperty.call(configBlocks[0], 'platform')
 
-            plugin.recommendChildBridge = plugin.isConfiguredDynamicPlatform
+            plugin.recommendChildBridge = plugin.isConfigured
               && this.$settings.env.recommendChildBridges
               && !['homebridge', 'homebridge-config-ui-x'].includes(plugin.name)
 

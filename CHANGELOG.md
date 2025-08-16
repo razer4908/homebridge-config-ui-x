@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - refreshed icons: light, leak, motion, occ., hum. sensor
 - expand/collapse state saving for update information - docker information (#2529) (@NorthernMan54)
 - updates to the credits modal
+- recommend child bridges for accessory-based plugins
 
 ### Homebridge Dependencies
 
