@@ -15,6 +15,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - expand/collapse state saving for update information - docker information (#2529) (@NorthernMan54)
 - updates to the credits modal
 - recommend child bridges for accessory-based plugins
+- fix for accessory control issue on android-edge/chrome
 
 ### Homebridge Dependencies
 

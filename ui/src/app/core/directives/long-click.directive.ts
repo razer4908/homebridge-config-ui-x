@@ -8,6 +8,8 @@ import { Directive, HostListener, Input, OnDestroy, output } from '@angular/core
 export class LongClickDirective implements OnDestroy {
   private downTimeout: NodeJS.Timeout
   private done = false
+  private touchInProgress = false
+  private touchStartTime = 0
 
   @Input() public duration = 350
 
@@ -21,44 +23,63 @@ export class LongClickDirective implements OnDestroy {
 
   @HostListener('mouseup', ['$event'])
   public onMouseUp(event: MouseEvent): void {
-    clearTimeout(this.downTimeout)
-    if (!this.done) {
-      this.done = true
-      this.shortClick.emit(event)
+    if (!this.touchInProgress && !this.isSyntheticEvent()) {
+      clearTimeout(this.downTimeout)
+      if (!this.done) {
+        this.done = true
+        this.shortClick.emit(event)
+      }
     }
   }
 
   @HostListener('touchend', ['$event'])
   public onTouchEnd(event: TouchEvent): void {
     clearTimeout(this.downTimeout)
-    event.preventDefault()
-    event.stopPropagation()
+
     if (!this.done) {
       this.done = true
       this.shortClick.emit(event)
     }
+
+    setTimeout(() => {
+      this.touchInProgress = false
+    }, 150)
   }
 
   @HostListener('touchstart', ['$event'])
   @HostListener('mousedown', ['$event'])
   public onMouseDown(event: MouseEvent | TouchEvent): void {
-    // Check for the left mouse button (button 0) in case of mouse event
-    if (event instanceof MouseEvent && event.button !== 0) {
+    if (event instanceof TouchEvent) {
+      this.touchInProgress = true
+      this.done = false
+      this.touchStartTime = Date.now()
+
+      if (event.cancelable && this.isSafariMobile()) {
+        event.preventDefault()
+      }
+
+      this.downTimeout = setTimeout(() => {
+        if (!this.done) {
+          this.done = true
+          this.longClick.emit(event)
+        }
+      }, this.duration)
       return
     }
-    this.done = false
 
-    if (event instanceof TouchEvent) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-
-    this.downTimeout = setTimeout(() => {
-      if (!this.done) {
-        this.done = true
-        this.longClick.emit(event)
+    if (event instanceof MouseEvent) {
+      if (!this.touchInProgress && !this.isSyntheticEvent()) {
+        if (event.button === 0) {
+          this.done = false
+          this.downTimeout = setTimeout(() => {
+            if (!this.done) {
+              this.done = true
+              this.longClick.emit(event)
+            }
+          }, this.duration)
+        }
       }
-    }, this.duration)
+    }
   }
 
   @HostListener('mousemove', ['$event'])
@@ -68,7 +89,18 @@ export class LongClickDirective implements OnDestroy {
     clearTimeout(this.downTimeout)
   }
 
+  private isSyntheticEvent(): boolean {
+    const timeSinceTouch = Date.now() - this.touchStartTime
+    return this.touchInProgress && timeSinceTouch < 300
+  }
+
+  private isSafariMobile(): boolean {
+    const userAgent = navigator.userAgent
+    return /iPad|iPhone|iPod/.test(userAgent) && /Safari/.test(userAgent) && !/Chrome|CriOS|FxiOS|EdgiOS/.test(userAgent)
+  }
+
   public ngOnDestroy() {
     clearTimeout(this.downTimeout)
+    this.touchInProgress = false
   }
 }
