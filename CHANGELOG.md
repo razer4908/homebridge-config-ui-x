@@ -26,6 +26,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - ignore some host settings in dev mode for compatibility
+- refactor function to detect changes to json config on save
 
 ### Homebridge Dependencies
 

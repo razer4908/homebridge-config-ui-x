@@ -641,147 +641,167 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
   }
 
   private async detectSavesChangesForRestart() {
+    const restartType = await this.determineRestartType()
+
+    if (restartType === 'full') {
+      await this.performFullRestart()
+    } else if (restartType === 'child') {
+      await this.performChildBridgeRestart()
+    }
+    // If restartType === 'none', do nothing
+
+    this.latestSavedConfig = JSON.parse(this.homebridgeConfig)
+  }
+
+  private async determineRestartType(): Promise<'none' | 'child' | 'full'> {
+    // If homebridge is pending a restart, we don't even need to start with these checks
+    if (this.hbPendingRestart) {
+      return 'full'
+    }
+
+    // We can try to find things that have changed, to offer the best restart option
+    const originalConfigJson = this.latestSavedConfig
+    const originalConfigString = JSON.stringify(originalConfigJson, null, 4)
+    const updatedConfigJson = JSON.parse(this.homebridgeConfig) as HomebridgeConfig
+    const updatedConfigString = this.homebridgeConfig
+
+    // Check one: has anything actually changed?
+    if (originalConfigString === updatedConfigString && !this.childBridgesToRestart.length) {
+      this.$toastr.info(this.$translate.instant('config.no_restart'), this.$translate.instant('config.config_saved'))
+      return 'none'
+    }
+
+    // Check two: has a new key been added or removed at the top level?
+    if (!this.validateArraysEqual(Object.keys(originalConfigJson), Object.keys(updatedConfigJson))) {
+      return 'full'
+    }
+
+    // Check three: if the user has no child bridges, then there is no point in checking the rest
+    const platformsAndAccessories = [
+      ...(updatedConfigJson.platforms || []),
+      ...(updatedConfigJson.accessories || []),
+    ]
+    // Check if no child bridges are present
+    if (platformsAndAccessories.every((entry: PlatformConfig | AccessoryConfig) => !entry._bridge || !Object.keys(entry._bridge).length)) {
+      return 'full'
+    }
+
+    // Check four: have any of the top level properties changed (except plugins and accessories)?
+    // Remove 'accessories' and 'platforms' from both configs
+    const originalConfigOmitted = this.removePlatformsAndAccessories(originalConfigJson)
+    const updatedConfigOmitted = this.removePlatformsAndAccessories(updatedConfigJson)
+    if (!isEqual(originalConfigOmitted, updatedConfigOmitted)) {
+      return 'full'
+    }
+
+    // So far so good, now we just needs to deal with the platforms and accessories keys
+    // Check five: In each case, for the properties of those arrays, compare on the 'platform' or 'accessory' key
+    // If by comparing them, we find a 'platform' or 'accessory' has been added, removed or changed, we need a full restart
+    const originalPlatforms = originalConfigJson.platforms || []
+    const updatedPlatforms = updatedConfigJson.platforms || []
+    const originalPlatformKeys = originalPlatforms.map((p: PlatformConfig) => p.platform)
+    const updatedPlatformKeys = updatedPlatforms.map((p: PlatformConfig) => p.platform)
+    if (!this.validateArraysEqual(originalPlatformKeys, updatedPlatformKeys)) {
+      return 'full'
+    }
+    const originalAccessories = originalConfigJson.accessories || []
+    const updatedAccessories = updatedConfigJson.accessories || []
+    const originalAccessoryKeys = originalAccessories.map((a: AccessoryConfig) => a.accessory)
+    const updatedAccessoryKeys = updatedAccessories.map((a: AccessoryConfig) => a.accessory)
+    if (!this.validateArraysEqual(originalAccessoryKeys, updatedAccessoryKeys)) {
+      return 'full'
+    }
+
+    // Any object in the platforms array can have a '_bridge' key, and the value is an object
+    // Check six: We need a full restart if for any of the platforms a '_bridge' key has been added, changed or removed
+    if (!this.validateBridgesEqual(this.removeEmptyBridges(originalPlatforms), this.removeEmptyBridges(updatedPlatforms))) {
+      return 'full'
+    }
+    if (!this.validateBridgesEqual(this.removeEmptyBridges(originalAccessories), this.removeEmptyBridges(updatedAccessories))) {
+      return 'full'
+    }
+
+    // For the rest of the checks, we need to find out which entries have changed
+    const changedPlatformEntries = originalPlatforms.filter((p: PlatformConfig) => {
+      return !isEqual(p, updatedPlatforms.find((up: PlatformConfig) => up.platform === p.platform))
+    })
+    const changedAccessoryEntries = originalAccessories.filter((a: AccessoryConfig) => {
+      return !isEqual(a, updatedAccessories.find((ua: AccessoryConfig) => ua.accessory === a.accessory))
+    })
+    const changedEntries = [...changedPlatformEntries, ...changedAccessoryEntries]
+
+    // Check seven: we need a full restart if the homebridge ui config entry has changed
+    if (changedPlatformEntries.some((entry: PlatformConfig) => entry.platform === 'config')) {
+      return 'full'
+    }
+
+    // Check eight: apart from the ui config entry, if any of the changed entries do not have a '_bridge' key
+    //   (or it is null or an empty object), we must do a full restart
+    const hasChangedEntriesWithoutBridge = changedEntries.some((entry: PlatformConfig | AccessoryConfig) => {
+      if (entry.platform === 'config') {
+        return false
+      }
+      return !entry._bridge || Object.keys(entry._bridge).length === 0
+    })
+    if (hasChangedEntriesWithoutBridge) {
+      return 'full'
+    }
+
+    // At this point we have a list of the changed entries, and we know they all have a _bridge key
+    // Now we can start to form a list of the child bridges that we can restart.
     try {
-      // If homebridge is pending a restart, we don't even need to start with these checks
-      if (this.hbPendingRestart) {
-        throw new Error('homebridge already pending a restart')
-      }
+      const data: ChildBridge[] = await firstValueFrom(this.$api.get('/status/homebridge/child-bridges'))
 
-      // We can try to find things that have changed, to offer the best restart option
-      const originalConfigJson = this.latestSavedConfig
-      const originalConfigString = JSON.stringify(originalConfigJson, null, 4)
-      const updatedConfigJson = JSON.parse(this.homebridgeConfig) as HomebridgeConfig
-      const updatedConfigString = this.homebridgeConfig
-
-      // Check one: has anything actually changed?
-      if (originalConfigString === updatedConfigString && !this.childBridgesToRestart.length) {
-        this.$toastr.info(this.$translate.instant('config.no_restart'), this.$translate.instant('config.config_saved'))
-      } else {
-        // Check two: has a new key been added or removed at the top level?
-        if (!this.validateArraysEqual(Object.keys(originalConfigJson), Object.keys(updatedConfigJson))) {
-          throw new Error('top level keys have changed')
-        }
-
-        // Check three: if the user has no child bridges, then there is no point in checking the rest
-        const platformsAndAccessories = [
-          ...(updatedConfigJson.platforms || []),
-          ...(updatedConfigJson.accessories || []),
-        ]
-        // Check if no child bridges are present
-        if (platformsAndAccessories.every((entry: PlatformConfig | AccessoryConfig) => !entry._bridge || !Object.keys(entry._bridge).length)) {
-          throw new Error('All platforms and accessories are missing a valid _bridge property.')
-        }
-
-        // Check four: have any of the top level properties changed (except plugins and accessories)?
-        // Remove 'accessories' and 'platforms' from both configs
-        const originalConfigOmitted = this.removePlatformsAndAccessories(originalConfigJson)
-        const updatedConfigOmitted = this.removePlatformsAndAccessories(updatedConfigJson)
-        if (!isEqual(originalConfigOmitted, updatedConfigOmitted)) {
-          throw new Error('top level properties have changed (except accessories and platforms)')
-        }
-
-        // So far so good, now we just needs to deal with the platforms and accessories keys
-        // Check five: In each case, for the properties of those arrays, compare on the 'platform' or 'accessory' key
-        // If by comparing them, we find a 'platform' or 'accessory' has been added, removed or changed, we need a full restart
-        const originalPlatforms = originalConfigJson.platforms || []
-        const updatedPlatforms = updatedConfigJson.platforms || []
-        const originalPlatformKeys = originalPlatforms.map((p: PlatformConfig) => p.platform)
-        const updatedPlatformKeys = updatedPlatforms.map((p: PlatformConfig) => p.platform)
-        if (!this.validateArraysEqual(originalPlatformKeys, updatedPlatformKeys)) {
-          throw new Error('platform keys have changed')
-        }
-        const originalAccessories = originalConfigJson.accessories || []
-        const updatedAccessories = updatedConfigJson.accessories || []
-        const originalAccessoryKeys = originalAccessories.map((a: AccessoryConfig) => a.accessory)
-        const updatedAccessoryKeys = updatedAccessories.map((a: AccessoryConfig) => a.accessory)
-        if (!this.validateArraysEqual(originalAccessoryKeys, updatedAccessoryKeys)) {
-          throw new Error('accessory keys have changed')
-        }
-
-        // Any object in the platforms array can have a '_bridge' key, and the value is an object
-        // Check six: We need a full restart if for any of the platforms a '_bridge' key has been added, changed or removed
-        if (!this.validateBridgesEqual(this.removeEmptyBridges(originalPlatforms), this.removeEmptyBridges(updatedPlatforms))) {
-          throw new Error('platform bridges have changed')
-        }
-        if (!this.validateBridgesEqual(this.removeEmptyBridges(originalAccessories), this.removeEmptyBridges(updatedAccessories))) {
-          throw new Error('accessory bridges have changed')
-        }
-
-        // For the rest of the checks, we need to find out which entries have changed
-        const changedPlatformEntries = originalPlatforms.filter((p: PlatformConfig) => {
-          return !isEqual(p, updatedPlatforms.find((up: PlatformConfig) => up.platform === p.platform))
-        })
-        const changedAccessoryEntries = originalAccessories.filter((a: AccessoryConfig) => {
-          return !isEqual(a, updatedAccessories.find((ua: AccessoryConfig) => ua.accessory === a.accessory))
-        })
-        const changedEntries = [...changedPlatformEntries, ...changedAccessoryEntries]
-
-        // Check seven: we need a full restart if the homebridge ui config entry has changed
-        if (changedPlatformEntries.some((entry: PlatformConfig) => entry.platform === 'config')) {
-          throw new Error('homebridge ui config has changed')
-        }
-
-        // Check eight: apart from the ui config entry, if any of the changed entries do not have a '_bridge' key
-        //   (or it is null or an empty object), we must do a full restart
-        const hasChangedEntriesWithoutBridge = changedEntries.some((entry: PlatformConfig | AccessoryConfig) => {
-          if (entry.platform === 'config') {
-            return false
+      // Match up the changed entries with the child bridges
+      changedEntries.forEach((entry: PlatformConfig | AccessoryConfig) => {
+        // Grab the username from the _bridge key, uppercase it, and find the matching child bridge
+        const configUsername = entry._bridge.username.toUpperCase()
+        const childBridge = data.find(({ username }) => username === configUsername)
+        if (childBridge) {
+          if (!this.childBridgesToRestart.some((b: ChildBridgeToRestart) => b.username === childBridge.username)) {
+            this.childBridgesToRestart.push({
+              name: childBridge.name,
+              username: childBridge.username,
+            })
           }
-          return !entry._bridge || Object.keys(entry._bridge).length === 0
-        })
-        if (hasChangedEntriesWithoutBridge) {
-          throw new Error('some changed entry does not have a _bridge key')
+        } else {
+          return 'full' // child bridge not found, need full restart
         }
-
-        // At this point we have a list of the changed entries, and we know they all have a _bridge key
-        // Now we can start to form a list of the child bridges that we can restart.
-        const data: ChildBridge[] = await firstValueFrom(this.$api.get('/status/homebridge/child-bridges'))
-
-        // Match up the changed entries with the child bridges
-        changedEntries.forEach((entry: PlatformConfig | AccessoryConfig) => {
-          // Grab the username from the _bridge key, uppercase it, and find the matching child bridge
-          const configUsername = entry._bridge.username.toUpperCase()
-          const childBridge = data.find(({ username }) => username === configUsername)
-          if (childBridge) {
-            if (!this.childBridgesToRestart.some((b: ChildBridgeToRestart) => b.username === childBridge.username)) {
-              this.childBridgesToRestart.push({
-                name: childBridge.name,
-                username: childBridge.username,
-              })
-            }
-          } else {
-            throw new Error(`no child bridge found for username: ${configUsername}`)
-          }
-        })
-
-        const ref = this.$modal.open(RestartChildBridgesComponent, {
-          size: 'lg',
-          backdrop: 'static',
-        })
-        ref.componentInstance.bridges = this.childBridgesToRestart
-
-        // If the user dismisses the modal, the child bridges are still pending a restart
-        try {
-          await ref.result
-          this.childBridgesToRestart = []
-        } catch (error) { /* modal dismissed */ }
-      }
-    } catch (error) {
-      console.error(error)
-      const ref = this.$modal.open(RestartHomebridgeComponent, {
-        size: 'lg',
-        backdrop: 'static',
       })
 
-      try {
-        await ref.result
-        this.hbPendingRestart = false
-        this.childBridgesToRestart = []
-      } catch {
-        this.hbPendingRestart = true
-      }
-    } finally {
-      this.latestSavedConfig = JSON.parse(this.homebridgeConfig)
+      return 'child' // child bridge restart is sufficient
+    } catch (error) {
+      console.error('Error fetching child bridges:', error)
+      return 'full' // api error, fallback to full restart
+    }
+  }
+
+  private async performChildBridgeRestart() {
+    const ref = this.$modal.open(RestartChildBridgesComponent, {
+      size: 'lg',
+      backdrop: 'static',
+    })
+    ref.componentInstance.bridges = this.childBridgesToRestart
+
+    // If the user dismisses the modal, the child bridges are still pending a restart
+    try {
+      await ref.result
+      this.childBridgesToRestart = []
+    } catch (error) { /* modal dismissed */ }
+  }
+
+  private async performFullRestart() {
+    const ref = this.$modal.open(RestartHomebridgeComponent, {
+      size: 'lg',
+      backdrop: 'static',
+    })
+
+    try {
+      await ref.result
+      this.hbPendingRestart = false
+      this.childBridgesToRestart = []
+    } catch {
+      this.hbPendingRestart = true
     }
   }
 
