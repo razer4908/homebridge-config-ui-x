@@ -7,6 +7,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### UI Changes
 
 - refreshed icons: lightbulb, switch, outlet + unknown
+- update `monaco-editor` from `v0.21.3` to `v0.52.2`
 
 ### Other Changes
 
