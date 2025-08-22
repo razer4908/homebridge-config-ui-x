@@ -16,6 +16,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the credits modal
 - recommend child bridges for accessory-based plugins
 - fix for accessory control issue on android-edge/chrome
+- page loading spinner should not block access to menus
 
 ### Homebridge Dependencies
 
