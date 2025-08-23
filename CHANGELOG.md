@@ -17,6 +17,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - recommend child bridges for accessory-based plugins
 - fix for accessory control issue on android-edge/chrome
 - page loading spinner should not block access to menus
+- fix link to swagger docs in development mode
 
 ### Other Changes
 
