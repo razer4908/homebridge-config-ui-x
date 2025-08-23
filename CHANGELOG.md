@@ -18,6 +18,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix for accessory control issue on android-edge/chrome
 - page loading spinner should not block access to menus
 - fix link to swagger docs in development mode
+- fix host and reverse proxy host settings not showing current value
 
 ### Other Changes
 

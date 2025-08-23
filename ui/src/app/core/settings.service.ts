@@ -22,6 +22,8 @@ export class SettingsService {
   private forbiddenKeys = ['__proto__', 'constructor', 'prototype']
 
   public env: EnvInterface = {} as EnvInterface
+  public host: string
+  public proxyHost: string
   public formAuth = true
   public sessionTimeout = 28800
   public uiVersion: string
@@ -62,6 +64,8 @@ export class SettingsService {
     this.formAuth = data.formAuth
     this.sessionTimeout = data.sessionTimeout
     this.env = data.env
+    this.host = data.host
+    this.proxyHost = data.proxyHost
     this.lightingMode = data.lightingMode
     this.wallpaper = data.wallpaper
     this.setLightingMode(this.lightingMode, 'user')

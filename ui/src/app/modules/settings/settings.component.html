@@ -682,7 +682,7 @@
         <input
           class="form-control custom-input resp-input order-1 order-md-2"
           type="text"
-          pattern="^[^{}/ :\\]+(?::\d+)?$"
+          pattern="^[^{}/:\\s]+(?::\d+)?$"
           [formControl]="uiHostFormControl"
           placeholder="0.0.0.0"
           [attr.aria-label]="('settings.network.host' | translate)"
@@ -704,7 +704,7 @@
         <input
           class="form-control custom-input resp-input order-1 order-md-2"
           type="text"
-          pattern="^[^{}/ :\\]+(?::\d+)?$"
+          pattern="^[^{}/:\\s]+(?::\d+)?$"
           placeholder="example.com:8443"
           [formControl]="uiProxyHostFormControl"
           [attr.aria-label]="('settings.network.proxy' | translate)"

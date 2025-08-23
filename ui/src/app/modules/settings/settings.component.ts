@@ -144,6 +144,10 @@ export class SettingsComponent implements OnInit {
   public hbPortIsSaving = false
   public hbPortFormControl = new FormControl(0)
 
+  public uiPortIsInvalid = false
+  public uiPortIsSaving = false
+  public uiPortFormControl = new FormControl(0)
+
   public hbStartPortIsInvalid = false
   public hbStartPortIsSaving = false
   public hbStartPortFormControl = new FormControl(0)
@@ -152,9 +156,11 @@ export class SettingsComponent implements OnInit {
   public hbEndPortIsSaving = false
   public hbEndPortFormControl = new FormControl(0)
 
-  public uiPortIsInvalid = false
-  public uiPortIsSaving = false
-  public uiPortFormControl = new FormControl(0)
+  public uiHostIsSaving = false
+  public uiHostFormControl = new FormControl('')
+
+  public uiProxyHostIsSaving = false
+  public uiProxyHostFormControl = new FormControl('')
 
   public uiAuthIsSaving = false
   public uiAuthFormControl = new UntypedFormControl(true)
@@ -176,12 +182,6 @@ export class SettingsComponent implements OnInit {
 
   public uiSslPassphraseIsSaving = false
   public uiSslPassphraseFormControl = new FormControl('')
-
-  public uiHostIsSaving = false
-  public uiHostFormControl = new FormControl('')
-
-  public uiProxyHostIsSaving = false
-  public uiProxyHostFormControl = new FormControl('')
 
   public hbPackageIsSaving = false
   public hbPackageFormControl = new FormControl('')
@@ -305,12 +305,12 @@ export class SettingsComponent implements OnInit {
       .pipe(debounceTime(750))
       .subscribe((value: string) => this.uiSslTypeSave(value))
 
-    this.uiHostFormControl.patchValue(this.$settings.env.host || '')
+    this.uiHostFormControl.patchValue(this.$settings.host || '')
     this.uiHostFormControl.valueChanges
       .pipe(debounceTime(1500))
       .subscribe((value: string) => this.uiHostSave(value))
 
-    this.uiProxyHostFormControl.patchValue(this.$settings.env.proxyHost || '')
+    this.uiProxyHostFormControl.patchValue(this.$settings.proxyHost || '')
     this.uiProxyHostFormControl.valueChanges
       .pipe(debounceTime(1500))
       .subscribe((value: string) => this.uiProxyHostSave(value))
@@ -1129,7 +1129,7 @@ export class SettingsComponent implements OnInit {
   private async uiHostSave(value: string) {
     try {
       this.uiHostIsSaving = true
-      this.$settings.setEnvItem('host', value)
+      this.$settings.setItem('host', value)
       await this.saveUiSettingChange('host', value)
       setTimeout(() => {
         this.uiHostIsSaving = false
@@ -1145,7 +1145,7 @@ export class SettingsComponent implements OnInit {
   private async uiProxyHostSave(value: string) {
     try {
       this.uiProxyHostIsSaving = true
-      this.$settings.setEnvItem('proxyHost', value)
+      this.$settings.setItem('proxyHost', value)
       await this.saveUiSettingChange('proxyHost', value)
       setTimeout(() => {
         this.uiProxyHostIsSaving = false

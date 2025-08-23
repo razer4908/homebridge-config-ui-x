@@ -52,8 +52,6 @@ export interface EnvInterface {
     hideWarning?: boolean
     bufferSize?: number
   }
-  host?: string
-  proxyHost?: string
   homebridgePackagePath?: string
   disableServerMetricsMonitoring?: boolean
 }
@@ -61,6 +59,8 @@ export interface EnvInterface {
 export interface AppSettingsInterface {
   env: EnvInterface
   formAuth: boolean
+  host?: string
+  proxyHost?: string
   sessionTimeout: number
   theme: string
   lightingMode: 'auto' | 'light' | 'dark'

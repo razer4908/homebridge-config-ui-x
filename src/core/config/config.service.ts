@@ -85,6 +85,7 @@ export class ConfigService {
     name: string
     port: number
     host?: '::' | '0.0.0.0' | string
+    proxyHost?: string
     auth: 'form' | 'none'
     theme: string
     lightingMode: 'auto' | 'light' | 'dark'
@@ -121,7 +122,6 @@ export class ConfigService {
       restart?: string
     }
     debug?: boolean
-    proxyHost?: string
     sessionTimeout?: number
     homebridgePackagePath?: string
     scheduledBackupPath?: string
@@ -275,8 +275,8 @@ export class ConfigService {
       },
       menuMode: this.ui.menuMode || 'default',
       wallpaper: this.ui.wallpaper,
-      host: this.ui.host,
-      proxyHost: this.ui.proxyHost,
+      host: this.ui.host || '',
+      proxyHost: this.ui.proxyHost || '',
       homebridgePackagePath: this.ui.homebridgePackagePath,
       disableServerMetricsMonitoring: this.ui.disableServerMetricsMonitoring,
       keepOrphans: this.hbStartupSettings?.keepOrphans || false,
