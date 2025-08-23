@@ -44,12 +44,12 @@ export async function getStartupConfig() {
   }
 
   // Preload custom host settings
-  if (ui.host) {
+  if (ui.host && process.env.UIX_DEVELOPMENT !== '1') {
     config.host = ui.host
   }
 
   // Preload ssl settings
-  if (ui.ssl && ((ui.ssl.key && ui.ssl.cert) || ui.ssl.pfx)) {
+  if (ui.ssl && ((ui.ssl.key && ui.ssl.cert) || ui.ssl.pfx) && process.env.UIX_DEVELOPMENT !== '1') {
     for (const attribute of ['key', 'cert', 'pfx']) {
       if (ui.ssl[attribute]) {
         if (!(await (stat(ui.ssl[attribute]))).isFile()) {
@@ -72,7 +72,7 @@ export async function getStartupConfig() {
   }
 
   // Preload proxy host settings
-  if (ui.proxyHost) {
+  if (ui.proxyHost && process.env.UIX_DEVELOPMENT !== '1') {
     config.cspWsOverride = `wss://${ui.proxyHost} ws://${ui.proxyHost}`
   }
 

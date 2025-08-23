@@ -18,6 +18,10 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix for accessory control issue on android-edge/chrome
 - page loading spinner should not block access to menus
 
+### Other Changes
+
+- ignore some host settings in dev mode for compatibility
+
 ### Homebridge Dependencies
 
 - `@homebridge/hap-client` @ `v3.1.1`
