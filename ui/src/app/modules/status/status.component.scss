@@ -19,23 +19,28 @@ gridster {
 }
 
 .widget-control-button {
+  position: absolute;
+  float: right;
+  top: 0 !important;
+  right: 2px !important;
+  padding: 10px;
   cursor: pointer;
-  position: fixed;
-  right: 8px;
-  top: 10px;
   opacity: 0;
   -webkit-transition: opacity 200ms ease-in;
   -moz-transition: opacity 200ms ease-in;
   -ms-transition: opacity 200ms ease-in;
   -o-transition: opacity 200ms ease-in;
   transition: opacity 200ms ease-in;
+  color: #999999;
 
-  &:active {
-    transform: scale(1.2);
+  &:active,
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
   }
 
-  @media (max-width: 1023px) {
-    display: none;
+  @media (max-width: 767px) {
+    opacity: 1;
   }
 }
 

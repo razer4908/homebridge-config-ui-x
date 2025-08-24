@@ -21,6 +21,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix host and reverse proxy host settings not showing current value
 - fix instructions on login page for recovering admin account
 - show system info table rows when data is ready per row
+- allow show/hide widgets and widget config on mobile
 
 ### Other Changes
 

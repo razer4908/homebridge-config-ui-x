@@ -3,11 +3,11 @@
     <h3 class="primary-text m-0">{{ 'menu.label_status' | translate }}</h3>
   </div>
   @if (consoleStatus === 'up' && isAdmin) {
-  <div class="col-6 text-end d-none d-sm-block">
+  <div class="col-6 text-end">
     <button
       type="button"
-      class="btn btn-elegant my-0 me-2"
-      [hidden]="!options.draggable.enabled"
+      class="btn btn-elegant my-0 me-0"
+      [hidden]="!options.draggable.enabled && !page.showWidgetConfigure"
       (click)="addWidget()"
       container="body"
       placement="bottom"
@@ -18,10 +18,10 @@
     >
       <i class="fas fa-fw fa-eye-low-vision"></i>
     </button>
-    <div class="btn-group" role="group">
+    <div class="btn-group d-none d-sm-inline-block" role="group">
       <button
         type="button"
-        class="btn btn-elegant my-0"
+        class="btn btn-elegant my-0 ms-2"
         [disabled]="options.draggable.enabled"
         (click)="unlockLayout()"
         container="body"
@@ -61,8 +61,10 @@
       @for (item of dashboard; track item) { @if (!(item.hideOnMobile && page.mobile)) {
       <gridster-item class="widget-item" [item]="item" [id]="item.component">
         <div class="gridster-item-content">
-          @if (options.draggable.enabled) {
-          <i class="fas fa-fw fa-cog widget-control-button primary-text" (click)="manageWidget(item)"></i>
+          @if (options.draggable.enabled || page.showWidgetConfigure) {
+          <div class="widget-control-button" (click)="manageWidget(item)">
+            <i class="fas fa-fw fa-cog"></i>
+          </div>
           }
         </div>
         <app-widgets [widget]="item" class="d-flex h-100 w-100"></app-widgets>

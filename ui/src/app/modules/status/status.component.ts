@@ -47,6 +47,7 @@ export class StatusComponent implements OnInit, OnDestroy {
   public currentYear: number
   public page = {
     mobile: (window.innerWidth < 1024),
+    showWidgetConfigure: (window.innerWidth < 576),
   }
 
   public ngOnInit() {
@@ -265,6 +266,7 @@ export class StatusComponent implements OnInit, OnDestroy {
   private gridResizeEvent(_item: any, itemComponent: any) {
     itemComponent.item.$resizeEvent.next('resize')
     this.page.mobile = (window.innerWidth < 1024)
+    this.page.showWidgetConfigure = (window.innerWidth < 576)
   }
 
   private async gridChangedEvent() {
