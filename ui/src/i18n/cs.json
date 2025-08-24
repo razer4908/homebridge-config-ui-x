@@ -203,7 +203,7 @@
   "form.select.auto": "Automaticky (Použijí se nastavení prohlížeče)",
   "login.invalid_code": "The code entered is incorrect or has expired",
   "login.invalid_credentials": "Neplatné uživatelské jméno a heslo",
-  "login.invalid_credentials_2": "To reset your credentials or 2fa code, delete the <code>auth.json</code> file in your Homebridge storage directory, restart Homebridge, then login with <code>admin</code> / <code>admin</code>.",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "Neplatné heslo",
   "login.label_2fa_code": "Dvoufaktorový kód",
   "logs.download.error": "Nepodařilo se stáhnout soubor protokolu.",

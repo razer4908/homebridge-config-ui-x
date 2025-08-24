@@ -203,7 +203,7 @@
   "form.select.auto": "Otomatis (Gunakan Pengaturan Peramban)",
   "login.invalid_code": "The code entered is incorrect or has expired",
   "login.invalid_credentials": "Nama Pengguna dan Kata Sandi Salah",
-  "login.invalid_credentials_2": "To reset your credentials or 2fa code, delete the <code>auth.json</code> file in your Homebridge storage directory, restart Homebridge, then login with <code>admin</code> / <code>admin</code>.",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "Kata kunci tidak valid",
   "login.label_2fa_code": "Kode Otentikasi Dua Faktor (2FA)",
   "logs.download.error": "Gagal mengunduh berkas log.",

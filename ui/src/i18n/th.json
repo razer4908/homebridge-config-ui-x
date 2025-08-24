@@ -203,7 +203,7 @@
   "form.select.auto": "อัตโนมัติ (ใช้การตั้งค่าเบราว์เซอร์)",
   "login.invalid_code": "รหัสที่ป้อนไม่ถูกต้องหรือหมดอายุแล้ว",
   "login.invalid_credentials": "ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง",
-  "login.invalid_credentials_2": "หากต้องการรีเซ็ตข้อมูลประจำตัวหรือรหัส 2fa ของคุณ ให้ลบไฟล์ <code>auth.json</code> ในไดเร็กทอรีที่เก็บข้อมูล Homebridge ของคุณ รีสตาร์ท Homebridge จากนั้นเข้าสู่ระบบด้วย <code>admin</code> / <code>admin</code>",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "รหัสผ่านไม่ถูกต้อง",
   "login.label_2fa_code": "รหัสรับรองความถูกต้องสองปัจจัย",
   "logs.download.error": "ไม่สามารถดาวน์โหลดไฟล์ log ได้",

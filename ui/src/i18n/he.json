@@ -203,7 +203,7 @@
   "form.select.auto": "אוטומטי (השתמש בהגדרות הדפדפן)",
   "login.invalid_code": "הקוד שהוזן שגוי או פג תוקף",
   "login.invalid_credentials": "שם משתמש וסיסמה לא תקינים",
-  "login.invalid_credentials_2": "כדי לאפס את פרטי הכניסה שלך או את קוד האימות הדו שלבי, מחק את קובץ <code>auth.json</code> בתיקיית האחסון של Homebridge, הפעל מחדש את Homebridge, ואז התחבר עם <code>admin</code> / <code>admin</code>.",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "סיסמה שגויה",
   "login.label_2fa_code": "קוד גישה דו שלבית",
   "logs.download.error": "כשל בהורדת קובץ הלוג.",

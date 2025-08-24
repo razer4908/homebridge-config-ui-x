@@ -203,7 +203,7 @@
   "form.select.auto": "자동 (브라우저 설정 사용)",
   "login.invalid_code": "The code entered is incorrect or has expired",
   "login.invalid_credentials": "유효하지 않은 사용자명 또는 비밀번호입니다",
-  "login.invalid_credentials_2": "To reset your credentials or 2fa code, delete the <code>auth.json</code> file in your Homebridge storage directory, restart Homebridge, then login with <code>admin</code> / <code>admin</code>.",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "Invalid Password",
   "login.label_2fa_code": "2차 인증 코드",
   "logs.download.error": "로그 파일 다운로드에 실패했습니다.",

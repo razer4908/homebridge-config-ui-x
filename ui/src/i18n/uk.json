@@ -203,7 +203,7 @@
   "form.select.auto": "Автоматично (використовувати налаштування браузера)",
   "login.invalid_code": "Введений код неправильний або термін його дії минув",
   "login.invalid_credentials": "Неправильне ім'я користувача або пароль.",
-  "login.invalid_credentials_2": "Щоб скинути свої облікові дані або код 2FA, видаліть файл <code>auth.json</code> у каталозі сховища Homebridge, перезапустіть Homebridge, а потім увійдіть у систему за допомогою <code>admin</code> / <code>admin</code>.",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "Невірний пароль",
   "login.label_2fa_code": "Код 2FA",
   "logs.download.error": "Не вдалося завантажити файл журналу.",

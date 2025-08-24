@@ -19,6 +19,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - page loading spinner should not block access to menus
 - fix link to swagger docs in development mode
 - fix host and reverse proxy host settings not showing current value
+- fix instructions on login page for recovering admin account
 
 ### Other Changes
 

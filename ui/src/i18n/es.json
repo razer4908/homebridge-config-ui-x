@@ -203,7 +203,7 @@
   "form.select.auto": "Automático (Usar ajustes del navegador)",
   "login.invalid_code": "The code entered is incorrect or has expired",
   "login.invalid_credentials": "Usuario o contraseña incorrectos",
-  "login.invalid_credentials_2": "To reset your credentials or 2fa code, delete the <code>auth.json</code> file in your Homebridge storage directory, restart Homebridge, then login with <code>admin</code> / <code>admin</code>.",
+  "login.invalid_credentials_2": "If you lose access, delete the <code>auth.json</code> file in your Homebridge storage directory and restart Homebridge. Then refresh this page to set up a new admin account. Your Homebridge/UI settings will remain unchanged, except for UI user accounts. The only user account will be the admin account that you are setting up now.",
   "login.invalid_password": "Contraseña Inválida",
   "login.label_2fa_code": "Código de autenticación de dos factores",
   "logs.download.error": "Error al descargar el archivo de registro.",
