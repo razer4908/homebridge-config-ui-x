@@ -12,6 +12,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
   - the default view is the **new inline view**, which shows the differences together
   - a new button allows switching between the inline view and the **existing side-by-side view**
 - improvements to frontend route auth, guards and auth services
+- improvements to schema and translations in config editor
 
 ### Other Changes
 
