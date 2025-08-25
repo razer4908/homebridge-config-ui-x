@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
   - a new button allows switching between the inline view and the **existing side-by-side view**
 - improvements to frontend route auth, guards and auth services
 - improvements to schema and translations in config editor
+- add schema info and validation to manual plugin config editor
 
 ### Other Changes
 
