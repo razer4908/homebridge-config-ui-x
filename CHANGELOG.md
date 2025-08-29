@@ -22,6 +22,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - minor performance updates
+- added copilot instructions file (#2544) (copilot)
 
 ### Homebridge Dependencies
 
