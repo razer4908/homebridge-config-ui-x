@@ -19,6 +19,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - show help on accessories when no plugins installed
 - add config option to always show beta versions of plugins
 - fix ios safari burger menu viewport issue
+- update to use font-awesome v7
 
 ### Other Changes
 

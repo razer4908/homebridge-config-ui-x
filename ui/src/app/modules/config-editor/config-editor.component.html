@@ -16,7 +16,7 @@
         [ngbTooltip]="'form.button_cancel' | translate"
         [attr.aria-label]="'form.button_cancel' | translate"
       >
-        <i class="fas fa-fw fa-times"></i>
+        <i class="fas fa-times"></i>
       </button>
       } @if (!originalConfig) {
       <button
@@ -29,7 +29,7 @@
         [attr.aria-label]="'form.button_restore' | translate"
         [ngbTooltip]="'form.button_restore' | translate"
       >
-        <i class="fas fa-fw fa-history"></i>
+        <i class="fas fa-history"></i>
       </button>
       } @if (!isMobile && originalConfig) {
       <button
@@ -42,7 +42,7 @@
         [attr.aria-label]="(renderSideBySide ? 'config.restore.view_inline' : 'config.restore.view_side_by_side') | translate"
         [ngbTooltip]="(renderSideBySide ? 'config.restore.view_inline' : 'config.restore.view_side_by_side') | translate"
       >
-        <i class="fas fa-fw" [class.fa-columns]="!renderSideBySide" [class.fa-bars]="renderSideBySide"></i>
+        <i class="fas" [class.fa-columns]="!renderSideBySide" [class.fa-bars]="renderSideBySide"></i>
       </button>
       }
       <button
@@ -57,9 +57,9 @@
         [attr.aria-label]="'form.button_save' | translate"
       >
         @if (!saveInProgress) {
-        <i class="fas fa-fw fa-floppy-disk"></i>
+        <i class="fas fa-floppy-disk"></i>
         } @if (saveInProgress) {
-        <i class="fas fa-fw fa-spinner fa-pulse"></i>
+        <i class="fas fa-spinner fa-pulse"></i>
         }
       </button>
     </div>

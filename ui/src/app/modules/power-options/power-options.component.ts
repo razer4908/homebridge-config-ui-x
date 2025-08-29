@@ -56,7 +56,7 @@ export class PowerOptionsComponent {
     ref.componentInstance.title = this.$translate.instant('menu.linux.label_shutdown_server')
     ref.componentInstance.message = this.$translate.instant('menu.linux.label_shutdown_modal')
     ref.componentInstance.confirmButtonLabel = this.$translate.instant('form.button_continue')
-    ref.componentInstance.faIconClass = 'fa fa-fw fa-power-off primary-text'
+    ref.componentInstance.faIconClass = 'fa fa-power-off primary-text'
 
     ref.result
       .then(() => {

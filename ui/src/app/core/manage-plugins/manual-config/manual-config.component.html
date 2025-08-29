@@ -13,7 +13,7 @@
   <div class="modal-body pb-0">
     @if (loading) {
     <div class="text-center primary-text">
-      <i class="fa fa-fw fa-cog fa-spin" style="font-size: 75px"></i>
+      <i class="fa fa-cog fa-spin" style="font-size: 75px"></i>
     </div>
     } @if (!loading && !canConfigure) {
     <div class="alert alert-warning mb-0">
@@ -47,7 +47,7 @@
                 [openDelay]="150"
                 triggers="hover"
               >
-                <i class="fa fa-fw fa-trash"></i>
+                <i class="fa fa-trash"></i>
               </button>
               }
               <button
@@ -59,11 +59,11 @@
                 [openDelay]="150"
                 triggers="hover"
               >
-                <i class="fa fa-fw fa-edit"></i>
+                <i class="fa fa-edit"></i>
               </button>
               } @if (!schema?.singular) {
               <i
-                class="fa fa-fw fa-xl"
+                class="fa fa-xl"
                 [ngClass]="{
                   'fa-circle-check green-text': formBlocksValid[$index],
                   'fa-circle-exclamation red-text': strictValidation && !formBlocksValid[$index],
@@ -115,7 +115,7 @@
     <div class="text-end d-flex align-items-center justify-content-end">
       @if (canConfigure) { @if (schema?.singular) {
       <i
-        class="fa fa-fw fa-xl me-2"
+        class="fa fa-xl me-2"
         [ngClass]="{
             'fa-circle-check green-text': formIsValid,
             'fa-circle-exclamation red-text': strictValidation && !formIsValid,
@@ -129,7 +129,7 @@
       ></i>
       } @if (!schema?.singular) {
       <button type="button" class="btn btn-elegant me-2" data-bs-dismiss="modal" (click)="addBlock()">
-        <i class="fa fa-fw fa-plus"></i>
+        <i class="fa fa-plus"></i>
       </button>
       }
       <button
@@ -140,7 +140,7 @@
         [disabled]="saveInProgress || (!formIsValid && strictValidation)"
       >
         @if (!saveInProgress) { {{ 'form.button_save' | translate }} } @if (saveInProgress) {
-        <i class="fas fa-fw fa-spinner fa-pulse"></i>
+        <i class="fas fa-spinner fa-pulse"></i>
         }
       </button>
       } @if (!canConfigure) {
