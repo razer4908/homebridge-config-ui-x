@@ -15,6 +15,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - improvements to schema and translations in config editor
 - add schema info and validation to manual plugin config editor
 - show plugin schema header and footer in plugin json editor
+- hide search button when no plugins installed
 
 ### Other Changes
 
