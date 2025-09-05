@@ -49,7 +49,8 @@ export class LongClickDirective implements OnDestroy {
   @HostListener('touchstart', ['$event'])
   @HostListener('mousedown', ['$event'])
   public onMouseDown(event: MouseEvent | TouchEvent): void {
-    if (event instanceof TouchEvent) {
+    // Check for touch event by looking for touches property instead of instanceof
+    if ('touches' in event) {
       this.touchInProgress = true
       this.done = false
       this.touchStartTime = Date.now()
@@ -67,17 +68,16 @@ export class LongClickDirective implements OnDestroy {
       return
     }
 
-    if (event instanceof MouseEvent) {
-      if (!this.touchInProgress && !this.isSyntheticEvent()) {
-        if (event.button === 0) {
-          this.done = false
-          this.downTimeout = setTimeout(() => {
-            if (!this.done) {
-              this.done = true
-              this.longClick.emit(event)
-            }
-          }, this.duration)
-        }
+    // If not a touch event, handle as mouse event
+    if (!this.touchInProgress && !this.isSyntheticEvent()) {
+      if ((event as MouseEvent).button === 0) {
+        this.done = false
+        this.downTimeout = setTimeout(() => {
+          if (!this.done) {
+            this.done = true
+            this.longClick.emit(event)
+          }
+        }, this.duration)
       }
     }
   }
