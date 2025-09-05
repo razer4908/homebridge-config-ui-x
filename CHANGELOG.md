@@ -21,6 +21,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix ios safari burger menu viewport issue
 - update to use font-awesome v7
 - fix: no `TouchEvent` in safari to fix toggles
+- fix floating-point precision issues in temperature display
 
 ### Other Changes
 

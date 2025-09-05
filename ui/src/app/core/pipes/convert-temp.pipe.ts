@@ -11,8 +11,8 @@ export class ConvertTempPipe implements PipeTransform {
 
   transform(value: number, unit: 'c' | 'f' = this.$settings.env.temperatureUnits): number {
     if (unit === 'f') {
-      return value * 1.8 + 32
+      return Math.round((value * 1.8 + 32) * 10) / 10
     }
-    return value
+    return Math.round(value * 10) / 10
   }
 }
