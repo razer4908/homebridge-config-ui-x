@@ -19,7 +19,6 @@
       <i class="fas fab fa-node-js primary-text mb-3" style="font-size: 75px"></i>
       <h5 class="mb-3">{{ nodeVersion }}@if (latestVersion !== nodeVersion) { &rarr; {{ latestVersion }} }</h5>
     </div>
-
     <ul class="mb-3">
       <li>{{ 'status.widget.info.node_update_message' | translate }}</li>
       @if (homebridgeRunningInSynologyPackage || homebridgeRunningInDocker) {
@@ -28,8 +27,30 @@
       <li>{{ 'status.widget.info.node_unsupp_message' | translate }}</li>
       }
     </ul>
+    <ul class="list-group list-group-box mt-3 mb-0">
+      <li class="list-group-item text-center">{{ 'status.widget.info.node_major' | translate }}</li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="text-start flex-grow-1">
+          Node.js v24
+          <br />
+          <span class="grey-text small">
+            {{ (supportsNodeJs24 ? 'status.widget.info.node_next_yes' : 'status.widget.info.node_next_no') | translate:
+            { architecture: architecture } }}
+          </span>
+        </div>
+        <div class="ms-3">
+          @if (supportsNodeJs24) {
+          <i class="fas fa-check-circle green-text fa-xl"></i>
+          } @else {
+          <i class="fas fa-xmark-circle red-text fa-xl"></i>
+          }
+        </div>
+      </li>
+    </ul>
+
     @if (installedPlugins.length) {
     <ul class="list-group list-group-box mt-3 mb-0">
+      <li class="list-group-item text-center">{{ 'menu.label_plugins' | translate }}</li>
       @for (plugin of installedPlugins; track plugin) {
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="text-start flex-grow-1">

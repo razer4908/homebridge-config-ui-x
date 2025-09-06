@@ -2,6 +2,24 @@
 
 All notable changes to `homebridge-config-ui-x` will be documented in this file. This project tries to adhere to [Semantic Versioning](http://semver.org/).
 
+## v5.6.1 (Unreleased)
+
+### UI Changes
+
+- updates to the `th.json` language file (#2564) (@tomzt)
+- updates to the `ja.json` language file (#2570) (@FreeWiFi7749)
+- add node 24 info to node modal + prevent node 24 upgrades on 32-bit systems
+
+### Other Changes
+
+- add pull request targeting guidelines to copilot instructions (#2563) (@NorthernMan54)
+
+### Homebridge Dependencies
+
+- `@homebridge/hap-client` @ `v3.1.1`
+- `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.0`
+
 ## v5.6.0 (2025-09-06)
 
 ### UI Changes

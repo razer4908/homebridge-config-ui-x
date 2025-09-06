@@ -28,6 +28,7 @@ import {
 import { ConfigService } from '../../core/config/config.service'
 import { HomebridgeIpcService } from '../../core/homebridge-ipc/homebridge-ipc.service'
 import { Logger } from '../../core/logger/logger.service'
+import { isNodeV24SupportedArchitecture } from '../../core/node-version.constants'
 import { PluginsService } from '../plugins/plugins.service'
 import { ServerService } from '../server/server.service'
 
@@ -455,6 +456,8 @@ export class StatusService {
       return cachedResult
     }
 
+    const isNodeJs24Supported = isNodeV24SupportedArchitecture()
+
     try {
       const versionList = (await firstValueFrom(this.httpService.get('https://nodejs.org/dist/index.json'))).data
 
@@ -472,7 +475,7 @@ export class StatusService {
        *      18            2.28
        *      20            2.31
        *      22            2.31 (assumption - the code below assumes this)
-       *      24            ????
+       *      24            2.31+ (64-bit architectures only)
        */
 
       // Behaviour depends on the installed version of node
@@ -494,7 +497,7 @@ export class StatusService {
           break
         }
         case 'v24': {
-          // Currently using v24
+          // Currently using v24 (only possible on 64-bit architectures)
           // Check if there is a new minor/patch version available
           if (gt(latest24.version, process.version)) {
             updateAvailable = true
@@ -524,6 +527,8 @@ export class StatusService {
         showNodeUnsupportedWarning,
         installPath: dirname(process.execPath),
         npmVersion,
+        architecture: process.arch,
+        supportsNodeJs24: isNodeJs24Supported,
       }
       this.statusCache.set('nodeJsVersion', versionInformation, 86400)
       return versionInformation
@@ -534,6 +539,8 @@ export class StatusService {
         latestVersion: process.version,
         updateAvailable: false,
         showNodeUnsupportedWarning: false,
+        architecture: process.arch,
+        supportsNodeJs24: isNodeJs24Supported,
       }
       this.statusCache.set('nodeJsVersion', versionInformation, 3600)
       return versionInformation
