@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - add pull request targeting guidelines to copilot instructions (#2563) (@NorthernMan54)
+- include `homebridge` check with prefer betas settings
 
 ### Homebridge Dependencies
 

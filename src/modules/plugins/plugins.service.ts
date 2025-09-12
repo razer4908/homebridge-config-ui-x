@@ -720,19 +720,21 @@ export class PluginsService {
     const homebridgeVersion = parse(homebridge.installedVersion)
     const installedTag = homebridgeVersion.prerelease[0]?.toString()
 
-    // Show pre-releases updates if the user is currently running an alpha/beta/test release
+    // check for beta updates, if no latest version is available
     // or if the alwaysShowBetas setting is enabled
-    const shouldCheckBetas = (installedTag && ['alpha', 'beta', 'test'].includes(installedTag) && gt(homebridge.installedVersion, homebridge.latestVersion))
-      || this.configService.ui.plugins?.alwaysShowBetas
+    if (!homebridge.updateAvailable) {
+      const shouldCheckBetas = (installedTag && ['alpha', 'beta', 'test'].includes(installedTag) && gt(homebridge.installedVersion, homebridge.latestVersion))
+        || this.configService.ui.plugins?.alwaysShowBetas
 
-    if (shouldCheckBetas) {
-      const versions = await this.getAvailablePluginVersions('homebridge')
-      const targetTag = this.configService.ui.plugins?.alwaysShowBetas && !installedTag ? 'beta' : installedTag
-      if (versions.tags[targetTag] && gt(versions.tags[targetTag], homebridge.installedVersion)) {
-        homebridge.latestVersion = versions.tags[targetTag]
-        homebridge.updateAvailable = true
-        homebridge.updateEngines = versions.versions?.[homebridge.latestVersion]?.engines || null
-        homebridge.updateTag = targetTag
+      if (shouldCheckBetas) {
+        const versions = await this.getAvailablePluginVersions('homebridge')
+        const targetTag = this.configService.ui.plugins?.alwaysShowBetas && !installedTag ? 'beta' : installedTag
+        if (versions.tags[targetTag] && gt(versions.tags[targetTag], homebridge.installedVersion)) {
+          homebridge.latestVersion = versions.tags[targetTag]
+          homebridge.updateAvailable = true
+          homebridge.updateEngines = versions.versions?.[homebridge.latestVersion]?.engines || null
+          homebridge.updateTag = targetTag
+        }
       }
     }
 
