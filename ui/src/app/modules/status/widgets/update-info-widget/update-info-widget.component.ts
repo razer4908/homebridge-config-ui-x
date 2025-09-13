@@ -16,6 +16,7 @@ import { IoNamespace, WsService } from '@/app/core/ws.service'
 import { HbV2ModalComponent } from '@/app/modules/status/widgets/update-info-widget/hb-v2-modal/hb-v2-modal.component'
 import { NodeVersionModalComponent } from '@/app/modules/status/widgets/update-info-widget/node-version-modal/node-version-modal.component'
 import { DockerDetails, NodeJsInfo, ServerInfo, Widget } from '@/app/modules/status/widgets/widgets.interfaces'
+import { environment } from '@/environments/environment'
 
 @Component({
   templateUrl: './update-info-widget.component.html',
@@ -163,6 +164,9 @@ export class UpdateInfoWidgetComponent implements OnInit {
       const response = await firstValueFrom(this.io.request('homebridge-ui-version-check'))
       this.homebridgeUiPkg = response
       this.$settings.env.homebridgeUiVersion = response.installedVersion
+      if (!environment.production) {
+        this.homebridgeUiPkg.updateAvailable = false
+      }
     } catch (error) {
       console.error(error)
       this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
