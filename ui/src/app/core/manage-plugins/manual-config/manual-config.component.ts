@@ -341,63 +341,6 @@ export class ManualConfigComponent implements OnInit, OnDestroy {
 
       // Manually trigger change detection to update the UI immediately
       this.$cdr.detectChanges()
-
-      // Log validation issues to console if any exist
-      const validationErrors = this.getValidationErrors()
-      if (validationErrors.length > 0) {
-        console.error('Manual config validation issues:', validationErrors)
-      }
-    }
-  }
-
-  /**
-   * Get detailed validation information
-   * @returns array of validation errors/warnings
-   */
-  public getValidationErrors(): Array<{ message: string, line: number, column: number, severity: string }> {
-    if (!this.monacoEditor) {
-      return []
-    }
-
-    const model = this.monacoEditor.getModel()
-    if (!model) {
-      return []
-    }
-
-    const markers = (window as any).monaco.editor.getModelMarkers({ resource: model.uri })
-
-    // Return both errors and warnings as validation issues
-    const monaco = (window as any).monaco
-    const validationMarkers = markers.filter((marker: any) =>
-      marker.severity === monaco.MarkerSeverity.Error || marker.severity === monaco.MarkerSeverity.Warning,
-    )
-
-    return validationMarkers.map((marker: any) => ({
-      message: marker.message,
-      line: marker.startLineNumber,
-      column: marker.startColumn,
-      severity: this.getMarkerSeverityName(marker.severity),
-    }))
-  }
-
-  private getMarkerSeverityName(severity: number): string {
-    const monaco = (window as any).monaco
-    switch (severity) {
-      case monaco.MarkerSeverity.Error: {
-        return 'error'
-      }
-      case monaco.MarkerSeverity.Warning: {
-        return 'warning'
-      }
-      case monaco.MarkerSeverity.Info: {
-        return 'info'
-      }
-      case monaco.MarkerSeverity.Hint: {
-        return 'hint'
-      }
-      default: {
-        return 'unknown'
-      }
     }
   }
 

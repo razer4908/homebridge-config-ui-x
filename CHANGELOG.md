@@ -15,10 +15,11 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - add pull request targeting guidelines to copilot instructions (#2563) (@NorthernMan54)
 - include `homebridge` check with prefer betas settings
 - hide updates for the ui when running in dev mode
+- temporary fix for `@ng-formworks/core` for schemas
 
 ### Homebridge Dependencies
 
-- `@homebridge/hap-client` @ `v3.1.1`
+- `@homebridge/hap-client` @ `v3.1.2`
 - `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
 - `@homebridge/plugin-ui-utils` @ `v2.1.0`
 

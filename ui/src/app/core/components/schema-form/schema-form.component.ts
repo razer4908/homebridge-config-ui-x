@@ -51,10 +51,10 @@ export class SchemaFormComponent implements OnInit {
   public validChange(data: any) {
     this.isValid.emit(data)
   }
-
-  public validationErrors(errors: any[] | null) {
-    if (errors) {
-      errors.forEach(error => console.error(error.instancePath, error.message))
-    }
-  }
+  //
+  // public validationErrors(errors: any[] | null) {
+  //   if (errors) {
+  //     errors.forEach(error => console.error(error.instancePath, error.message))
+  //   }
+  // }
 }
