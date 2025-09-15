@@ -11,6 +11,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - put services types into translatable strings
 - prevent url-based settings from being changed from a pwa
 - add search bar on settings page for filtering options
+- implement html page titles on section pages (#2579)
 
 ### Other Changes
 
