@@ -253,7 +253,6 @@ export class ServerController {
   @Put('/ports')
   @ApiOperation({ summary: 'Update the usable ports for Homebridge.' })
   @ApiBody({ description: 'Object with start and end properties.', type: 'json', isArray: false })
-  @Put()
   setUsablePorts(@Body() body) {
     return this.serverService.setUsablePorts(body)
   }

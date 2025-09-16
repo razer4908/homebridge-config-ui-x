@@ -97,16 +97,22 @@ export class ConfigEditorController {
   @Put('/ui/accessory-control/instance-blacklist')
   @ApiOperation({ summary: 'Update the accessory control instance blacklist.' })
   @ApiBody({ description: 'Array of bridge instances for which control by the UI should be blocked.', type: 'json', isArray: true })
-  @Put()
   setAccessoryControlInstanceBlacklist(@Body() { body }) {
     return this.configEditorService.setAccessoryControlInstanceBlacklist(body)
+  }
+
+  @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
+  @Get('/ui/plugins/hide-updates-for')
+  @ApiOperation({ summary: 'Get the plugins hide updates for list.' })
+  getPluginsHideUpdatesFor(): Promise<string[]> {
+    return this.configEditorService.getPluginsHideUpdatesFor()
   }
 
   @UseGuards(AdminGuard)
   @Put('/ui/plugins/hide-updates-for')
   @ApiOperation({ summary: 'Update the plugins hide updates for.' })
   @ApiBody({ description: 'Array of plugin names to hide updates for in the UI.', type: 'json', isArray: true })
-  @Put()
   setPluginsHideUpdatesFor(@Body() { body }) {
     return this.configEditorService.setPluginsHideUpdatesFor(body)
   }
