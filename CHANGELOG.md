@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix air purifier off switch in control modal
 - fix infinite loading spinner on authentication expiry (@copilot)
 - added config option to advertise the ui over mdns
+- added config option to for inactivity-based session timeout
 
 ### Homebridge Dependencies
 
