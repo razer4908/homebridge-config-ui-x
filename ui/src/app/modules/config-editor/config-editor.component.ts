@@ -395,6 +395,17 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
         if (existingModifiedModel) {
           existingModifiedModel.dispose()
         }
+
+        // Clean up validation schemas to prevent interference with other Monaco editors
+        // Remove the homebridge config schema we added
+        const existingSchemas = (window as any).monaco.languages.json.jsonDefaults.diagnosticsOptions.schemas || []
+        const updatedSchemas = existingSchemas.filter((x: any) => x.uri !== 'http://homebridge/config.json');
+
+        (window as any).monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+          validate: true,
+          allowComments: false,
+          schemas: updatedSchemas,
+        })
       }
 
       // Clean up monaco editor instance

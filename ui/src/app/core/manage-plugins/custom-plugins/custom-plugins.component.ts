@@ -297,8 +297,10 @@ export class CustomPluginsComponent implements OnInit, OnDestroy {
   }
 
   private handleUpdateConfig(event: MessageEvent, pluginConfig: Array<any>) {
-    // Refresh the schema form
-    this.schemaFormRefreshSubject.next(undefined)
+    // Only refresh the schema form if it's actually visible
+    if (this.showSchemaForm) {
+      this.schemaFormRefreshSubject.next(undefined)
+    }
 
     // Ensure the update contains an array
     if (!Array.isArray(pluginConfig)) {
