@@ -10,6 +10,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - refreshed icons: heater, cooler, de/humidifier + thermostat
 - put services types into translatable strings
 - prevent url-based settings from being changed from a pwa
+- add search bar on settings page for filtering options
 
 ### Other Changes
 
