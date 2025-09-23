@@ -10,6 +10,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the `uk.json` language file (#2584) (@xrust83)
 - updates to the `th.json` language file (#2590) (@tomzt)
 - detect full restart needed after config (editor) update
+- fix microphone active state on accessory tile
 
 ### Homebridge Dependencies
 
