@@ -38,18 +38,28 @@ export class AirPurifierManageComponent implements OnInit {
         this.service.getCharacteristic('RotationSpeed').setValue(this.targetRotationSpeed.value)
 
         // Turn the air purifier on or off when rotation speed is adjusted
-        if (this.targetRotationSpeed.value && !this.service.values.Active) {
+        if (this.targetRotationSpeed.value && !this.targetState) {
           this.targetState = 1
-          this.service.getCharacteristic('Active').setValue(this.targetMode)
-        } else if (!this.targetRotationSpeed.value && this.service.values.Active) {
+          if ('Active' in this.service.values) {
+            this.service.getCharacteristic('Active').setValue(1)
+          } else if ('On' in this.service.values) {
+            this.service.getCharacteristic('On').setValue(true)
+          }
+        } else if (!this.targetRotationSpeed.value && this.targetState) {
           this.targetState = 0
-          this.service.getCharacteristic('Active').setValue(this.targetMode)
+          if ('Active' in this.service.values) {
+            this.service.getCharacteristic('Active').setValue(0)
+          } else if ('On' in this.service.values) {
+            this.service.getCharacteristic('On').setValue(false)
+          }
         }
       })
   }
 
   public ngOnInit() {
-    this.targetState = this.service.values.Active || this.service.values.On
+    this.targetState = 'Active' in this.service.values
+      ? this.service.values.Active
+      : (this.service.values.On ? 1 : 0)
     this.targetMode = this.service.values.TargetAirPurifierState
     if ('TargetAirPurifierState' in this.service.values) {
       this.targetModeValidValues = this.service.getCharacteristic('TargetAirPurifierState').validValues as number[]
@@ -63,11 +73,6 @@ export class AirPurifierManageComponent implements OnInit {
       this.service.getCharacteristic('Active').setValue(this.targetState)
     } else if ('On' in this.service.values) {
       this.service.getCharacteristic('On').setValue(this.targetState === 1)
-    }
-
-    // Set the rotation speed to max if on 0% when turned on
-    if (this.targetState && this.targetRotationSpeed && !this.targetRotationSpeed.value) {
-      this.targetRotationSpeed.value = this.service.getCharacteristic('RotationSpeed').maxValue
     }
 
     const target = event.target as HTMLButtonElement

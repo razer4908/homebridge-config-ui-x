@@ -41,11 +41,6 @@ export class AirPurifierComponent implements OnInit {
     } else if ('On' in this.service.values) {
       this.service.getCharacteristic('On').setValue(!this.service.values.On)
     }
-
-    // Set the rotation speed to max if on 0% when turned on
-    if ('RotationSpeed' in this.service.values && !this.service.values.On && !this.service.values.Active && !this.service.values.RotationSpeed) {
-      this.service.values.RotationSpeed = this.service.getCharacteristic('RotationSpeed').maxValue
-    }
   }
 
   public onLongClick() {

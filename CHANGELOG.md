@@ -11,6 +11,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the `th.json` language file (#2590) (@tomzt)
 - detect full restart needed after config (editor) update
 - fix microphone active state on accessory tile
+- fix air purifier off switch in control modal
 
 ### Homebridge Dependencies
 
