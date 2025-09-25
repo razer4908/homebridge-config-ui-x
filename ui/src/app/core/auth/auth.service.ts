@@ -21,7 +21,7 @@ export class AuthService {
 
   constructor() {
     // Load the token (if present) from local storage on page init
-    this.loadToken()
+    void this.loadToken()
   }
 
   public async login(form: { username: string, password: string, ota?: string }) {
@@ -61,14 +61,24 @@ export class AuthService {
   }
 
   public async checkToken() {
+    // First do a quick client-side check if token is expired to avoid API call
+    if (!this.token || this.$jwtHelper.isTokenExpired(this.token, this.$settings.serverTimeOffset)) {
+      console.warn('Token expired on client side, logging out immediately')
+      this.logout()
+      return
+    }
+
     try {
       return await firstValueFrom(this.$api.get('/auth/check'))
     } catch (err) {
       if (err.status === 401) {
-        // Token is no longer valid, do logout
-        console.error('Current token is not valid')
+        // Token is no longer valid on server side, perform logout
+        console.warn('Current token is not valid on server')
         this.logout()
       }
+
+      // Re-throw to let the interceptor handle it
+      throw err
     }
   }
 

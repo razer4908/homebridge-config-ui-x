@@ -1,10 +1,11 @@
 import { NgClass, NgOptimizedImage } from '@angular/common'
 import { Component, inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core'
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router'
+import { NavigationEnd, NavigationStart, Router, RouterLink, RouterLinkActive } from '@angular/router'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { isStandalonePWA } from 'is-standalone-pwa'
 
+import { AuthHelperService } from '@/app/core/auth/auth-helper.service'
 import { AuthService } from '@/app/core/auth/auth.service'
 import { InformationComponent } from '@/app/core/components/information/information.component'
 import { NotificationService } from '@/app/core/notification.service'
@@ -25,6 +26,7 @@ import { SettingsService } from '@/app/core/settings.service'
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   private $auth = inject(AuthService)
+  private $authHelper = inject(AuthHelperService)
   private $settings = inject(SettingsService)
   private $modal = inject(NgbModal)
   private $notification = inject(NotificationService)
@@ -53,8 +55,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }, 500)
     })
 
-    // Ensure the menu closes when we navigate
-    this.$router.events.subscribe((event) => {
+    // Check authentication before navigation and ensure the menu closes when we navigate
+    this.$router.events.subscribe(async (event) => {
+      if (event instanceof NavigationStart) {
+        // Check if using form auth and if the token is expired
+        if (this.$settings.formAuth && event.url !== '/login') {
+          const isAuthenticated = await this.$authHelper.isAuthenticated()
+          if (!isAuthenticated) {
+            // Store the target route before redirecting
+            window.sessionStorage.setItem('target_route', event.url)
+
+            // Prevent the navigation and redirect to the login page
+            await this.$router.navigate(['/login'])
+            return
+          }
+        }
+      }
+
       if (event instanceof NavigationEnd) {
         this.closeSidebar()
         this.freezeMenu = true

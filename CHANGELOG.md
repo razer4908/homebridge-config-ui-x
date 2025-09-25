@@ -12,6 +12,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - detect full restart needed after config (editor) update
 - fix microphone active state on accessory tile
 - fix air purifier off switch in control modal
+- fix infinite loading spinner on authentication expiry (@copilot)
 
 ### Homebridge Dependencies
 
