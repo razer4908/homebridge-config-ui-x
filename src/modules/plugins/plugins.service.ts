@@ -1088,7 +1088,21 @@ export class PluginsService {
       throw new NotFoundException()
     }
 
-    const schemaPath = resolve(plugin.installPath, pluginName, 'config.schema.json')
+    let schemaPath: string
+
+    const i18nPath = plugin.directories?.schemas
+    if (i18nPath) {
+      const lang = this.configService.ui.lang === 'auto' ? 'en' : this.configService.ui.lang
+
+      if (lang && lang !== 'en' && lang !== 'auto') {
+        const i18nSchemaPath = resolve(plugin.installPath, pluginName, i18nPath, `config.schema.${lang}.json`)
+        if (existsSync(i18nSchemaPath)) {
+          schemaPath = i18nSchemaPath
+        }
+      }
+    }
+
+    schemaPath ??= resolve(plugin.installPath, pluginName, 'config.schema.json')
 
     let configSchema = await readJson(schemaPath)
 
@@ -1651,6 +1665,9 @@ export class PluginsService {
 
     // Only verified plugins can show donation links
     plugin.funding = (plugin.verifiedPlugin || plugin.verifiedPlusPlugin) ? pkgJson.funding : undefined
+
+    // Add directories for i18n schema support
+    plugin.directories = pkgJson.directories
 
     // If the plugin is private, do not attempt to query npm
     if (pkgJson.private) {

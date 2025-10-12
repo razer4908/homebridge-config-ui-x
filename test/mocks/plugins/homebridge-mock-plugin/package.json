@@ -11,6 +11,9 @@
   "engines": {
     "homebridge": ">0.4.53"
   },
+  "directories": {
+    "schemas": "i18n"
+  },
   "dependencies": {},
   "devDependencies": {}
 }

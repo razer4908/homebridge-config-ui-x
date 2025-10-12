@@ -39,6 +39,9 @@ export interface HomebridgePlugin {
     to: string
     switch: string
   }
+  directories?: {
+    schemas?: string
+  }
 }
 
 export interface HomebridgePluginUiMetadata {
@@ -157,6 +160,9 @@ export interface IPackageJson {
   private?: boolean
   publishConfig?: { registry?: string }
   deprecated?: string
+  directories?: {
+    schemas?: string
+  }
 }
 
 export type NpmFunding = { type: string, url: string } | string | Array<{ type: string, url: string } | string>

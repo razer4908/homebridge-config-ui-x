@@ -288,6 +288,102 @@ describe('PluginController (e2e)', () => {
     expect(res.json().pluginType).toBe('platform')
   })
 
+  it('GET /plugins/config-schema/:plugin-name (i18n - French)', async () => {
+    // Mock the language setting to French
+    const originalLang = (pluginsService as any).configService.ui.lang;
+    (pluginsService as any).configService.ui.lang = 'fr'
+
+    const res = await app.inject({
+      method: 'GET',
+      path: '/plugins/config-schema/homebridge-mock-plugin',
+      headers: {
+        authorization,
+      },
+    })
+
+    expect(res.statusCode).toBe(200)
+    expect(res.json().pluginAlias).toBe('ExampleHomebridgePlugin')
+    expect(res.json().pluginType).toBe('platform')
+    // Verify French translation is loaded
+    expect(res.json().schema.properties.name.title).toBe('Nom')
+    expect(res.json().schema.properties.name.default).toBe('Exemple de plateforme dynamique')
+
+    // Restore original language
+    ;(pluginsService as any).configService.ui.lang = originalLang
+  })
+
+  it('GET /plugins/config-schema/:plugin-name (i18n - German)', async () => {
+    // Mock the language setting to German
+    const originalLang = (pluginsService as any).configService.ui.lang;
+    (pluginsService as any).configService.ui.lang = 'de'
+
+    const res = await app.inject({
+      method: 'GET',
+      path: '/plugins/config-schema/homebridge-mock-plugin',
+      headers: {
+        authorization,
+      },
+    })
+
+    expect(res.statusCode).toBe(200)
+    expect(res.json().pluginAlias).toBe('ExampleHomebridgePlugin')
+    expect(res.json().pluginType).toBe('platform')
+    // Verify German translation is loaded
+    expect(res.json().schema.properties.name.title).toBe('Name')
+    expect(res.json().schema.properties.name.default).toBe('Beispiel Dynamische Plattform')
+
+    // Restore original language
+    ;(pluginsService as any).configService.ui.lang = originalLang
+  })
+
+  it('GET /plugins/config-schema/:plugin-name (i18n - fallback to base for unsupported language)', async () => {
+    // Mock the language setting to a language that doesn't have a translation
+    const originalLang = (pluginsService as any).configService.ui.lang;
+    (pluginsService as any).configService.ui.lang = 'es'
+
+    const res = await app.inject({
+      method: 'GET',
+      path: '/plugins/config-schema/homebridge-mock-plugin',
+      headers: {
+        authorization,
+      },
+    })
+
+    expect(res.statusCode).toBe(200)
+    expect(res.json().pluginAlias).toBe('ExampleHomebridgePlugin')
+    expect(res.json().pluginType).toBe('platform')
+    // Verify base English schema is loaded as fallback
+    expect(res.json().schema.properties.name.title).toBe('Name')
+    expect(res.json().schema.properties.name.default).toBe('Example Dynamic Platform')
+
+    // Restore original language
+    ;(pluginsService as any).configService.ui.lang = originalLang
+  })
+
+  it('GET /plugins/config-schema/:plugin-name (i18n - English explicitly)', async () => {
+    // Mock the language setting to English (should skip i18n directory)
+    const originalLang = (pluginsService as any).configService.ui.lang;
+    (pluginsService as any).configService.ui.lang = 'en'
+
+    const res = await app.inject({
+      method: 'GET',
+      path: '/plugins/config-schema/homebridge-mock-plugin',
+      headers: {
+        authorization,
+      },
+    })
+
+    expect(res.statusCode).toBe(200)
+    expect(res.json().pluginAlias).toBe('ExampleHomebridgePlugin')
+    expect(res.json().pluginType).toBe('platform')
+    // Verify base English schema is loaded (not from i18n directory)
+    expect(res.json().schema.properties.name.title).toBe('Name')
+    expect(res.json().schema.properties.name.default).toBe('Example Dynamic Platform')
+
+    // Restore original language
+    ;(pluginsService as any).configService.ui.lang = originalLang
+  })
+
   it('GET /plugins/changelog/:plugin-name', async () => {
     const res = await app.inject({
       method: 'GET',
