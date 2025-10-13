@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - implement simple feature flags system dependent on hb version
 - fix type import in config editor test file
+- improve schemas and types for bridges
 
 ### Homebridge Dependencies
 
