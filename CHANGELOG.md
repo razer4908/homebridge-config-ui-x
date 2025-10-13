@@ -10,6 +10,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the `zh-cn.json` language file (#2594) (@honue)
 - consistent sizing of input fields and select fields
 - status qr code widget - show pin in monospace
+- bridges widget - show bridges as restarting on full restart
 
 ### Other Changes
 
