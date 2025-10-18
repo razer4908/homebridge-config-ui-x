@@ -11,6 +11,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - consistent sizing of input fields and select fields
 - status qr code widget - show pin in monospace
 - bridges widget - show bridges as restarting on full restart
+- do not hide search button when no search results found
 
 ### Other Changes
 
