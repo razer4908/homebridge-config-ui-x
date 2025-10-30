@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - update npm publish process for `oidc` auth
 - update npm publish process for `oidc` auth (fix)
 - fix: adjusted timeout for npm requests to 30 seconds (@NorthernMan54) (#2655, #2656)
+- recommend update to node 24 when available
 
 ### Homebridge Dependencies
 
