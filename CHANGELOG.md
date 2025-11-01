@@ -17,6 +17,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updated various dependencies
 - support `dynamicDefaults` in config schema forms
 - use homebridge icon for child bridges
+- refactor child bridge screen with config alerts
 
 ### Other Changes
 

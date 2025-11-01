@@ -102,7 +102,6 @@ export class ConfigEditorController {
   }
 
   @UseGuards(AdminGuard)
-  @UseGuards(AdminGuard)
   @Get('/ui/plugins/hide-updates-for')
   @ApiOperation({ summary: 'Get the plugins hide updates for list.' })
   getPluginsHideUpdatesFor(): Promise<string[]> {
@@ -115,6 +114,21 @@ export class ConfigEditorController {
   @ApiBody({ description: 'Array of plugin names to hide updates for in the UI.', type: 'json', isArray: true })
   setPluginsHideUpdatesFor(@Body() { body }) {
     return this.configEditorService.setPluginsHideUpdatesFor(body)
+  }
+
+  @UseGuards(AdminGuard)
+  @Get('/ui/plugins/hide-pairing-alerts')
+  @ApiOperation({ summary: 'Get the plugins hide pairing alerts list.' })
+  getPluginsHidePairingAlerts(): Promise<string[]> {
+    return this.configEditorService.getPluginsHidePairingAlerts()
+  }
+
+  @UseGuards(AdminGuard)
+  @Put('/ui/plugins/hide-pairing-alerts')
+  @ApiOperation({ summary: 'Update the plugins hide pairing alerts list.' })
+  @ApiBody({ description: 'Array of bridge identifiers (e.g., "0E:02:9A:9D:44:45-hap") to hide pairing alerts for in the UI.', type: 'json', isArray: true })
+  setPluginsHidePairingAlerts(@Body() { body }) {
+    return this.configEditorService.setPluginsHidePairingAlerts(body)
   }
 
   @UseGuards(AdminGuard)

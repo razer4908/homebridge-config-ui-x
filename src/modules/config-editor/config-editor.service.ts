@@ -414,6 +414,40 @@ export class ConfigEditorService {
   }
 
   /**
+   * Get the plugin hide pairing alerts list
+   */
+  public async getPluginsHidePairingAlerts(): Promise<string[]> {
+    // 1. Get the current config for the Homebridge UI
+    const config = await this.getConfigFile()
+    const pluginConfig = config.platforms.find(x => x.platform === 'config')
+
+    // 2. Return the hidePairingAlerts list or empty array if not set
+    return pluginConfig?.plugins?.hidePairingAlerts || []
+  }
+
+  /**
+   * Set the plugin hide pairing alerts list (this request is not partial)
+   */
+  public async setPluginsHidePairingAlerts(value: string[]) {
+    // 1. Get the current config for the Homebridge UI
+    const config = await this.getConfigFile()
+    const pluginConfig = config.platforms.find(x => x.platform === 'config')
+
+    // 2. Ensure the plugins object exists and set the hidePairingAlerts property
+    if (!pluginConfig.plugins) {
+      pluginConfig.plugins = {}
+    }
+    // Validate format: USERNAME-hap (e.g., "0E:02:9A:9D:44:45-hap")
+    pluginConfig.plugins.hidePairingAlerts = (value || [])
+      .filter(x => typeof x === 'string' && x.trim() !== '' && /^[0-9A-F]{2}(?::[0-9A-F]{2}){5}-hap$/i.test(x.trim()))
+      .map(x => x.trim().toUpperCase())
+
+    // 3. Clean and save the UI config block
+    config.platforms[config.platforms.findIndex(x => x.platform === 'config')] = this.cleanUpUiConfig(pluginConfig)
+    await this.updateConfigFile(config)
+  }
+
+  /**
    * Mark a plugin as disabled
    */
   public async disablePlugin(pluginName: string) {

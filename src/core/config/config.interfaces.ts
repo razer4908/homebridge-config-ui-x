@@ -98,6 +98,7 @@ export interface HomebridgeUiConfig {
   }
   plugins?: {
     hideUpdatesFor?: string[]
+    hidePairingAlerts?: string[]
     alwaysShowBetas?: boolean
   }
   temp?: string

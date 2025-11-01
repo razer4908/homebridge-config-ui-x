@@ -938,6 +938,16 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                                 pattern: '^(?:@[\\w-]+(?:\\.[\\w-]+)*/)?homebridge-[\\w-]+$',
                               },
                             },
+                            hidePairingAlerts: {
+                              type: 'array',
+                              title: 'Hide Pairing Alerts',
+                              description: 'A list of bridge identifiers (e.g., "0E:02:9A:9D:44:45-HAP") for which pairing alerts will be hidden in the UI.',
+                              items: {
+                                type: 'string',
+                                title: 'Bridge Identifier',
+                                pattern: '^[0-9A-F]{2}(?::[0-9A-F]{2}){5}-(HAP)$',
+                              },
+                            },
                             alwaysShowBetas: {
                               type: 'boolean',
                               title: this.$translate.instant('settings.display.show_betas'),

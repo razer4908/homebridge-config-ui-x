@@ -59,13 +59,19 @@ export class PluginBridgeComponent implements OnInit {
   public bridgesAvailableForLink: { index: string, usesIndex: string, name: string, username: string, port: number }[] = []
   public currentlySelectedLink: { index: string, usesIndex: string, name: string, username: string, port: number } | null = null
   public currentBridgeHasLinks: boolean = false
+  public readonly defaultIcon = 'assets/hb-icon.png'
   public readonly linkChildBridges = '<a href="https://github.com/homebridge/homebridge/wiki/Child-Bridges" target="_blank"><i class="fas fa-external-link-alt primary-text"></i></a>'
   public readonly linkDebug = '<a href="https://github.com/homebridge/homebridge-config-ui-x/wiki/Debug-Common-Values" target="_blank"><i class="fa fa-external-link-alt primary-text"></i></a>'
+  public hidePairingAlerts: Set<string> = new Set()
 
   public async ngOnInit(): Promise<void> {
-    await Promise.all([this.getPluginType(), this.loadPluginConfig()])
+    await Promise.all([this.getPluginType(), this.loadPluginConfig(), this.loadHidePairingAlerts()])
     this.canShowBridgeDebug = this.$settings.isFeatureEnabled('childBridgeDebugMode')
     this.loading = false
+  }
+
+  public handleIconError() {
+    this.plugin.icon = this.defaultIcon
   }
 
   public onBlockChange(index: string) {
@@ -77,7 +83,8 @@ export class PluginBridgeComponent implements OnInit {
     // Bridges available for link can only be accessory blocks
     if (this.configBlocks[Number(index)].accessory) {
       for (const [i, bridge] of Array.from(this.bridgeCache.entries())) {
-        if (!this.deleteBridges.some(b => b.id === bridge.username)) {
+        // Only include bridges that are enabled and not marked for deletion
+        if (this.enabledBlocks[i] && !this.deleteBridges.some(b => b.id === bridge.username)) {
           if (i < Number(index)) {
             this.bridgesAvailableForLink.push({
               index: i.toString(),
@@ -133,12 +140,15 @@ export class PluginBridgeComponent implements OnInit {
     try {
       this.configBlocks = await firstValueFrom(this.$api.get(`/config-editor/plugin/${encodeURIComponent(this.plugin.name)}`))
       for (const [i, block] of this.configBlocks.entries()) {
-        if (block._bridge && block._bridge.username) {
+        if (block._bridge) {
           this.enabledBlocks[i] = true
+        }
 
+        if (block._bridge && block._bridge.username) {
           // For accessory plugin blocks, the username might be the same as a previous block
-          const existingBridgeIndex = Array.from(this.bridgeCache.values()).findIndex(bridge => bridge.username === block._bridge.username)
-          const existingBridge = existingBridgeIndex !== -1 ? Array.from(this.bridgeCache.values())[existingBridgeIndex] : undefined
+          const existingBridgeEntry = Array.from(this.bridgeCache.entries()).find(([, bridge]) => bridge.username === block._bridge.username)
+          const existingBridgeIndex = existingBridgeEntry ? existingBridgeEntry[0] : -1
+          const existingBridge = existingBridgeEntry ? existingBridgeEntry[1] : undefined
           if (existingBridge) {
             block._bridge.env = {}
             this.accessoryBridgeLinks.push({
@@ -155,7 +165,10 @@ export class PluginBridgeComponent implements OnInit {
 
             // If the bridge does not have a name in the config, then override it from the pairing
             if (!block._bridge.name) {
-              block._bridge.name = this.deviceInfo[block._bridge.username]?.displayName
+              const info = this.deviceInfo.get(block._bridge.username)
+              if (info) {
+                block._bridge.name = info.displayName
+              }
             }
             this.originalBridges.push(block._bridge)
           }
@@ -175,6 +188,26 @@ export class PluginBridgeComponent implements OnInit {
       if (currentBridgeLinks) {
         this.currentBridgeHasLinks = true
       }
+
+      // Initialize the currently selected link
+      this.currentlySelectedLink = this.accessoryBridgeLinks.find(link => link.index === this.selectedBlock) || null
+
+      // Initialize bridges available for link
+      if (this.configBlocks[Number(this.selectedBlock)]?.accessory) {
+        for (const [i, bridge] of Array.from(this.bridgeCache.entries())) {
+          if (this.enabledBlocks[i] && !this.deleteBridges.some(b => b.id === bridge.username)) {
+            if (i < Number(this.selectedBlock)) {
+              this.bridgesAvailableForLink.push({
+                index: i.toString(),
+                usesIndex: this.selectedBlock,
+                name: bridge.name,
+                port: bridge.port,
+                username: bridge.username,
+              })
+            }
+          }
+        }
+      }
     } catch (error) {
       this.canConfigure = false
       console.error(error)
@@ -185,15 +218,16 @@ export class PluginBridgeComponent implements OnInit {
     if (enable) {
       const bridgeCache = this.bridgeCache.get(Number(index))
 
+      // Always create HAP bridge configuration when HAP toggle is enabled
       block._bridge = {
         username: bridgeCache ? bridgeCache.username : this.generateUsername(),
         port: await this.getUnusedPort(),
-        name: bridgeCache?.name,
+        name: bridgeCache?.name || this.plugin.displayName || this.plugin.name,
         model: bridgeCache?.model,
         manufacturer: bridgeCache?.manufacturer,
         firmwareRevision: bridgeCache?.firmwareRevision,
         debugModeEnabled: bridgeCache?.debugModeEnabled,
-        env: bridgeCache?.env,
+        env: bridgeCache?.env || {},
       }
 
       if (this.deleteBridges.some(b => b.id === block._bridge.username)) {
@@ -203,6 +237,9 @@ export class PluginBridgeComponent implements OnInit {
       this.bridgeCache.set(Number(index), block._bridge)
       await this.getDeviceInfo(block._bridge.username)
     } else {
+      // Set enabled state to false
+      this.enabledBlocks[Number(index)] = false
+
       // Check for linked bridges
       if (this.accessoryBridgeLinks.some(link => link.index === index)) {
         this.accessoryBridgeLinks = this.accessoryBridgeLinks.filter(link => link.index !== index)
@@ -211,11 +248,15 @@ export class PluginBridgeComponent implements OnInit {
         // Store unused child bridge id for deletion, so no bridges are orphaned
         const originalBridge = this.originalBridges.find(b => b.username === block._bridge.username)
         if (originalBridge) {
-          this.deleteBridges.push({
-            id: block._bridge.username,
-            bridgeName: block._bridge.name || originalBridge.displayName,
-            paired: this.deviceInfo[block._bridge.username]?._isPaired,
-          })
+          // Avoid duplicates
+          if (!this.deleteBridges.some(b => b.id === block._bridge.username)) {
+            const info = this.deviceInfo.get(block._bridge.username)
+            this.deleteBridges.push({
+              id: block._bridge.username,
+              bridgeName: block._bridge.name || originalBridge.displayName,
+              paired: info ? info._isPaired : false,
+            })
+          }
         }
       }
 
@@ -227,30 +268,88 @@ export class PluginBridgeComponent implements OnInit {
   }
 
   private async getUnusedPort() {
-    this.saveInProgress = true
     try {
       const lookup = await firstValueFrom(this.$api.get('/server/port/new'))
       return lookup.port
     } catch (e) {
       return Math.floor(Math.random() * (60000 - 30000 + 1) + 30000)
-    } finally {
-      this.saveInProgress = false
     }
   }
 
   private async getDeviceInfo(username: string) {
     try {
-      this.deviceInfo[username] = await firstValueFrom(this.$api.get(`/server/pairings/${username.replace(/:/g, '')}`))
+      this.deviceInfo.set(username, await firstValueFrom(this.$api.get(`/server/pairings/${username.replace(/:/g, '')}`)))
     } catch (error) {
       console.error(error)
-      this.deviceInfo[username] = false
+      this.deviceInfo.set(username, false)
     }
+  }
+
+  public getHapNameValidationError(index: string): boolean {
+    const block = this.configBlocks[Number(index)]
+    if (!block._bridge?.name) {
+      return false // Empty is valid
+    }
+
+    const name = block._bridge.name
+    // HAP name validation: must start and end with letter/number, can contain letters, numbers, spaces, and apostrophes
+    // https://github.com/homebridge/HAP-NodeJS/blob/ee41309fd9eac383cdcace39f4f6f6a3d54396f3/src/lib/util/checkName.ts#L12
+    const hapNamePattern = /^[\p{L}\p{N}][\p{L}\p{N} ']*[\p{L}\p{N}]$/u
+    return !hapNamePattern.test(name)
+  }
+
+  public getHapPortValidationError(index: string): boolean {
+    const block = this.configBlocks[Number(index)]
+    const port = block._bridge?.port
+
+    if (!port && port !== 0) {
+      return false // Empty is valid (optional - will be auto-allocated)
+    }
+
+    if (typeof port !== 'number' || !Number.isInteger(port) || port < 1025 || port > 65533) {
+      return true
+    }
+
+    // Check for port conflicts with other enabled bridges
+    for (const [i, otherBlock] of this.configBlocks.entries()) {
+      if (i.toString() !== index && this.enabledBlocks[i] && otherBlock._bridge?.port === port) {
+        return true
+      }
+    }
+
+    return false
   }
 
   public async save() {
     this.saveInProgress = true
 
     try {
+      // Validate HAP config before saving
+      for (const [index, block] of this.configBlocks.entries()) {
+        // HAP validation
+        if (block._bridge?.username) {
+          if (this.getHapNameValidationError(index.toString())) {
+            this.$toastr.error(
+              this.$translate.instant('plugins.bridge.name_error'),
+              this.$translate.instant('toast.title_error'),
+            )
+            this.saveInProgress = false
+            return
+          }
+
+          if (this.getHapPortValidationError(index.toString())) {
+            this.$toastr.error(
+              this.$translate.instant('plugins.bridge.port_error', {
+                type: 'HAP',
+              }),
+              this.$translate.instant('toast.title_error'),
+            )
+            this.saveInProgress = false
+            return
+          }
+        }
+      }
+
       await firstValueFrom(this.$api.post(`/config-editor/plugin/${encodeURIComponent(this.plugin.name)}`, this.configBlocks))
 
       // Delete unused bridges, so no bridges are orphaned
@@ -281,7 +380,7 @@ export class PluginBridgeComponent implements OnInit {
     this.$activeModal.close()
 
     // Open the plugin config modal
-    this.$plugin.settings({
+    void this.$plugin.settings({
       name: this.plugin.name,
       settingsSchema: true,
       links: {},
@@ -312,5 +411,50 @@ export class PluginBridgeComponent implements OnInit {
 
   public closeModal() {
     this.$activeModal.close('Dismiss')
+  }
+
+  /**
+   * Load the hidePairingAlerts setting from the server
+   */
+  private async loadHidePairingAlerts(): Promise<void> {
+    try {
+      const hidePairingAlerts = await firstValueFrom(this.$api.get('/config-editor/ui/plugins/hide-pairing-alerts'))
+      this.hidePairingAlerts = new Set(hidePairingAlerts)
+    } catch (error) {
+      console.error('Failed to load hide pairing alerts:', error)
+    }
+  }
+
+  /**
+   * Check if a specific bridge protocol is hidden
+   */
+  public isUnpairingHidden(username: string, protocol: 'hap'): boolean {
+    return this.hidePairingAlerts.has(`${username}-${protocol}`.toUpperCase())
+  }
+
+  /**
+   * Toggle hiding of unpairing for a specific bridge protocol
+   */
+  public async toggleHideUnpairing(username: string, protocol: 'hap'): Promise<void> {
+    const identifier = `${username}-${protocol}`.toUpperCase()
+    let currentSetting = Array.from(this.hidePairingAlerts)
+
+    if (this.hidePairingAlerts.has(identifier)) {
+      currentSetting = currentSetting.filter(x => x !== identifier)
+    } else {
+      currentSetting.push(identifier)
+      currentSetting.sort()
+    }
+
+    try {
+      await firstValueFrom(this.$api.put('/config-editor/ui/plugins/hide-pairing-alerts', {
+        body: currentSetting,
+      }))
+      this.hidePairingAlerts = new Set(currentSetting)
+      this.$settings.setEnvItem('plugins.hidePairingAlerts', currentSetting)
+    } catch (error) {
+      console.error('Failed to update hide pairing alerts:', error)
+      this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
+    }
   }
 }
