@@ -15,6 +15,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - close settings restart toast if any restart button clicked
 - change session timeout from seconds to days, hours, minutes
 - updated various dependencies
+- support `dynamicDefaults` in config schema forms
 
 ### Other Changes
 
