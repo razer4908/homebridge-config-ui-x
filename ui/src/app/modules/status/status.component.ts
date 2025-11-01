@@ -15,7 +15,7 @@ import { IoNamespace, WsService } from '@/app/core/ws.service'
 import { CreditsComponent } from '@/app/modules/status/credits/credits.component'
 import { WidgetControlComponent } from '@/app/modules/status/widget-control/widget-control.component'
 import { WidgetVisibilityComponent } from '@/app/modules/status/widget-visibility/widget-visibility.component'
-import { WidgetsComponent } from '@/app/modules/status/widgets/widgets.component'
+import { AVAILABLE_WIDGETS, WidgetsComponent } from '@/app/modules/status/widgets/widgets.component'
 
 @Component({
   templateUrl: './status.component.html',
@@ -242,6 +242,12 @@ export class StatusComponent implements OnInit, OnDestroy {
         if (item.component === 'TerminalWidgetComponent' && !this.isAdmin) {
           return null
         }
+
+        // Hide items not in the list of available widgets
+        if (!AVAILABLE_WIDGETS.includes(item.component)) {
+          return null
+        }
+
         return item
       }).filter(Boolean))
 
