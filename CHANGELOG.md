@@ -8,6 +8,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - updates to the `th.json` language file (#2592) (@tomzt)
 - updates to the `zh-cn.json` language file (#2594) (@honue)
+- consistent sizing of input fields and select fields
 
 ### Other Changes
 
