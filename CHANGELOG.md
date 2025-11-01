@@ -25,6 +25,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix type import in config editor test file
 - improve schemas and types for bridges
 - get available port function should adhere to configured range
+- update versions of actions, remove `macos-13`
 
 ### Homebridge Dependencies
 
