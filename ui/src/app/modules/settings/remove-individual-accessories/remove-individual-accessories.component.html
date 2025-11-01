@@ -54,8 +54,12 @@
       </li>
       } @for (item of selectedBridgeAccessories; track item) {
       <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>
-          {{ item.displayName }}<br />
+        <span class="me-3">
+          <i class="fas fa-lg fa-hap"></i>
+        </span>
+        <span class="flex-grow-1">
+          {{ item.displayName }}
+          <br />
           <small><span class="font-monospace grey-text">{{ item.UUID }}</span></small>
         </span>
         <button
