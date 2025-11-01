@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core'
 import { Title } from '@angular/platform-browser'
 import { TranslateService } from '@ngx-translate/core'
 import dayjs from 'dayjs'
-import { ToastrService } from 'ngx-toastr'
+import { ActiveToast, ToastrService } from 'ngx-toastr'
 import { firstValueFrom, Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 
@@ -20,6 +20,8 @@ export class SettingsService {
   private settingsLoadedSubject = new Subject()
   private readonly defaultTheme = 'deep-purple'
   private forbiddenKeys = ['__proto__', 'constructor', 'prototype']
+
+  public restartToastRef: ActiveToast<any> = null
 
   public env: EnvInterface = {} as EnvInterface
   public host: string

@@ -1660,7 +1660,7 @@ export class SettingsComponent implements OnInit {
   private showRestartToast() {
     if (!this.restartToastIsShown) {
       this.restartToastIsShown = true
-      const ref = this.$toastr.info(
+      this.$settings.restartToastRef = this.$toastr.info(
         this.$translate.instant('settings.changes.saved'),
         this.$translate.instant('menu.hbrestart.title'),
         {
@@ -1672,8 +1672,8 @@ export class SettingsComponent implements OnInit {
         },
       )
 
-      if (ref && ref.onTap) {
-        ref.onTap.subscribe(() => {
+      if (this.$settings.restartToastRef && this.$settings.restartToastRef.onTap) {
+        this.$settings.restartToastRef.onTap.subscribe(() => {
           void this.$router.navigate(['/restart'])
         })
       }
