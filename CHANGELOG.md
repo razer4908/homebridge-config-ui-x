@@ -9,6 +9,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the `uk.json` language file (#2618) (@xrust83)
 - updates to the `th.json` language file (#2628) (@tomzt)
 - fix german welcome translation typo
+- add spinners for loading data widget values
 
 ### Other Changes
 
