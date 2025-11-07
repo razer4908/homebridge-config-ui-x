@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - hide ssl settings when on hb raspbian image
 - hide accessory widget if insecure mode disabled
 - rename insecure option to accessory control
+- improve json schema for ui settings section
 
 ### Other Changes
 

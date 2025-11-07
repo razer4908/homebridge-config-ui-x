@@ -508,10 +508,12 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
           fileMatch: [uri.toString()],
           schema: {
             type: 'object',
+            additionalProperties: false,
             required: ['bridge'],
             properties: {
               bridge: {
                 type: 'object',
+                additionalProperties: false,
                 required: ['name', 'username', 'port', 'pin'],
                 properties: {
                   name: {
@@ -562,6 +564,29 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                     title: this.$translate.instant('child_bridge.config.model'),
                     description: 'The bridge model to be displayed in HomeKit.',
                   },
+                  advertiser: {
+                    type: 'string',
+                    title: this.$translate.instant('settings.mdns_advertiser'),
+                    description: this.$translate.instant('settings.mdns_advertiser_help'),
+                    oneOf: [
+                      {
+                        title: 'Avahi',
+                        enum: ['avahi'],
+                      },
+                      {
+                        title: 'Bonjour HAP',
+                        enum: ['bonjour-hap'],
+                      },
+                      {
+                        title: 'Ciao',
+                        enum: ['ciao'],
+                      },
+                      {
+                        title: 'Resolved',
+                        enum: ['resolved'],
+                      },
+                    ],
+                  },
                   bind: {
                     title: this.$translate.instant('settings.network.title_network_interfaces'),
                     description: 'A string or an array of strings with the name(s) of the network interface(s) Homebridge should bind to.\n'
@@ -577,6 +602,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
               },
               mdns: {
                 type: 'object',
+                additionalProperties: false,
                 properties: {
                   interface: {
                     type: 'string',
@@ -595,6 +621,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
               },
               ports: {
                 type: 'object',
+                additionalProperties: false,
                 title: 'Port Range',
                 description: 'The range of ports that should be used for external accessories like cameras and TVs.',
                 required: ['start', 'end'],
@@ -651,6 +678,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                     },
                     {
                       type: 'object',
+                      additionalProperties: false,
                       properties: {
                         platform: {
                           type: 'string',
@@ -814,6 +842,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         },
                         log: {
                           type: 'object',
+                          additionalProperties: false,
                           title: 'Log Settings',
                           description: 'The log settings for the Homebridge UI.',
                           properties: {
@@ -833,6 +862,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         },
                         ssl: {
                           type: 'object',
+                          additionalProperties: false,
                           title: this.$translate.instant('settings.security.https'),
                           description: this.$translate.instant('settings.security.https_desc'),
                           properties: {
@@ -861,6 +891,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         accessoryControl: {
                           title: 'Accessory Control Setup',
                           type: 'object',
+                          additionalProperties: false,
                           description: 'The accessory control settings for the Homebridge UI.',
                           properties: {
                             debug: {
@@ -883,6 +914,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         linux: {
                           title: 'Linux Server Commands',
                           type: 'object',
+                          additionalProperties: false,
                           description: 'The Linux server commands for the Homebridge UI.',
                           properties: {
                             shutdown: {
@@ -926,6 +958,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         plugins: {
                           title: this.$translate.instant('menu.label_plugins'),
                           type: 'object',
+                          additionalProperties: false,
                           description: 'Settings surrounding plugins used by the Homebridge UI.',
                           properties: {
                             hideUpdatesFor: {
@@ -957,6 +990,7 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         },
                         terminal: {
                           type: 'object',
+                          additionalProperties: false,
                           title: 'Terminal Settings',
                           description: 'The terminal settings for the Homebridge UI.',
                           properties: {
