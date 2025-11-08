@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs'
 import { lt, minVersion } from 'semver'
 
 import { ApiService } from '@/app/core/api.service'
+import { RestartHomebridgeComponent } from '@/app/core/components/restart-homebridge/restart-homebridge.component'
 import { CustomPluginsService } from '@/app/core/manage-plugins/custom-plugins/custom-plugins.service'
 import { ManagePluginComponent } from '@/app/core/manage-plugins/manage-plugin/manage-plugin.component'
 import { ChildBridge, Plugin } from '@/app/core/manage-plugins/manage-plugins.interfaces'
@@ -30,7 +31,7 @@ export class ManagePluginsService {
   private $toastr = inject(ToastrService)
   private $translate = inject(TranslateService)
 
-  installPlugin(plugin: Plugin, targetVersion: string) {
+  async installPlugin(plugin: Plugin, targetVersion: string) {
     const ref = this.$modal.open(ManagePluginComponent, {
       size: 'lg',
       backdrop: 'static',
@@ -39,6 +40,25 @@ export class ManagePluginsService {
     ref.componentInstance.pluginName = plugin.name
     ref.componentInstance.pluginDisplayName = plugin.displayName
     ref.componentInstance.targetVersion = targetVersion
+    ref.componentInstance.onRefreshPluginList = () => this.pluginListRefreshSubject.next()
+
+    try {
+      const result = await ref.result
+
+      // Handle just-installed action
+      if (result?.action === 'just-installed' && result?.plugin) {
+        if (result.plugin.isConfigured) {
+          this.$modal.open(RestartHomebridgeComponent, {
+            size: 'lg',
+            backdrop: 'static',
+          })
+        } else {
+          await this.settings(result.plugin)
+        }
+      }
+    } catch (e) {
+      // Modal was dismissed
+    }
   }
 
   uninstallPlugin(plugin: Plugin, childBridges: ChildBridge[]) {
@@ -71,6 +91,25 @@ export class ManagePluginsService {
     ref.componentInstance.latestVersion = plugin.latestVersion
     ref.componentInstance.installedVersion = plugin.installedVersion
     ref.componentInstance.isDisabled = plugin.disabled
+    ref.componentInstance.onRefreshPluginList = () => this.pluginListRefreshSubject.next()
+
+    try {
+      const result = await ref.result
+
+      // Handle just-installed action (also triggered for updates)
+      if (result?.action === 'just-installed' && result?.plugin) {
+        if (result.plugin.isConfigured) {
+          this.$modal.open(RestartHomebridgeComponent, {
+            size: 'lg',
+            backdrop: 'static',
+          })
+        } else {
+          await this.settings(result.plugin)
+        }
+      }
+    } catch (e) {
+      // Modal was dismissed
+    }
   }
 
   async upgradeHomebridge(homebridgePkg: Plugin, targetVersion: string) {
@@ -102,6 +141,7 @@ export class ManagePluginsService {
     })
 
     ref.componentInstance.plugin = plugin
+    ref.componentInstance.onRefreshPluginList = () => this.pluginListRefreshSubject.next()
 
     try {
       const { action, version, engines } = await ref.result

@@ -15,6 +15,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - rename insecure option to accessory control
 - improve json schema for ui settings section
 - avoid refreshing after changing widget setting
+- avoid refresh after plugin install/setting change
 
 ### Other Changes
 

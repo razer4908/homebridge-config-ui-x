@@ -95,12 +95,6 @@ export class PluginsComponent implements OnInit, OnDestroy {
             }
             break
           }
-          case 'open-manage-version': {
-            if (plugin) {
-              this.$plugin.installAlternateVersion(plugin)
-            }
-            break
-          }
         }
 
         // Clear the query parameters so that we don't keep showing the same action
