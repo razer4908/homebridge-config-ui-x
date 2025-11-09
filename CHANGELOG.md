@@ -21,6 +21,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - add method to determine if running on raspbian image
 - fix node deprecation `DEP0190` (shell option)
+- config editor - fix restart case of no child bridges
 
 ### Homebridge Dependencies
 

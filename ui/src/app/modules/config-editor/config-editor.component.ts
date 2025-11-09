@@ -1304,6 +1304,12 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
   }
 
   private async performChildBridgeRestart() {
+    // If there are no child bridges to restart, fall through to full restart
+    if (!this.childBridgesToRestart.length) {
+      await this.performFullRestart(false)
+      return
+    }
+
     const ref = this.$modal.open(RestartChildBridgesComponent, {
       size: 'lg',
       backdrop: 'static',
