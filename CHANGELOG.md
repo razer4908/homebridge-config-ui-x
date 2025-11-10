@@ -17,6 +17,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - avoid refreshing after changing widget setting
 - avoid refresh after plugin install/setting change
 - shorten arrow button for same row height
+- monospace input font for relevant options
 
 ### Other Changes
 

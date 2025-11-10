@@ -170,6 +170,7 @@
           <input
             type="text"
             class="form-control custom-input"
+            [ngClass]="{ 'font-monospace': configBlocks[selectedBlock]._bridge.firmwareRevision }"
             [placeholder]="'form.optional' | translate"
             [(ngModel)]="configBlocks[selectedBlock]._bridge.firmwareRevision"
           />
@@ -201,7 +202,7 @@
         <div class="text-start text-md-end w-100 w-md-50">
           <input
             type="text"
-            class="form-control custom-input"
+            class="form-control custom-input font-monospace"
             [(ngModel)]="configBlocks[selectedBlock]._bridge.env.DEBUG"
             placeholder="HAP-NodeJS:Advertiser,HAP-NodeJS:Service"
           />
@@ -215,7 +216,7 @@
         <div class="text-start text-md-end w-100 w-md-50">
           <input
             type="text"
-            class="form-control custom-input"
+            class="form-control custom-input font-monospace"
             [(ngModel)]="configBlocks[selectedBlock]._bridge.env.NODE_OPTIONS"
             placeholder="--max-old-space-size=512 --max-http-header-size=8192"
           />
@@ -298,7 +299,7 @@
         <div class="text-start text-md-end w-100 w-md-50">
           <input
             type="number"
-            class="form-control custom-input"
+            class="form-control custom-input font-monospace"
             [(ngModel)]="configBlocks[selectedBlock]._bridge.port"
             [ngClass]="{ 'is-invalid': getHapPortValidationError(selectedBlock) }"
             min="1025"
