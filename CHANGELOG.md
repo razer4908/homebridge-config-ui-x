@@ -24,6 +24,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - config editor - fix restart case of no child bridges
 - code styling chore - consistent code spacing
 - extract 'extract' string to language files
+- lift from beta - custom types, betas, terminal
 
 ### Homebridge Dependencies
 
