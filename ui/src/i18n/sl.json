@@ -153,6 +153,7 @@
   "backup.backup_restored": "Varnostno kopiranje arhiva obnovljeno",
   "backup.backup_warning": "Rezervni arhivi vsebujejo občutljive podatke in jih ne smete deliti z drugimi.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Nalaganje …",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Obnovitev ni uspela",

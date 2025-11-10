@@ -153,6 +153,7 @@
   "backup.backup_restored": "Резервна копія відновлена",
   "backup.backup_warning": "Архіви резервних копій містять конфіденціїну інформацію і не повинні передаватись іншим особам.",
   "backup.files_auto": "Збережені резервні файли",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Завантаження…",
   "backup.load_error": "Не вдалося завантажити резервну копію конфігурації.",
   "backup.restore_failed": "Помилка відновлення з резервної копії",

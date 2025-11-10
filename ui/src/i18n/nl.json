@@ -153,6 +153,7 @@
   "backup.backup_restored": "Backup Archief Teruggeplaatst",
   "backup.backup_warning": "Backup archieven bevatten gevoelige informatie en moeten niet met anderen worden gedeelt.",
   "backup.files_auto": "Vorige Geautomatiseerde Backups",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Aan het uploaden…",
   "backup.load_error": "Laden van configuratie backup is mislukt.",
   "backup.restore_failed": "Backup Terugzetten Mislukt",

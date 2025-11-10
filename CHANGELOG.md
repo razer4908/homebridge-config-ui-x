@@ -23,6 +23,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix node deprecation `DEP0190` (shell option)
 - config editor - fix restart case of no child bridges
 - code styling chore - consistent code spacing
+- extract 'extract' string to language files
 
 ### Homebridge Dependencies
 

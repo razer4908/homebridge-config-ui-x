@@ -153,6 +153,7 @@
   "backup.backup_restored": "Arsip Cadangan Dipulihkan",
   "backup.backup_warning": "Arsip cadangan berisikan informasi sensitif dan sebaiknya tidak dibagikan kepada orang lain.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Mengunggah…",
   "backup.load_error": "Gagal memuat cadangan konfigurasi.",
   "backup.restore_failed": "Pemulihan Gagal",

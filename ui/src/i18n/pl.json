@@ -153,6 +153,7 @@
   "backup.backup_restored": "Przywracanie backupu zakończone sukcesem",
   "backup.backup_warning": "Backup zawiera ważne informacje i nie powinien być udostępniany nikomu.",
   "backup.files_auto": "Pliki backupu",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Przywracanie…",
   "backup.load_error": "Nie udało się załadować backupu.",
   "backup.restore_failed": "Przywracanie backupu zakończone niepowodzeniem",

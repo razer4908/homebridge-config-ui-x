@@ -153,6 +153,7 @@
   "backup.backup_restored": "Záloha byla obnovena",
   "backup.backup_warning": "Zálohy obsahují citlivé informace a neměly by být sdíleny s ostatními.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Nahrávám…",
   "backup.load_error": "Nepodařilo se načíst zálohu konfigurace.",
   "backup.restore_failed": "Obnovení selhalo",

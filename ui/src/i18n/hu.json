@@ -153,6 +153,7 @@
   "backup.backup_restored": "Backup Archive Restored",
   "backup.backup_warning": "Backup archives contain sensitive information and should not be shared with others.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Uploading…",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Restore Failed",

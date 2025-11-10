@@ -153,6 +153,7 @@
   "backup.backup_restored": "Archive de sauvegarde restaurée",
   "backup.backup_warning": "Les archives de sauvegarde contiennent des informations sensibles et ne doivent pas être partagées à des tiers.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Envoi en cours…",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Echec de la Restauration",

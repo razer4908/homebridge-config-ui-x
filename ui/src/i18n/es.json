@@ -153,6 +153,7 @@
   "backup.backup_restored": "Copia de seguridad restaurada",
   "backup.backup_warning": "Los archivos de copias de seguridad contienen información confidencial que no deberías compartir con otros.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Subiendo...",
   "backup.load_error": "Error al cargar la copia de seguridad de la configuración.",
   "backup.restore_failed": "Error al restaurar",

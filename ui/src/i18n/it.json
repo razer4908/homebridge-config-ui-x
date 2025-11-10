@@ -153,6 +153,7 @@
   "backup.backup_restored": "Archivio di backup ripristinato",
   "backup.backup_warning": "Gli archivi di backup contengono informazioni sensibili e non dovrebbero essere condivisi con altre persone.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Caricamento in corso…",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Ripristino fallito",

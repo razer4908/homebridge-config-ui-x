@@ -153,6 +153,7 @@
   "backup.backup_restored": "백업 기록파일 복원됨",
   "backup.backup_warning": "백업 기록파일에는 민감한 정보가 포함되어 있기 때문에 다른사람과 공유해서는 안됩니다.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "업로드 중…",
   "backup.load_error": "설정 백업을 로드하지 못했습니다.",
   "backup.restore_failed": "복원 실패",

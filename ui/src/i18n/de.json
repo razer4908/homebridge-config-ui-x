@@ -153,6 +153,7 @@
   "backup.backup_restored": "Backup-Archiv wiederhergestellt",
   "backup.backup_warning": "Backup-Archive enhalten sensitive Informationen und sollten nicht mit anderen geteilt werden.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Lädt hoch …",
   "backup.load_error": "Config-Backup konnte nicht geladen werden.",
   "backup.restore_failed": "Wiederherstellung fehlgeschlagen",

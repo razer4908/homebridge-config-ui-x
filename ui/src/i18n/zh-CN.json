@@ -153,6 +153,7 @@
   "backup.backup_restored": "备份归档已恢复",
   "backup.backup_warning": "备份归档包含敏感信息，不应与他人共享。",
   "backup.files_auto": "已存储的备份文件",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "正在上传…",
   "backup.load_error": "加载配置备份失败。",
   "backup.restore_failed": "恢复失败",

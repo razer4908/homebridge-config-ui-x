@@ -153,6 +153,7 @@
   "backup.backup_restored": "Arxiu de còpia de seguretat restaurat",
   "backup.backup_warning": "Els arxius de còpia de seguretat contenen informació confidencial i no s'han de compartir amb els altres.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Carregant…",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Error al restaurar",

@@ -153,6 +153,7 @@
   "backup.backup_restored": "Архив резервной копии восстановлен",
   "backup.backup_warning": "Архивы резервных копий содержат конфиденциальную информацию и не должны передаваться третьим лицам.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Загрузка…",
   "backup.load_error": "Ошибка загрузки конфигурации резервной копии.",
   "backup.restore_failed": "Ошибка восстановления",

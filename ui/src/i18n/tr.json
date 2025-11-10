@@ -153,6 +153,7 @@
   "backup.backup_restored": "Yedekleme Arşivi Geri Yüklendi",
   "backup.backup_warning": "Yedekleme arşivleri hassas bilgiler barındırırlar ve başka kişilerle paylaşılmamalıdırlar.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Yükleniyor…",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Geri Yükleme Başarısız",

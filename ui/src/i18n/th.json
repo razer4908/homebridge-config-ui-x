@@ -153,6 +153,7 @@
   "backup.backup_restored": "กู้คืนที่เก็บข้อมูลสำรองแล้ว",
   "backup.backup_warning": "คลังข้อมูลสำรองมีข้อมูลที่ละเอียดอ่อนและไม่ควรแชร์กับผู้อื่น",
   "backup.files_auto": "ไฟล์สำรองข้อมูลที่เก็บไว้",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "กำลังอัปโหลด…",
   "backup.load_error": "ไม่สามารถโหลดการสำรองข้อมูลการกำหนดค่าได้",
   "backup.restore_failed": "กู้คืนไม่สำเร็จ",

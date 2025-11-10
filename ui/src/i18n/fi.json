@@ -153,6 +153,7 @@
   "backup.backup_restored": "Varmuuskopio palautettu",
   "backup.backup_warning": "Varmuuskopio sisältää arkaluontoista tietoa, älä jaa sitä muille.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Ladataan",
   "backup.load_error": "Asetus varmuuskopion lataus epäonnistui.",
   "backup.restore_failed": "Palautus epäonnistui",

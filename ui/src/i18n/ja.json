@@ -153,6 +153,7 @@
   "backup.backup_restored": "バックアップアーカイブを復元しました",
   "backup.backup_warning": "バックアップアーカイブには機密情報が含まれるため、第三者と共有しないでください。",
   "backup.files_auto": "保存済みバックアップファイル",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "アップロード中…",
   "backup.load_error": "設定のバックアップ読み込みに失敗しました。",
   "backup.restore_failed": "復元に失敗しました",

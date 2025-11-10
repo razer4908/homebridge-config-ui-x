@@ -153,6 +153,7 @@
   "backup.backup_restored": "Arquivo de Backup Restaurado",
   "backup.backup_warning": "Os arquivos de backup possuem informações privadas e não devem de ser compartilhados com outras pessoas.",
   "backup.files_auto": "Stored Backup Files",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "Enviando…",
   "backup.load_error": "Failed to load config backup.",
   "backup.restore_failed": "Falha na Restauração",

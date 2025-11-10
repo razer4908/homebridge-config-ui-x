@@ -153,6 +153,7 @@
   "backup.backup_restored": "גיבוי שחזור",
   "backup.backup_warning": "גיבוי מכיל מידע רגיש ולא אמור להיות משותף עם אנשים אחרים",
   "backup.files_auto": "קבצי גיבוי מאוחסנים",
+  "backup.label_extracting": "Extracting Archive",
   "backup.label_uploading": "מעלה…",
   "backup.load_error": "כשל בטעינת גיבוי קונפיגורציה.",
   "backup.restore_failed": "שחזור נכשל",
