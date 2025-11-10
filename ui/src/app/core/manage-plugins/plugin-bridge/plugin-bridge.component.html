@@ -327,7 +327,7 @@
       </div>
     </ngb-alert>
     } @if (!configBlocks.length && canConfigure) {
-    <ngb-alert type="info" [dismissible]="false"> {{ 'child_bridge.must_configure_plugin' | translate }} </ngb-alert>
+    <ngb-alert type="info" [dismissible]="false">{{ 'child_bridge.must_configure_plugin' | translate }}</ngb-alert>
     } @if (!canConfigure) {
     <ngb-alert type="info" class="mb-0" [dismissible]="false">
       <div class="mb-3">
