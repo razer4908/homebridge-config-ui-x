@@ -76,7 +76,7 @@
     <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
       <span class="pe-2">{{ 'backup.title_backup' | translate }}</span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="openBackupModal()"
         [attr.aria-label]="'backup.title_backup' | translate"
@@ -88,7 +88,7 @@
     <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
       <span class="pe-2">{{ 'config.restore.title' | translate }}</span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="openConfigBackup()"
         [attr.aria-label]="'config.restore.title' | translate"
@@ -100,7 +100,7 @@
     <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
       <span class="pe-2">{{ 'menu.tooltip_user_accounts' | translate }}</span>
       <a
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         routerLink="/users"
         [attr.aria-label]="'menu.tooltip_user_accounts' | translate"
@@ -259,7 +259,7 @@
     <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
       <span class="pe-2">{{ 'settings.display.wallpaper' | translate }}</span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="openWallpaperModal()"
         [attr.aria-label]="'settings.display.wallpaper' | translate"
@@ -501,7 +501,7 @@
         <small class="grey-text pe-2">{{ 'platform.docker.script_help' | translate }}</small>
       </span>
       <a
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         routerLink="/platform-tools/docker/startup-script"
         [attr.aria-label]="'menu.docker.startup_script' | translate"
@@ -554,7 +554,7 @@
         }
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="selectNetworkInterfaces()"
         [disabled]="!adaptersAvailable.length"
@@ -1158,7 +1158,7 @@
         <small class="grey-text pe-2">{{ 'settings.security.ui_control_desc' | translate }}</small>
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="accessoryUiControl()"
         [attr.aria-label]="'settings.security.ui_control' | translate"
@@ -1220,7 +1220,7 @@
         <small class="grey-text pe-2">{{ 'reset.accessory_ind.desc' | translate }}</small>
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="removeSingleCachedAccessories()"
         [attr.aria-label]="'reset.accessory_ind.title' | translate"
@@ -1235,7 +1235,7 @@
         <small class="grey-text pe-2">{{ 'reset.bridge_accessories.desc' | translate }}</small>
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="removeBridgeAccessories()"
         [attr.aria-label]="'reset.accessory_all.title' | translate"
@@ -1250,7 +1250,7 @@
         <small class="grey-text pe-2">{{ 'reset.accessory_all.desc' | translate }}</small>
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="removeAllCachedAccessories()"
         [attr.aria-label]="'reset.accessory_all.title' | translate"
@@ -1290,7 +1290,7 @@
         <small class="grey-text pe-2">{{ 'reset.bridge_ind.desc' | translate }}</small>
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="unpairAccessory()"
         [attr.aria-label]="'reset.bridge_ind.title' | translate"
@@ -1305,7 +1305,7 @@
         <small class="grey-text pe-2">{{ 'reset.bridge_all.desc' | translate }}</small>
       </span>
       <button
-        class="btn btn-primary waves-effect m-0 ms-3"
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
         style="min-width: 50px"
         (click)="resetHomebridgeState()"
         [attr.aria-label]="'reset.bridge_all.title' | translate"
