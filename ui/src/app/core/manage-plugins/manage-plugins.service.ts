@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { TranslateService } from '@ngx-translate/core'
 import { ToastrService } from 'ngx-toastr'
-import { firstValueFrom } from 'rxjs'
+import { firstValueFrom, Subject } from 'rxjs'
 import { lt, minVersion } from 'semver'
 
 import { ApiService } from '@/app/core/api.service'
@@ -30,6 +30,10 @@ export class ManagePluginsService {
   private $settings = inject(SettingsService)
   private $toastr = inject(ToastrService)
   private $translate = inject(TranslateService)
+
+  // Subject to notify when plugins list needs to be refreshed
+  private pluginListRefreshSubject = new Subject<void>()
+  public onPluginListRefresh = this.pluginListRefreshSubject.asObservable()
 
   async installPlugin(plugin: Plugin, targetVersion: string) {
     const ref = this.$modal.open(ManagePluginComponent, {
@@ -131,7 +135,6 @@ export class ManagePluginsService {
 
   /**
    * Open the version selector
-   *
    * @param plugin
    */
   async installAlternateVersion(plugin: Plugin) {
@@ -164,7 +167,6 @@ export class ManagePluginsService {
 
   /**
    * Open the child bridge modal
-   *
    * @param plugin
    * @param justInstalled
    */
@@ -189,11 +191,19 @@ export class ManagePluginsService {
     ref.componentInstance.schema = schema
     ref.componentInstance.plugin = plugin
     ref.componentInstance.justInstalled = justInstalled
+
+    try {
+      const result = await ref.result
+
+      // If the modal closed with 'refresh' result, emit refresh event
+      if (result === 'refresh') {
+        this.pluginListRefreshSubject.next()
+      }
+    } catch (error) { /* modal was dismissed */ }
   }
 
   /**
    * Open the plugin settings modal
-   *
    * @param plugin
    */
   async settings(plugin: Plugin) {

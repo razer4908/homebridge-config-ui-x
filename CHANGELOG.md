@@ -27,12 +27,13 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - code styling chore - consistent code spacing
 - extract 'extract' string to language files
 - lift from beta - custom types, betas, terminal
+- convert repo to esm modules
 
 ### Homebridge Dependencies
 
 - `@homebridge/hap-client` @ `v3.1.2`
 - `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
-- `@homebridge/plugin-ui-utils` @ `v2.1.0`
+- `@homebridge/plugin-ui-utils` @ `v2.1.1`
 
 ## v5.9.0 (2025-11-01)
 
