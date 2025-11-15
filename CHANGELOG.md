@@ -29,6 +29,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - lift from beta - custom types, betas, terminal
 - convert repo to esm modules
 - enable nestjs logging when in dev mode
+- add api endpoint for updating a package
 
 ### Homebridge Dependencies
 
