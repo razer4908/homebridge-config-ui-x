@@ -95,11 +95,23 @@ export class ServerService {
       // Check if the original username is in the access list, if so, update it to the new username
       const uiConfig = configFile.platforms.find(x => x.platform === 'config')
       let blacklistChanged = false
+      let bridgesChanged = false
       if (uiConfig.accessoryControl?.instanceBlacklist?.includes(username)) {
         // Remove the old username from the blacklist
         blacklistChanged = true
         uiConfig.accessoryControl.instanceBlacklist = uiConfig.accessoryControl.instanceBlacklist
           .filter((x: string) => x.toUpperCase() !== username)
+      }
+
+      // Check if the original username is in the config.bridges list (as a username property with colons)
+      let oldBridgeConfig: { username: string, hideHapAlert?: boolean, scheduledRestartCron?: string } | undefined
+      if (uiConfig.bridges && Array.isArray(uiConfig.bridges)) {
+        const bridgeIndex = uiConfig.bridges.findIndex(x => x.username?.toUpperCase() === username)
+        if (bridgeIndex > -1) {
+          bridgesChanged = true
+          oldBridgeConfig = uiConfig.bridges[bridgeIndex]
+          uiConfig.bridges.splice(bridgeIndex, 1)
+        }
       }
 
       // Only available for child bridges
@@ -128,7 +140,15 @@ export class ServerService {
           // Add the new username to the blacklist if it was previously there
           if (blacklistChanged) {
             uiConfig.accessoryControl.instanceBlacklist = uiConfig.accessoryControl.instanceBlacklist
-              .concat(pluginBlock._bridge.username.toUpperCase())
+              .concat(pluginBlock._bridge.username)
+          }
+
+          // Add an entry to the bridges list mirroring the new username and original object
+          if (bridgesChanged) {
+            uiConfig.bridges.push({
+              ...oldBridgeConfig,
+              username: pluginBlock._bridge.username,
+            })
           }
 
           this.logger.warn(`Bridge ${id} reset: new username: ${pluginBlock._bridge.username} and new pin: ${pluginBlock._bridge.pin}.`)

@@ -945,6 +945,11 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                           type: 'boolean',
                           description: 'When enabled, the Homebridge UI will not create daily scheduled backups.',
                         },
+                        scheduledRestartCron: {
+                          type: 'string',
+                          title: this.$translate.instant('settings.startup.scheduled_restart'),
+                          description: this.$translate.instant('settings.startup.scheduled_restart_desc'),
+                        },
                         disableServerMetricsMonitoring: {
                           title: 'Disable Server Metrics Monitoring',
                           type: 'boolean',
@@ -959,11 +964,11 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                           title: this.$translate.instant('menu.label_plugins'),
                           type: 'object',
                           additionalProperties: false,
-                          description: 'Settings surrounding plugins used by the Homebridge UI.',
+                          description: 'Settings surrounding plugins that are used by the Homebridge UI.',
                           properties: {
                             hideUpdatesFor: {
                               type: 'array',
-                              title: 'Hide Plugin Updates For',
+                              title: this.$translate.instant('config.hide_plugin_updates'),
                               description: 'A list of plugin names for which frontend update notifications will be hidden.',
                               items: {
                                 type: 'string',
@@ -971,20 +976,38 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                                 pattern: '^(?:@[\\w-]+(?:\\.[\\w-]+)*/)?homebridge-[\\w-]+$',
                               },
                             },
-                            hidePairingAlerts: {
-                              type: 'array',
-                              title: 'Hide Pairing Alerts',
-                              description: 'A list of bridge identifiers (e.g., "0E:02:9A:9D:44:45-HAP") for which pairing alerts will be hidden in the UI.',
-                              items: {
-                                type: 'string',
-                                title: 'Bridge Identifier',
-                                pattern: '^[0-9A-F]{2}(?::[0-9A-F]{2}){5}-(HAP)$',
-                              },
-                            },
                             alwaysShowBetas: {
                               type: 'boolean',
                               title: this.$translate.instant('settings.display.show_betas'),
                               description: 'When enabled, beta releases will be shown as available for Homebridge, the UI and plugins.',
+                            },
+                          },
+                        },
+                        bridges: {
+                          type: 'array',
+                          title: this.$translate.instant('child_bridge.bridges'),
+                          description: 'Settings surrounding bridges that are used by the Homebridge UI.',
+                          items: {
+                            type: 'object',
+                            additionalProperties: false,
+                            required: ['username'],
+                            properties: {
+                              username: {
+                                type: 'string',
+                                title: this.$translate.instant('users.label_username'),
+                                description: 'The MAC address of the bridge (e.g., "0E:02:9A:9D:44:45").',
+                                pattern: '^[0-9A-F]{2}(?::[0-9A-F]{2}){5}$',
+                              },
+                              hideHapAlert: {
+                                type: 'boolean',
+                                title: this.$translate.instant('config.hide_hap_pairing'),
+                                description: 'Hide the HAP pairing alert for this bridge.',
+                              },
+                              scheduledRestartCron: {
+                                type: 'string',
+                                title: this.$translate.instant('settings.startup.scheduled_restart'),
+                                description: this.$translate.instant('settings.startup.scheduled_restart_desc'),
+                              },
                             },
                           },
                         },

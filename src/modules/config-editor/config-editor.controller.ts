@@ -1,3 +1,5 @@
+import type { HomebridgeUiBridgeConfig } from '../../core/config/config.interfaces.js'
+
 import {
   Body,
   Controller,
@@ -14,12 +16,14 @@ import { AuthGuard } from '@nestjs/passport'
 import {
   ApiBearerAuth,
   ApiBody,
+  ApiOkResponse,
   ApiOperation,
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger'
 
 import { AdminGuard } from '../../core/auth/guards/admin.guard.js'
+import { SetBridgeAlertDto, SetScheduledRestartCronDto } from './config-editor.dto.js'
 import { ConfigEditorService } from './config-editor.service.js'
 
 @ApiTags('Homebridge Config Editor')
@@ -118,18 +122,55 @@ export class ConfigEditorController {
   }
 
   @UseGuards(AdminGuard)
-  @Get('/ui/plugins/hide-pairing-alerts')
-  @ApiOperation({ summary: 'Get the plugins hide pairing alerts list.' })
-  getPluginsHidePairingAlerts(): Promise<string[]> {
-    return this.configEditorService.getPluginsHidePairingAlerts()
+  @Get('/ui/bridges/:username')
+  @ApiOperation({ summary: 'Get a specific bridge configuration by username.' })
+  @ApiParam({
+    name: 'username',
+    type: String,
+    description: 'The MAC address of the bridge (e.g., "0E:02:9A:9D:44:45")',
+    example: '0E:02:9A:9D:44:45',
+  })
+  @ApiOkResponse({
+    description: 'Bridge configuration',
+    type: 'object',
+    schema: {
+      example: {
+        username: '0E:02:9A:9D:44:45',
+        hideHapAlert: true,
+        hideMatterAlert: false,
+      },
+    },
+  })
+  getBridge(@Param('username') username: string): Promise<HomebridgeUiBridgeConfig | null> {
+    return this.configEditorService.getBridge(username)
   }
 
   @UseGuards(AdminGuard)
-  @Put('/ui/plugins/hide-pairing-alerts')
-  @ApiOperation({ summary: 'Update the plugins hide pairing alerts list.' })
-  @ApiBody({ description: 'Array of bridge identifiers (e.g., "0E:02:9A:9D:44:45-hap") to hide pairing alerts for in the UI.', type: 'json', isArray: true })
-  setPluginsHidePairingAlerts(@Body() { body }) {
-    return this.configEditorService.setPluginsHidePairingAlerts(body)
+  @Put('/ui/bridges/:username/hide-hap-alert')
+  @ApiOperation({ summary: 'Set the hideHapAlert flag for a specific bridge.' })
+  @ApiParam({
+    name: 'username',
+    type: String,
+    description: 'The MAC address of the bridge (e.g., "0E:02:9A:9D:44:45")',
+    example: '0E:02:9A:9D:44:45',
+  })
+  @ApiBody({ type: SetBridgeAlertDto })
+  setBridgeHideHapAlert(@Param('username') username: string, @Body() body: SetBridgeAlertDto) {
+    return this.configEditorService.setBridgeHideHapAlert(username, body.value)
+  }
+
+  @UseGuards(AdminGuard)
+  @Put('/ui/bridges/:username/scheduled-restart-cron')
+  @ApiOperation({ summary: 'Set the scheduledRestartCron for a specific child bridge.' })
+  @ApiParam({
+    name: 'username',
+    type: String,
+    description: 'The MAC address of the bridge (e.g., `0E:02:9A:9D:44:45`)',
+    example: '0E:02:9A:9D:44:45',
+  })
+  @ApiBody({ type: SetScheduledRestartCronDto })
+  setBridgeScheduledRestartCron(@Param('username') username: string, @Body() body: SetScheduledRestartCronDto) {
+    return this.configEditorService.setBridgeScheduledRestartCron(username, body.value)
   }
 
   @UseGuards(AdminGuard)

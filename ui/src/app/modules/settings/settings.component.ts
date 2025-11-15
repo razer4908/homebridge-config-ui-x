@@ -253,8 +253,12 @@ export class SettingsComponent implements OnInit {
   public hbLinuxRestartIsSaving = false
   public hbLinuxRestartFormControl = new FormControl('')
 
+  public scheduledRestartCronIsSaving = false
+  public scheduledRestartCronFormControl = new FormControl('')
+
   public readonly linkDebug = '<a href="https://github.com/homebridge/homebridge-config-ui-x/wiki/Debug-Common-Values" target="_blank" rel="noopener noreferrer"><i class="fa fa-external-link-alt primary-text"></i></a>'
   public readonly linkRaspbianSsl = '<a href="https://github.com/homebridge/homebridge-raspbian-image/wiki/SSL-HTTPS-Access" target="_blank" rel="noopener noreferrer"><i class="fa fa-external-link-alt primary-text"></i></a>'
+  public readonly linkCron = '<a href="https://crontab.guru/" target="_blank" rel="noopener noreferrer"><i class="fa fa-external-link-alt primary-text"></i></a>'
 
   public toggleSearch() {
     this.showSearchBar = !this.showSearchBar
@@ -334,6 +338,7 @@ export class SettingsComponent implements OnInit {
         'setting-debug',
         'setting-insecure',
         'setting-keep',
+        'setting-scheduled-restart',
         'setting-metrics-startup',
         'setting-package-path',
         'setting-linux-restart',
@@ -409,6 +414,7 @@ export class SettingsComponent implements OnInit {
       'setting-debug': this.$translate.instant('settings.startup.debug'),
       'setting-insecure': this.$translate.instant('settings.startup.insecure'),
       'setting-keep': this.$translate.instant('settings.startup.keep_accessories'),
+      'setting-scheduled-restart': this.$translate.instant('settings.startup.scheduled_restart'),
       'setting-metrics-startup': this.$translate.instant('settings.startup.metrics'),
       'setting-env-debug': this.$translate.instant('settings.startup.env_debug'),
       'setting-env-debug-manual': 'DEBUG',
@@ -671,6 +677,11 @@ export class SettingsComponent implements OnInit {
     this.hbLinuxRestartFormControl.valueChanges
       .pipe(debounceTime(1500))
       .subscribe((value: string) => this.hbLinuxRestartSave(value))
+
+    this.scheduledRestartCronFormControl.patchValue(this.$settings.env.scheduledRestartCron || '')
+    this.scheduledRestartCronFormControl.valueChanges
+      .pipe(debounceTime(1500))
+      .subscribe((value: string) => this.scheduledRestartCronSave(value))
 
     this.loading = false
   }
@@ -1672,6 +1683,30 @@ export class SettingsComponent implements OnInit {
       console.error(error)
       this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
       this.hbLinuxRestartIsSaving = false
+    }
+  }
+
+  private async scheduledRestartCronSave(value: string) {
+    try {
+      this.scheduledRestartCronIsSaving = true
+      // Convert empty string to null
+      const cronValue = value?.trim() ? value : null
+      this.$settings.setEnvItem('scheduledRestartCron', cronValue)
+      await firstValueFrom(this.$api.put('/config-editor/ui', { key: 'scheduledRestartCron', value: cronValue }))
+      setTimeout(() => {
+        this.scheduledRestartCronIsSaving = false
+        this.$api.put('/platform-tools/hb-service/set-full-service-restart-flag', {}).subscribe({
+          next: () => this.showRestartToast(),
+          error: (error) => {
+            console.error(error)
+            this.showRestartToast()
+          },
+        })
+      }, 1000)
+    } catch (error) {
+      console.error(error)
+      this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
+      this.scheduledRestartCronIsSaving = false
     }
   }
 

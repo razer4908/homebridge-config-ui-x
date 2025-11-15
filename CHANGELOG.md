@@ -18,6 +18,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - avoid refresh after plugin install/setting change
 - shorten arrow button for same row height
 - monospace input font for relevant options
+- scheduled restart option for (child) bridges
 
 ### Other Changes
 

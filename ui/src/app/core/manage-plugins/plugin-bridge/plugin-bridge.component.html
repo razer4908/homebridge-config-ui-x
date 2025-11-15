@@ -176,6 +176,29 @@
           />
         </div>
       </li>
+      @if (!justInstalled) {
+      <li class="list-group-item d-flex flex-column flex-md-row align-items-center">
+        <label class="mb-2 mb-md-0 w-100 w-md-50">
+          {{ 'settings.startup.scheduled_restart' | translate }}
+          <span class="badge badge-primary ms-1">{{ 'common.labels.beta' | translate }}</span><br />
+          <small
+            class="grey-text"
+            [innerHtml]="'settings.startup.scheduled_restart_desc' | translate: { link: linkCron }"
+          ></small>
+        </label>
+        <div class="text-start text-md-end w-100 w-md-50 d-flex flex-column align-items-end">
+          <input
+            type="text"
+            class="form-control custom-input font-monospace"
+            placeholder="mm hh dd MM ww"
+            [value]="getScheduledRestartCron(configBlocks[selectedBlock]._bridge?.username)"
+            (input)="onScheduledRestartCronChange($event.target.value, configBlocks[selectedBlock]._bridge?.username)"
+            [style.letter-spacing]="'0.15em'"
+            [style.text-align]="'center'"
+            maxlength="30"
+          />
+        </div>
+      </li>
       @if (canShowBridgeDebug) {
       <li class="list-group-item d-flex justify-content-between align-items-center flex-row pb-2">
         <span class="text-start">{{ 'child_bridge.config.debug' | translate }} <code>-D</code></span>
@@ -222,7 +245,7 @@
           />
         </div>
       </li>
-      }
+      } }
     </ul>
 
     <!-- HOMEKIT (HAP) SECTION - Only shown when child bridge is enabled -->
@@ -284,8 +307,8 @@
             type="checkbox"
             class="rendux-input"
             [id]="'toggleHideHapUnpairing_' + selectedBlock"
-            [checked]="isUnpairingHidden(configBlocks[selectedBlock]._bridge?.username, 'hap')"
-            (change)="toggleHideUnpairing(configBlocks[selectedBlock]._bridge?.username, 'hap')"
+            [checked]="isUnpairingHidden(configBlocks[selectedBlock]._bridge?.username)"
+            (change)="toggleHideUnpairing(configBlocks[selectedBlock]._bridge?.username)"
             [attr.aria-label]="'child_bridge.config.hide_pairing_alert' | translate"
           />
           <label [for]="'toggleHideHapUnpairing_' + selectedBlock" class="rendux-label"></label>
@@ -357,7 +380,7 @@
     </div>
     <div class="text-center">
       @if (justInstalled) {
-      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saveInProgress">
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saveInProgress || hasValidationErrors">
         {{ 'form.button_save' | translate }} @if (saveInProgress) {
         <i class="fas fa-spinner fa-pulse"></i>
         }
@@ -370,7 +393,12 @@
     </div>
     <div class="text-end">
       @if (canConfigure && !justInstalled) { @if (configBlocks.length) {
-      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saveInProgress || loading">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="save()"
+        [disabled]="saveInProgress || loading || hasValidationErrors"
+      >
         @if (!saveInProgress) { {{ 'form.button_save' | translate }} } @if (saveInProgress) {
         <i class="fas fa-spinner fa-pulse"></i>
         }
