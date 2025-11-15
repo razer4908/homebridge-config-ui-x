@@ -80,7 +80,7 @@ async function bootstrap(): Promise<NestFastifyApplication> {
     AppModule,
     fAdapter,
     {
-      logger: startupConfig.debug ? new Logger() : false,
+      logger: (startupConfig.debug || process.env.UIX_DEVELOPMENT === '1') ? new Logger() : false,
       httpsOptions: startupConfig.httpsOptions,
     },
   )

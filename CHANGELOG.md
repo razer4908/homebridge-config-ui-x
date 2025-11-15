@@ -28,6 +28,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - extract 'extract' string to language files
 - lift from beta - custom types, betas, terminal
 - convert repo to esm modules
+- enable nestjs logging when in dev mode
 
 ### Homebridge Dependencies
 
