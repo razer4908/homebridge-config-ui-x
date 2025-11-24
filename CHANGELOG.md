@@ -7,6 +7,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### UI Changes
 
 - fix: plugins/accessories not displaying
+- fix: show all child bridge details, not just first
 
 ### Other Changes
 

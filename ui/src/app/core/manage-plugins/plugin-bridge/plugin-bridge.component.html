@@ -30,13 +30,11 @@
       <li>{{ 'child_bridge.bridges_paired_2' | translate }}</li>
       } }
     </ul>
-    @if (canConfigure && configBlocks.length) { @if (configBlocks.length > 1 && !isPlatform) {
+    @if (canConfigure && configBlocks.length) { @if (configBlocks.length > 1) {
     <ul class="list-group list-group-box mb-0">
       <li class="list-group-item text-center grey-text small">{{ 'form.label.changes_kept' | translate }}</li>
       <li class="list-group-item d-flex flex-column flex-md-row align-items-center">
-        <label for="bridgeSelect" class="mb-2 mb-md-0 w-100 w-md-50">
-          {{ 'child_bridge.config.accessory' | translate }}
-        </label>
+        <label for="bridgeSelect" class="mb-2 mb-md-0 w-100 w-md-50"> {{ 'accessories.plugin' | translate }} </label>
         <div class="text-start text-md-end w-100 w-md-50">
           <select
             class="custom-select"
