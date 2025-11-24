@@ -52,6 +52,7 @@ const { orderBy, uniq } = _
 
 // Create a require function for ESM compatibility
 const require = createRequire(import.meta.url)
+const module = require('node:module')
 
 @Injectable()
 export class PluginsService {
@@ -1579,7 +1580,8 @@ export class PluginsService {
         paths.push(...this.getNpmPrefixToSearchPaths())
       }
     } else {
-      paths = paths.concat(require.main?.paths || [])
+      // In ESM, require.main is not available, so we use Module._nodeModulePaths instead
+      paths = paths.concat(module._nodeModulePaths(dirname(require.resolve.paths('.')?.[0] || process.cwd())))
 
       if (process.env.NODE_PATH) {
         paths = process.env.NODE_PATH.split(delimiter).filter(p => !!p).concat(paths)

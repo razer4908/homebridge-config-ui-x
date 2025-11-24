@@ -2,6 +2,22 @@
 
 All notable changes to `homebridge-config-ui-x` will be documented in this file. This project tries to adhere to [Semantic Versioning](http://semver.org/).
 
+## v5.10.1 (Unreleased)
+
+### UI Changes
+
+- fix: plugins/accessories not displaying
+
+### Other Changes
+
+- replace badges in readme, use `shields.io`
+
+### Homebridge Dependencies
+
+- `@homebridge/hap-client` @ `v3.1.2`
+- `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.1`
+
 ## v5.10.0 (2025-11-16)
 
 ### UI Changes
