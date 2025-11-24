@@ -9,6 +9,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix: plugins/accessories not displaying
 - fix: show all child bridge details, not just first
 - fix: fix removing listeners events from sidebar
+- update `monaco-editor` to `v0.55.1` + more deps
 
 ### Other Changes
 
@@ -19,7 +20,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - `@homebridge/hap-client` @ `v3.1.2`
 - `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
-- `@homebridge/plugin-ui-utils` @ `v2.1.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.2`
 
 ## v5.10.0 (2025-11-16)
 
