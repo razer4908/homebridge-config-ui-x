@@ -8,6 +8,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - fix: plugins/accessories not displaying
 - fix: show all child bridge details, not just first
+- fix: fix removing listeners events from sidebar
 
 ### Other Changes
 
