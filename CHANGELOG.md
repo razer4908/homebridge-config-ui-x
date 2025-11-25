@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - replace badges in readme, use `shields.io`
+- run angular migration - use self-closing tags
 
 ### Homebridge Dependencies
 
