@@ -63,8 +63,9 @@ async function bootstrap(): Promise<NestFastifyApplication> {
           return `wss://${req.headers.host} ws://${req.headers.host} ${startupConfig.cspWsOverride || ''}`
         }],
         frameSrc: ['\'self\'', 'data:', 'https://developers.homebridge.io'],
+        workerSrc: ['\'self\'', 'blob:'], // required for web-workers for monaco editor
+        fontSrc: ['\'self\'', 'data:'], // required for web-workers for monaco editor
         scriptSrcAttr: null,
-        fontSrc: null,
         objectSrc: null,
         frameAncestors: null,
         formAction: null,
