@@ -2,7 +2,7 @@
   "name": "homebridge-config-ui-x",
   "displayName": "Homebridge UI",
   "type": "module",
-  "version": "5.11.0",
+  "version": "5.11.1",
   "description": "A web based management, configuration and control platform for Homebridge.",
   "author": "oznu <dev@oz.nu>",
   "license": "MIT",
@@ -133,7 +133,7 @@
     "@types/tail": "^2.2.3",
     "@types/tcp-port-used": "^1.0.4",
     "@types/unzipper": "^0.10.11",
-    "@vitest/coverage-v8": "^4.0.13",
+    "@vitest/coverage-v8": "^4.0.14",
     "concurrently": "^9.2.1",
     "eslint-plugin-format": "^1.0.2",
     "form-data": "^4.0.5",
@@ -142,7 +142,7 @@
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "unplugin-swc": "^1.5.9",
-    "vitest": "^4.0.13"
+    "vitest": "^4.0.14"
   },
   "overrides": {
     "@homebridge/hap-client": {
