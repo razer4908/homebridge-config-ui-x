@@ -2,6 +2,25 @@
 
 All notable changes to `homebridge-config-ui-x` will be documented in this file. This project tries to adhere to [Semantic Versioning](http://semver.org/).
 
+## v5.11.3 (Unreleased)
+
+### UI Changes
+
+- updates to the `it.json` language file (#2664) (@g-flex)
+- updates to the `de.json` language file (#2665) (@michi-onl)
+
+### Other Changes
+
+- update npm publish process for `oidc` auth
+- update npm publish process for `oidc` auth (fix)
+- fix: adjusted timeout for npm requests to 30 seconds (@NorthernMan54) (#2655, #2656)
+
+### Homebridge Dependencies
+
+- `@homebridge/hap-client` @ `v3.1.2`
+- `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.2`
+
 ## v5.11.2 (2025-12-06)
 
 ### UI Changes
@@ -11,6 +30,12 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - dependency updates
+
+### Homebridge Dependencies
+
+- `@homebridge/hap-client` @ `v3.1.2`
+- `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.2`
 
 ## v5.11.1 (2025-11-27)
 

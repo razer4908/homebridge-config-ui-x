@@ -20,7 +20,7 @@ import { PluginsService } from './plugins.service.js'
       headers: {
         'User-Agent': 'homebridge-config-ui-x',
       },
-      timeout: 10000,
+      timeout: 30000,
       httpsAgent: new Agent({ keepAlive: true }),
     }),
     NodePtyModule,
