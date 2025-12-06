@@ -313,6 +313,28 @@
         }
       </div>
     </li>
+    } @if (!isItemHidden('setting-keep')) {
+    <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
+      <span>
+        {{ 'settings.startup.keep_accessories' | translate }} <code>-K</code><br />
+        <small class="grey-text pe-2">{{ 'settings.startup.keep_accessories_desc' | translate }}</small>
+      </span>
+      <div class="d-flex align-items-center">
+        <div class="order-1 order-md-2">
+          <input
+            type="checkbox"
+            class="rendux-input"
+            id="homebridgeKeepOrphans"
+            [formControl]="hbKeepFormControl"
+            [attr.aria-label]="'settings.startup.keep_accessories' | translate"
+          />
+          <label for="homebridgeKeepOrphans" class="rendux-label ms-3" style="min-width: 50px"></label>
+        </div>
+        @if (hbKeepIsSaving) {
+        <i @fadeInOut class="fas fa-floppy-disk primary-text fa-xl me-0 me-md-2 ms-2 ms-md-0 order-2 order-md-1"></i>
+        }
+      </div>
+    </li>
     } @if (!isItemHidden('setting-insecure')) {
     <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
       <span>
@@ -335,27 +357,20 @@
         }
       </div>
     </li>
-    } @if (!isItemHidden('setting-keep')) {
+    } @if (!isItemHidden('setting-security-control') && hbInsecureFormControl.value) {
     <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
-      <span>
-        {{ 'settings.startup.keep_accessories' | translate }} <code>-K</code><br />
-        <small class="grey-text pe-2">{{ 'settings.startup.keep_accessories_desc' | translate }}</small>
+      <span class="pe-2">
+        {{ 'settings.security.ui_control' | translate }}<br />
+        <small class="grey-text pe-2">{{ 'settings.security.ui_control_desc' | translate }}</small>
       </span>
-      <div class="d-flex align-items-center">
-        <div class="order-1 order-md-2">
-          <input
-            type="checkbox"
-            class="rendux-input"
-            id="homebridgeKeepOrphans"
-            [formControl]="hbKeepFormControl"
-            [attr.aria-label]="'settings.startup.keep_accessories' | translate"
-          />
-          <label for="homebridgeKeepOrphans" class="rendux-label ms-3" style="min-width: 50px"></label>
-        </div>
-        @if (hbKeepIsSaving) {
-        <i @fadeInOut class="fas fa-floppy-disk primary-text fa-xl me-0 me-md-2 ms-2 ms-md-0 order-2 order-md-1"></i>
-        }
-      </div>
+      <button
+        class="btn btn-primary waves-effect m-0 ms-3 py-1"
+        style="min-width: 50px"
+        (click)="accessoryUiControl()"
+        [attr.aria-label]="'settings.security.ui_control' | translate"
+      >
+        <i class="fas fa-arrow-right"></i>
+      </button>
     </li>
     } @if (!isItemHidden('setting-scheduled-restart')) {
     <li @smoothHide class="list-group-item d-block d-md-flex justify-content-between align-items-center">
@@ -1179,22 +1194,6 @@
     </li>
     } } }
     <!-- end of raspbian hidden options -->
-    @if (!isItemHidden('setting-security-control')) {
-    <li @smoothHide class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="pe-2">
-        {{ 'settings.security.ui_control' | translate }}<br />
-        <small class="grey-text pe-2">{{ 'settings.security.ui_control_desc' | translate }}</small>
-      </span>
-      <button
-        class="btn btn-primary waves-effect m-0 ms-3 py-1"
-        style="min-width: 50px"
-        (click)="accessoryUiControl()"
-        [attr.aria-label]="'settings.security.ui_control' | translate"
-      >
-        <i class="fas fa-arrow-right"></i>
-      </button>
-    </li>
-    }
   </ul>
   }
 </div>

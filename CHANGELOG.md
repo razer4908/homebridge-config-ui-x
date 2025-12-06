@@ -8,6 +8,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - updates to the `it.json` language file (#2664) (@g-flex)
 - updates to the `de.json` language file (#2665) (@michi-onl)
+- move control list setting to under insecure mode setting
 
 ### Other Changes
 

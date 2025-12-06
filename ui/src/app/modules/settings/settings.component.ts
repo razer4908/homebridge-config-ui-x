@@ -337,6 +337,7 @@ export class SettingsComponent implements OnInit {
       startup: [
         'setting-debug',
         'setting-insecure',
+        'setting-security-control',
         'setting-keep',
         'setting-scheduled-restart',
         'setting-metrics-startup',
@@ -368,7 +369,6 @@ export class SettingsComponent implements OnInit {
         'setting-security-https',
         'setting-security-cert',
         'setting-security-pass',
-        'setting-security-control',
       ],
       cache: [
         'setting-accessory-debug',
