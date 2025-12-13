@@ -91,7 +91,7 @@
   }
 </div>
 } } @else if (tab === 'stats') {
-<div class="w-100 py-3 hb-stats-header text-white text-center">
+<div class="w-100 py-3 hb-stats-header text-white text-center" id="stats-header">
   <div class="mb-2">
     <code
       >https://developers.homebridge.io/analytics
@@ -103,6 +103,7 @@
 <iframe
   src="https://developers.homebridge.io/analytics/"
   class="hb-stats"
+  id="stats-iframe"
   sandbox="allow-scripts allow-same-origin allow-popups"
   referrerpolicy="no-referrer"
 >

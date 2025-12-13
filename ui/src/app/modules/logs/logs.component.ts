@@ -5,7 +5,7 @@ import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { saveAs } from 'file-saver'
 import { ToastrService } from 'ngx-toastr'
-import { Subject, Subscription } from 'rxjs'
+import { Observable, Subject, Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
 import { ApiService } from '@/app/core/api.service'
@@ -14,13 +14,17 @@ import { ConfirmComponent } from '@/app/core/components/confirm/confirm.componen
 import { LogService } from '@/app/core/log.service'
 import { SettingsService } from '@/app/core/settings.service'
 
+export interface CanComponentDeactivate {
+  canDeactivate: (nextUrl?: string) => Observable<boolean> | Promise<boolean> | boolean
+}
+
 @Component({
   templateUrl: './logs.component.html',
   styleUrls: ['./logs.component.scss'],
   standalone: true,
   imports: [NgbTooltip, TranslatePipe, ReactiveFormsModule],
 })
-export class LogsComponent implements OnInit, OnDestroy {
+export class LogsComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private $api = inject(ApiService)
   private $auth = inject(AuthService)
   private $log = inject(LogService)
@@ -60,6 +64,15 @@ export class LogsComponent implements OnInit, OnDestroy {
 
     // Set body bg color
     window.document.querySelector('body').classList.add('bg-black')
+
+    // Add light-mode class for animations (only in light mode)
+    if (this.$settings.actualLightingMode === 'light') {
+      window.document.querySelector('body').classList.add('light-mode')
+      const terminal = this.termTarget()?.nativeElement
+      if (terminal) {
+        terminal.classList.add('light-mode')
+      }
+    }
 
     // Start the terminal
     this.$log.startTerminal(this.termTarget(), {
@@ -138,9 +151,57 @@ export class LogsComponent implements OnInit, OnDestroy {
     this.$log.scrollToBottom()
   }
 
+  public canDeactivate(nextUrl?: string): Promise<boolean> {
+    // If in dark mode, no animations needed - navigate immediately
+    if (this.$settings.actualLightingMode !== 'light') {
+      window.document.querySelector('body').classList.remove('bg-black')
+      return Promise.resolve(true)
+    }
+
+    // Hide search bar immediately to avoid seeing black search bar on white background
+    if (this.showSearchBar()) {
+      this.showSearchBar.set(false)
+    }
+
+    // Remove light-mode class from body
+    window.document.querySelector('body').classList.remove('light-mode')
+
+    return new Promise((resolve) => {
+      // Check if we're navigating to another black-background page
+      const stayingBlack = nextUrl && (
+        nextUrl.includes('/platform-tools/terminal')
+        || nextUrl.includes('/logs')
+      )
+
+      // Add fade-out class to terminal
+      const terminal = this.termTarget()?.nativeElement
+      if (terminal) {
+        terminal.classList.add('fade-out')
+      }
+
+      if (stayingBlack) {
+        // Just fade out the terminal, keep background black
+        setTimeout(() => {
+          resolve(true)
+        }, 250)
+      } else {
+        // Wait for fade-out animation (250ms) and body background transition (250ms)
+        setTimeout(() => {
+          // Remove body bg color to trigger background transition
+          window.document.querySelector('body').classList.remove('bg-black')
+        }, 250)
+
+        // Wait for both animations to complete before allowing navigation
+        setTimeout(() => {
+          resolve(true)
+        }, 500)
+      }
+    })
+  }
+
   public ngOnDestroy() {
-    // Unset body bg color
-    window.document.querySelector('body').classList.remove('bg-black')
+    // Clean up light-mode class
+    window.document.querySelector('body').classList.remove('light-mode')
 
     // Unsubscribe from form changes
     if (this.valueChangesSubscription) {

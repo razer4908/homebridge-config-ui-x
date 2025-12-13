@@ -30,6 +30,7 @@ import { WallpaperComponent } from '@/app/modules/settings/wallpaper/wallpaper.c
 
 @Component({
   templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss'],
   standalone: true,
   imports: [
     NgClass,
@@ -96,6 +97,7 @@ export class SettingsComponent implements OnInit {
 
   public showSearchBar = false
   public searchQuery = ''
+  public isThemeTransitioning = false
 
   public showFields = {
     general: true,
@@ -920,8 +922,21 @@ export class SettingsComponent implements OnInit {
   private async uiThemeSave(value: string) {
     try {
       this.uiThemeIsSaving = true
+
+      // Start fade-out animation
+      this.isThemeTransitioning = true
+
+      // Wait for fade-out to complete
+      await new Promise(resolve => setTimeout(resolve, 250))
+
+      // Change the theme (background will transition)
       this.$settings.setTheme(value)
       await this.saveUiSettingChange('theme', value)
+
+      // Wait for background transition to start, then fade content back in
+      await new Promise(resolve => setTimeout(resolve, 100))
+      this.isThemeTransitioning = false
+
       setTimeout(() => {
         this.uiThemeIsSaving = false
       }, 1000)
@@ -929,14 +944,28 @@ export class SettingsComponent implements OnInit {
       console.error(error)
       this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
       this.uiThemeIsSaving = false
+      this.isThemeTransitioning = false
     }
   }
 
   private async uiLightSave(value: 'auto' | 'light' | 'dark') {
     try {
       this.uiLightIsSaving = true
+
+      // Start fade-out animation
+      this.isThemeTransitioning = true
+
+      // Wait for fade-out to complete
+      await new Promise(resolve => setTimeout(resolve, 250))
+
+      // Change the lighting mode (background will transition)
       this.$settings.setLightingMode(value, 'user')
       await this.saveUiSettingChange('lightingMode', value)
+
+      // Wait for background transition to start, then fade content back in
+      await new Promise(resolve => setTimeout(resolve, 100))
+      this.isThemeTransitioning = false
+
       setTimeout(() => {
         this.uiLightIsSaving = false
       }, 1000)
@@ -944,6 +973,7 @@ export class SettingsComponent implements OnInit {
       console.error(error)
       this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
       this.uiLightIsSaving = false
+      this.isThemeTransitioning = false
     }
   }
 
