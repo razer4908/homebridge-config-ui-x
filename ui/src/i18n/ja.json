@@ -264,6 +264,7 @@
   "logs.download.error": "ログファイルのダウンロードに失敗しました。",
   "logs.download_warning": "Homebridgeのログファイルには個人情報やパスワード、アクセストークンが含まれる可能性があります。共有する前に機密情報を削除してください。",
   "logs.log_file_truncated": "ログファイルを削除しました",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "ログファイルをダウンロード",
   "logs.title_truncate_log_file": "ログファイルを削除",
   "logs.truncate.error": "ログファイルの削除に失敗しました。",

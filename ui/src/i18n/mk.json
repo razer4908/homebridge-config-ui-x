@@ -264,6 +264,7 @@
   "logs.download.error": "Failed to download log file.",
   "logs.download_warning": "Логирачките фајлови од Homebridge може да содржат лични информации, лозинки, или токени. Разгледајте ги логирачките фајлови и отстранете било какви сензитивни информации пред да споделите со други лица.",
   "logs.log_file_truncated": "Логирачкиот фајл е скратен.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Симни го логирачкиот фајл",
   "logs.title_truncate_log_file": "Скрати го логирачкиот фајл",
   "logs.truncate.error": "Failed to truncate log file.",

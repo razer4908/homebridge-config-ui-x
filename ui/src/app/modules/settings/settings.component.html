@@ -28,9 +28,14 @@
         [ngModelOptions]="{standalone: true}"
       />
       @if (searchQuery) {
-      <a class="search-bar-clear" href="javascript:void(0)" (click)="clearSearch()">
-        <i class="fas fa-square-xmark"></i>
-      </a>
+      <button
+        type="button"
+        class="search-bar-clear"
+        (click)="clearSearch()"
+        [attr.aria-label]="'form.button_clear' | translate"
+      >
+        <i class="fas fa-square-xmark" aria-hidden="true"></i>
+      </button>
       }
     </form>
   </div>

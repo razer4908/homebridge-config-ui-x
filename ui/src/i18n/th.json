@@ -264,6 +264,7 @@
   "logs.download.error": "ไม่สามารถดาวน์โหลดไฟล์ log ได้",
   "logs.download_warning": "ไฟล์บันทึกของ Homebridge อาจมีข้อมูลส่วนบุคคลรหัสผ่านหรือโทเค็นการเข้าถึง โปรดตรวจสอบไฟล์บันทึกและลบข้อมูลที่ละเอียดอ่อนออกก่อนแบ่งปันกับผู้อื่น",
   "logs.log_file_truncated": "ไฟล์บันทึกถูกตัดให้สั้นลง",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "ดาวน์โหลดไฟล์บันทึก",
   "logs.title_truncate_log_file": "ตัดทอนไฟล์บันทึก",
   "logs.truncate.error": "ไม่สามารถตัดทอนไฟล์ log ได้",

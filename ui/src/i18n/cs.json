@@ -264,6 +264,7 @@
   "logs.download.error": "Nepodařilo se stáhnout soubor protokolu.",
   "logs.download_warning": "Soubory protokolu Homebridge mohou obsahovat osobní údaje, hesla nebo přístupové tokeny. Před sdílením s ostatními si soubor protokolu prohlédněte a odstraňte z něj veškeré citlivé informace.",
   "logs.log_file_truncated": "Soubor protokolu zkrácen.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Stáhnout Soubor Protokolu",
   "logs.title_truncate_log_file": "Zkrácení souboru protokolu",
   "logs.truncate.error": "Nepodařilo se zkrátit soubor protokolu.",

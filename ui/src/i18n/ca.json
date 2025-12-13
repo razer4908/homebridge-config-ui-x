@@ -264,6 +264,7 @@
   "logs.download.error": "Failed to download log file.",
   "logs.download_warning": "L'arxiu de logs de Homebridge pot contenir informació personal, contrasenyes o tokens d'accés. Si us plau revisi l'arxiu de log i elimini qualsevol informació sensible abans de compartir-lo amb els altres.",
   "logs.log_file_truncated": "Arxiu de logs truncat.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Descarregar arxiu de logs",
   "logs.title_truncate_log_file": "Truncar arxiu de logs",
   "logs.truncate.error": "Failed to truncate log file.",

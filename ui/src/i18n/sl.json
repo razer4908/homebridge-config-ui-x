@@ -264,6 +264,7 @@
   "logs.download.error": "Failed to download log file.",
   "logs.download_warning": "Dnevniške datoteke Homebridge lahko vsebujejo osebne podatke, gesla ali žetone za dostop. Preglejte datoteko dnevnika in odstranite vse občutljive podatke, preden jih delite z drugimi.",
   "logs.log_file_truncated": "Dnevnik je skrajšan.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Prenesi datoteko dnevnika",
   "logs.title_truncate_log_file": "Skrajšaj datoteko dnevnika",
   "logs.truncate.error": "Failed to truncate log file.",

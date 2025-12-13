@@ -46,7 +46,7 @@ export class ManageVersionComponent implements OnInit {
     this.isUpdateHidden = this.$settings.env.plugins.hideUpdatesFor && this.$settings.env.plugins.hideUpdatesFor.includes(this.plugin.name)
     this.hideUpdatesFormControl.patchValue(this.isUpdateHidden)
     this.hideUpdatesFormControl.valueChanges
-      .pipe(debounceTime(750))
+      .pipe(debounceTime(500))
       .subscribe((value: boolean) => this.toggleHideUpdates(value))
   }
 

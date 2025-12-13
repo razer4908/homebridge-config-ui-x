@@ -264,6 +264,7 @@
   "logs.download.error": "Download log bestand mislukt.",
   "logs.download_warning": "Homebridge log bestanden bevatten mogelijk persoonlijke gegevens, wachtwoorden of toegangs tokens. Bekijk de log bestanden en verwijder gevoelige data alvorens u dit bestand deelt met anderen.",
   "logs.log_file_truncated": "Log bestand afgekapt.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Download Log Bestanden",
   "logs.title_truncate_log_file": "Kap Log Bestanden Af",
   "logs.truncate.error": "Afkappen log bestand mislukt.",

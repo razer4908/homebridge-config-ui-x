@@ -264,6 +264,7 @@
   "logs.download.error": "로그 파일 다운로드에 실패했습니다.",
   "logs.download_warning": "Homebridge 로그파일에는 개인정보, 비밀번호, 액세스토큰이 포함될 수 있습니다. 다른 사람과 공유하기 전에 로그 파일을 검토하고 민감한 정보를 제거하십시오.",
   "logs.log_file_truncated": "로그파일이 잘렸습니다.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "로그파일 다운로드",
   "logs.title_truncate_log_file": "로그파일 자르기",
   "logs.truncate.error": "로그 파일 자르기에 실패했습니다.",

@@ -264,6 +264,7 @@
   "logs.download.error": "Failed to download log file.",
   "logs.download_warning": "Os ficheiros de registo do Homebridge podem conter informações pessoais, palavra-passes ou tokens de acesso. Por favor verifique o ficheiro de registo e remova qualquer informação sensível antes de partilhar com outros.",
   "logs.log_file_truncated": "Ficheiro de registo eliminado",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Descarregar o Ficheiro de Registo",
   "logs.title_truncate_log_file": "Apagar o Ficheiro de Registo",
   "logs.truncate.error": "Failed to truncate log file.",

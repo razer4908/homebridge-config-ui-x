@@ -264,6 +264,7 @@
   "logs.download.error": "כשל בהורדת קובץ הלוג.",
   "logs.download_warning": "קבצי הלוג של Homebridge עלולים להכיל מידע אישי, סיסמאות או אסימוני גישה. אנא בדוק את קובץ הלוג והסר כל מידע רגיש לפני שיתוף עם אחרים.",
   "logs.log_file_truncated": "קובץ הלוג נמחק לגמרי",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "הורד קובץ לוג",
   "logs.title_truncate_log_file": "מחק קובץ לוג",
   "logs.truncate.error": "כשל בקיצוץ קובץ הלוג.",

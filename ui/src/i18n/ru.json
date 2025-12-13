@@ -264,6 +264,7 @@
   "logs.download.error": "Не удалось скачать файл журнала.",
   "logs.download_warning": "Файлы журналов Homebridge могут содержать личную информацию, пароли или токены доступа. Пожалуйста, проверьте журнал и удалите конфиденциальную информацию перед публикацией.",
   "logs.log_file_truncated": "Файл журнала был усечён.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Скачать файл журнала",
   "logs.title_truncate_log_file": "Удалить журналы",
   "logs.truncate.error": "Не удалось очистить файл журнала.",

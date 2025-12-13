@@ -264,6 +264,7 @@
   "logs.download.error": "Gagal mengunduh berkas log.",
   "logs.download_warning": "Berkas catatan berkas log Homebridge mungkin mengandung informasi personal, password atau token akses. Harap review berkas catatan dan hapus informasi sensitif sebelum dibagikan.",
   "logs.log_file_truncated": "Berkas catatan terpotong.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Unduh Berkas Catatan",
   "logs.title_truncate_log_file": "Potong Berkas Catatan",
   "logs.truncate.error": "Gagal memotong file log.",

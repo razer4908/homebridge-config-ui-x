@@ -264,6 +264,7 @@
   "logs.download.error": "Failed to download log file.",
   "logs.download_warning": "Homebridge loggfiler kan innehålla personlig information, lösenord eller åtkomsttoken. Granska loggfilen och ta bort all känslig information innan du delar med andra.",
   "logs.log_file_truncated": "Loggfil rensad.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Ladda ner loggfil",
   "logs.title_truncate_log_file": "Rensa loggfil",
   "logs.truncate.error": "Failed to truncate log file.",

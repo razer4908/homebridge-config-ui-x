@@ -16,7 +16,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   private $settings = inject(SettingsService)
   private $navigationGuard = inject(TerminalNavigationGuardService)
   private $translate = inject(TranslateService)
-  private resizeEvent = new Subject()
+  private resizeEvent = new Subject<void>()
 
   readonly termTarget = viewChild<ElementRef>('terminaloutput')
 

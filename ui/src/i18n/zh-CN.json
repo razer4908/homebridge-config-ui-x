@@ -264,6 +264,7 @@
   "logs.download.error": "下载日志文件失败。",
   "logs.download_warning": "Homebridge 日志文件包含了个人信息，密码或者访问令牌。 在分享给他人之前请查看日志问卷并移除任何敏感信息。",
   "logs.log_file_truncated": "日志文件已截断。",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "下载日志文件",
   "logs.title_truncate_log_file": "截断日志文件",
   "logs.truncate.error": "截断日志文件失败。",

@@ -264,6 +264,7 @@
   "logs.download.error": "Failed to download log file.",
   "logs.download_warning": "Homebridge log files may contain personal information, passwords or access tokens. Please review the log file and remove any sensitive information before sharing with others.",
   "logs.log_file_truncated": "Log file truncated.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Download Log File",
   "logs.title_truncate_log_file": "Delete Logs",
   "logs.truncate.error": "Failed to truncate log file.",

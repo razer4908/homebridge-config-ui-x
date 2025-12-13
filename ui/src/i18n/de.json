@@ -264,6 +264,7 @@
   "logs.download.error": "Download der Log-Datei fehlgeschlagen.",
   "logs.download_warning": "Homebridge-Log-Dateien können persönliche Informationen, Passwörter oder Zugriffstoken beinhalten. Bitte sieh dir die Log-Datei an und entferne alle sensitiven Informationen, bevor du sie mit anderen teilst.",
   "logs.log_file_truncated": "Log-Datei abgeschnitten.",
+  "logs.placeholder_search_logs": "Search logs (min. 3 characters)...",
   "logs.title_download_log_file": "Log-Datei herunterladen",
   "logs.title_truncate_log_file": "Log-Datei abschneiden",
   "logs.truncate.error": "Kürzen der Log-Datei fehlgeschlagen.",
