@@ -15,6 +15,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - use transitions when changing between light and dark backgrounds
 - add a couple more post-update messages
 - show spinner when backing up before updating hb/ui
+- restore required field indicators in plugin config forms
 
 ### Other Changes
 
