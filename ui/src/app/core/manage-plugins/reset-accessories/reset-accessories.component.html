@@ -55,7 +55,7 @@
             [ngClass]="{
               'fa-broom': !toDelete.includes(item._id),
               'fa-undo': toDelete.includes(item._id) && !clicked,
-              'fa-spinner fa-pulse': toDelete.includes(item._id) && clicked
+              'fa-circle-notch fa-spin': toDelete.includes(item._id) && clicked
             }"
           ></i>
         </button>
@@ -96,7 +96,7 @@
       >
         @if (!clicked) { {{ 'form.button_reset' | translate }} @if (toDelete.length > 0) { ({{ toDelete.length }}) }}
         @if (clicked) {
-        <i class="fas fa-spinner fa-pulse"></i>
+        <i class="fas fa-circle-notch fa-spin"></i>
         }
       </button>
       }

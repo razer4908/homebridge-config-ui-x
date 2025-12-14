@@ -80,7 +80,7 @@ hb-service start</pre
           <div class="alert release-notes p-3 pb-1 my-0">
             @if (action === 'Update' && !versionNotesLoaded) {
             <div class="w-100 text-center primary-text mt-3 mb-4">
-              <i class="fa fa-cog fa-spin" style="font-size: 75px"></i>
+              <i class="fa fa-circle-notch fa-spin" style="font-size: 75px"></i>
             </div>
             } @else { @if (versionNotes) {
             <markdown class="plugin-md" [data]="versionNotes" />
@@ -105,7 +105,7 @@ hb-service start</pre
           <div class="alert release-notes p-3 pb-1 my-0" style="border-top-left-radius: 0; border-top-right-radius: 0">
             @if (action === 'Update' && !fullChangelogLoaded) {
             <div class="w-100 text-center primary-text mt-3 mb-4">
-              <i class="fa fa-cog fa-spin" style="font-size: 75px"></i>
+              <i class="fa fa-circle-notch fa-spin" style="font-size: 75px"></i>
             </div>
             } @else { @if (fullChangelog) {
             <markdown class="plugin-md" [data]="fullChangelog" />
@@ -126,7 +126,7 @@ hb-service start</pre
       <p class="w-100 text-center mb-1 small">
         <span class="grey-text">{{ 'plugins.manage.backup' | translate }}</span>
         @if (downloadingBackup) {
-        <span class="mx-1"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="mx-1"><i class="fa fa-circle-notch fa-spin"></i></span>
         } @else {
         <a href="javascript:void(0)" (click)="downloadBackupFile()"><i class="fa fa-download mx-1"></i></a>
         }

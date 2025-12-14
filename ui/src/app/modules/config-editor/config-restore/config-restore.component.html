@@ -37,7 +37,7 @@
     </ul>
     @if (loading) {
     <div class="text-center primary-text">
-      <i class="fa fa-cog fa-spin mt-3" style="font-size: 75px"></i>
+      <i class="fa fa-circle-notch fa-spin mt-3" style="font-size: 75px"></i>
     </div>
     } @else if (backupList.length) {
     <ul class="list-group list-group-box mt-3">
@@ -87,7 +87,7 @@
           >
             <i
               class="fas"
-              [ngClass]="{ 'fa-trash': backup.id !== deleting, 'fa-cog fa-spin': backup.id === deleting }"
+              [ngClass]="{ 'fa-trash': backup.id !== deleting, 'fa-circle-notch fa-spin': backup.id === deleting }"
             ></i>
           </button>
         </span>
@@ -110,7 +110,10 @@
             triggers="hover"
             [attr.aria-label]="'form.button_delete' | translate"
           >
-            <i class="fas" [ngClass]="{ 'fa-trash': 'all' !== deleting, 'fa-cog fa-spin': 'all' === deleting }"></i>
+            <i
+              class="fas"
+              [ngClass]="{ 'fa-trash': 'all' !== deleting, 'fa-circle-notch fa-spin': 'all' === deleting }"
+            ></i>
           </button>
         </span>
       </li>

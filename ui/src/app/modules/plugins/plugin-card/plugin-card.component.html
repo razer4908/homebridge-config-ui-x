@@ -112,7 +112,7 @@
               }
               <!-- // -->
               <!-- restart in progress spinner -->
-              <i [hidden]="!childBridgeRestartInProgress" class="fas fa-spinner fa-pulse fa-lg grey-text ms-3"></i>
+              <i [hidden]="!childBridgeRestartInProgress" class="fas fa-circle-notch fa-spin fa-lg grey-text ms-3"></i>
               <!-- // -->
               <!-- child bridge status (good status is not shown) -->
               @if (plugin.installedVersion && (!plugin.newHbScope || plugin.newHbScope.switch !==

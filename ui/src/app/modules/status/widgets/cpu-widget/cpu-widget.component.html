@@ -16,7 +16,7 @@
       <div class="text-center widget-value-parent-wrap">
         <div class="widget-value mb-0">
           @if (currentLoad !== undefined) { {{ currentLoad | number:'1.0-0' }}% } @else {
-          <i class="fas fa-spinner fa-pulse"></i>
+          <i class="fas fa-circle-notch fa-spin"></i>
           }
         </div>
         <div class="widget-value-label grey-text">{{ 'status.cpu.load' | translate }}</div>

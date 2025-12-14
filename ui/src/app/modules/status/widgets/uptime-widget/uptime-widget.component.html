@@ -7,7 +7,7 @@
       <div class="text-center widget-value-parent-wrap">
         <div class="widget-value mb-0">
           @if (serverUptime) { {{ serverUptime }} } @else {
-          <i class="fas fa-spinner fa-pulse"></i>
+          <i class="fas fa-circle-notch fa-spin"></i>
           }
         </div>
         <div class="widget-value-label grey-text">{{ 'status.widget.uptime.label_server' | translate }}</div>
@@ -15,7 +15,7 @@
       <div class="text-center widget-value-parent-wrap">
         <div class="widget-value mb-0">
           @if (processUptime) { {{ processUptime }} } @else {
-          <i class="fas fa-spinner fa-pulse"></i>
+          <i class="fas fa-circle-notch fa-spin"></i>
           }
         </div>
         <div class="widget-value-label grey-text">{{ 'status.widget.uptime.label_process' | translate }}</div>

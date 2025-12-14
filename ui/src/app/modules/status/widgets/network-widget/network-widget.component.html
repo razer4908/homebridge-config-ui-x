@@ -16,7 +16,7 @@
       <div class="text-center widget-value-parent-wrap">
         <div class="widget-value mb-0">
           @if (receivedPerSec !== undefined) { {{ receivedPerSec | number: '1.0-1' }} Mb/s } @else {
-          <i class="fas fa-spinner fa-pulse"></i>
+          <i class="fas fa-circle-notch fa-spin"></i>
           }
         </div>
         <div class="widget-value-label grey-text">{{ 'status.network.received_per_second' | translate }}</div>
@@ -24,7 +24,7 @@
       <div class="text-center widget-value-parent-wrap">
         <div class="widget-value mb-0">
           @if (sentPerSec !== undefined) { {{ sentPerSec | number: '1.0-1' }} Mb/s } @else {
-          <i class="fas fa-spinner fa-pulse"></i>
+          <i class="fas fa-circle-notch fa-spin"></i>
           }
         </div>
         <div class="widget-value-label grey-text">{{ 'status.network.sent_per_second' | translate }}</div>

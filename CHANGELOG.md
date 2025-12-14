@@ -16,6 +16,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - add a couple more post-update messages
 - show spinner when backing up before updating hb/ui
 - restore required field indicators in plugin config forms
+- make loading spinners consistent across the ui
 
 ### Other Changes
 
