@@ -98,6 +98,7 @@ export class ManagePluginComponent implements OnInit, OnDestroy {
   public fullChangelogLoaded = false
   public releaseNotesShow = false
   public releaseNotesTab: number = 1
+  public downloadingBackup = false
 
   constructor() {
     this.term.loadAddon(this.fitAddon)
@@ -279,11 +280,14 @@ export class ManagePluginComponent implements OnInit, OnDestroy {
   }
 
   public async downloadBackupFile(): Promise<void> {
+    this.downloadingBackup = true
     try {
       await this.$backup.downloadBackup()
     } catch (error) {
       console.error(error)
       this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
+    } finally {
+      this.downloadingBackup = false
     }
   }
 

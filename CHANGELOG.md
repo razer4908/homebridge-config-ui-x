@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - convert main spinner animation from `svg` to `css`
 - use transitions when changing between light and dark backgrounds
 - add a couple more post-update messages
+- show spinner when backing up before updating hb/ui
 
 ### Other Changes
 
