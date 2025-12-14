@@ -158,7 +158,11 @@ jobs:
   pre-release:
     needs: [determine-release-type, publish]
     name: Create GitHub Pre-Release
-    if: needs.determine-release-type.outputs.release_type == 'beta' || needs.determine-release-type.outputs.release_type == 'alpha'
+    if: |
+      always() &&
+      needs.publish.result == 'success' &&
+      github.repository == 'homebridge/homebridge-config-ui-x' &&
+      (needs.determine-release-type.outputs.release_type == 'beta' || needs.determine-release-type.outputs.release_type == 'alpha')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
