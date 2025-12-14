@@ -95,6 +95,9 @@ export class ManagePluginsService {
     ref.componentInstance.latestVersion = plugin.latestVersion
     ref.componentInstance.installedVersion = plugin.installedVersion
     ref.componentInstance.isDisabled = plugin.disabled
+    ref.componentInstance.verifiedPlugin = plugin.verifiedPlugin
+    ref.componentInstance.verifiedPlusPlugin = plugin.verifiedPlusPlugin
+    ref.componentInstance.funding = plugin.funding
     ref.componentInstance.onRefreshPluginList = () => this.pluginListRefreshSubject.next()
 
     try {

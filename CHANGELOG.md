@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - added log search facility on main logs page
 - convert main spinner animation from `svg` to `css`
 - use transitions when changing between light and dark backgrounds
+- add a couple more post-update messages
 
 ### Other Changes
 
