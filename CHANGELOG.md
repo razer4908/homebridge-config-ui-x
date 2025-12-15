@@ -7,6 +7,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### UI Changes
 
 - add `NFCAccess` as hidden accessory service
+- add status to security system modal
 
 ### Other Changes
 
