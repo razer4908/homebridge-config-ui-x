@@ -249,7 +249,10 @@ jobs:
   github-releases-to-discord:
     name: Discord Webhooks
     needs: [determine-release-type, publish, attach-artifact]
-    if: needs.publish.result == 'success' && needs.attach-artifact.result == 'success'
+    if: |
+      always() &&
+      needs.publish.result == 'success' &&
+      needs.attach-artifact.result == 'success'
     uses: homebridge/.github/.github/workflows/discord-webhooks.yml@latest
     with:
       title: ${{ needs.determine-release-type.outputs.release_type == 'latest' && 'Homebridge UI Release' || needs.determine-release-type.outputs.release_type == 'beta' && 'Homebridge UI Beta Release' || 'Homebridge UI Alpha Release' }}
