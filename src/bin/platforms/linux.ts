@@ -318,6 +318,9 @@ export class LinuxInstaller extends BasePlatform {
    *
    *      18            2.28
    *      20            2.31
+   *
+   * References:
+   * https://github.com/nodejs/node/blob/main/BUILDING.md?plain=1#L107-L125
    */
 
   private async glibcVersionCheck(target: string) {
