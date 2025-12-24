@@ -1,4 +1,5 @@
-import { Component, inject, Input, OnInit } from '@angular/core'
+/* global NodeJS */
+import { Component, inject, Input, OnInit, signal, WritableSignal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CharacteristicType } from '@homebridge/hap-client'
 import { Enums } from '@homebridge/hap-client/dist/hap-types'
@@ -27,6 +28,7 @@ import { RemoveIndividualAccessoriesComponent } from '@/app/modules/settings/rem
 export class AccessoryInfoComponent implements OnInit {
   private $activeModal = inject(NgbActiveModal)
   private $modal = inject(NgbModal)
+  private copyTimeouts = new Map<WritableSignal<boolean>, NodeJS.Timeout>()
   private allCustomTypeList: Array<Array<ServiceTypeX['type']>> = [
     // Groups of service types that can be changed from one to another
     [
@@ -77,6 +79,8 @@ export class AccessoryInfoComponent implements OnInit {
   public matchedCachedAccessory: any = null
   public enums = Enums
   public customTypeList: Array<ServiceTypeX['type']> = []
+  public uniqueIdCopied = signal(false)
+  public uuidCopied = signal(false)
 
   public ngOnInit() {
     this.accessoryInformation = Object.entries(this.service.accessoryInformation).map(([key, value]) => ({ key, value }))
@@ -96,6 +100,12 @@ export class AccessoryInfoComponent implements OnInit {
     }
   }
 
+  public ngOnDestroy() {
+    // Clear all pending timeouts to prevent memory leaks
+    this.copyTimeouts.forEach(timeout => clearTimeout(timeout))
+    this.copyTimeouts.clear()
+  }
+
   public removeSingleCachedAccessories() {
     this.$activeModal.close()
     const ref = this.$modal.open(RemoveIndividualAccessoriesComponent, {
@@ -113,6 +123,63 @@ export class AccessoryInfoComponent implements OnInit {
 
   public dismissModal() {
     this.$activeModal.dismiss('Dismiss')
+  }
+
+  public async copyUniqueIdToClipboard(): Promise<void> {
+    const uniqueId = this.service.uniqueId
+    if (uniqueId) {
+      await this.copyToClipboard(uniqueId, this.uniqueIdCopied)
+    }
+  }
+
+  public async copyUUIDToClipboard(): Promise<void> {
+    const uuid = this.matchedCachedAccessory?.UUID
+    if (uuid) {
+      await this.copyToClipboard(uuid, this.uuidCopied)
+    }
+  }
+
+  // Private methods
+  private async copyToClipboard(text: string, copiedSignal: WritableSignal<boolean>): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(text)
+    } catch (error) {
+      // Fallback for iOS Safari
+      this.fallbackCopyToClipboard(text)
+    }
+
+    copiedSignal.set(true)
+
+    // Clear existing timeout for this signal if any
+    const existingTimeout = this.copyTimeouts.get(copiedSignal)
+    if (existingTimeout) {
+      clearTimeout(existingTimeout)
+    }
+
+    // Set new timeout to reset the copied state
+    const timeout = setTimeout(() => {
+      copiedSignal.set(false)
+      this.copyTimeouts.delete(copiedSignal)
+    }, 3000)
+
+    this.copyTimeouts.set(copiedSignal, timeout)
+  }
+
+  private fallbackCopyToClipboard(text: string): void {
+    const textArea = document.createElement('textarea')
+    textArea.value = text
+    textArea.style.position = 'fixed'
+    textArea.style.left = '-999999px'
+    textArea.style.top = '-999999px'
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+    try {
+      document.execCommand('copy')
+    } catch (error) {
+      console.error('Fallback: Could not copy text', error)
+    }
+    document.body.removeChild(textArea)
   }
 
   private matchToCachedAccessory() {

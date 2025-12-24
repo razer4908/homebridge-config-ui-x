@@ -143,6 +143,7 @@
   "accessories.support.rooms_2": "既存の部屋名を変更したい場合は、新しい部屋を作成してアクセサリを移動してください。",
   "accessories.support.rooms_3": "部屋を削除する際は、すべてのアクセサリを別の部屋へ移動しページを更新します。",
   "accessories.title_rooms": "部屋",
+  "accessories.unique_id": "Unique ID",
   "backup.backup_delete_failed": "バックアップ削除に失敗しました。詳細はログを参照してください。",
   "backup.backup_download_failed": "バックアップのダウンロードに失敗しました",
   "backup.backup_exceeds_max_size": "バックアップ ({{ backupSize }}) が最大復元ファイルサイズ {{ maxBackupSizeText }} を超えています",

@@ -143,6 +143,7 @@
   "accessories.support.rooms_2": "Para renombrar una habitación existente, crea una nueva habitación con el nombre deseado y mueve los accesorios a la nueva habitación.",
   "accessories.support.rooms_3": "Para eliminar una habitación existente, mueve todos sus accesorios a otra habitación y actualiza la página.",
   "accessories.title_rooms": "Rooms",
+  "accessories.unique_id": "Unique ID",
   "backup.backup_delete_failed": "Error al eliminar la copia de seguridad. Consulta los registros para más detalles.",
   "backup.backup_download_failed": "Error al descargar la copia de seguridad",
   "backup.backup_exceeds_max_size": "La copia de seguridad ({{ backupSize }}) excede el tamaño máximo de archivo de restauración de {{ maxBackupSizeText }}",

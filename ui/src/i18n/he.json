@@ -143,6 +143,7 @@
   "accessories.support.rooms_2": "כדי לשנות שם חדר קיים, צור חדר חדש עם השם הרצוי והעבר את האביזרים לחדר החדש.",
   "accessories.support.rooms_3": "כדי למחוק חדר קיים, העבר את כל האביזרים שלו לחדר אחר ורענן את הדף.",
   "accessories.title_rooms": "חדרים",
+  "accessories.unique_id": "Unique ID",
   "backup.backup_delete_failed": "מחיקת גיבוי נכשלה. ראה לוגים לפרטים.",
   "backup.backup_download_failed": "הורדת גיבוי נכשלה",
   "backup.backup_exceeds_max_size": "גיבוי ({{ backupSize }}) חורג מגודל קובץ שחזור מרבי של {{ maxBackupSizeText }}",

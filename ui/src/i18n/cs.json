@@ -143,6 +143,7 @@
   "accessories.support.rooms_2": "Chcete-li přejmenovat existující místnost, vytvořte novou místnost s požadovaným názvem a přesuňte příslušenství do nové místnosti.",
   "accessories.support.rooms_3": "Chcete-li smazat existující místnost, přesuňte všechna její příslušenství do jiné místnosti a obnovte stránku.",
   "accessories.title_rooms": "Rooms",
+  "accessories.unique_id": "Unique ID",
   "backup.backup_delete_failed": "Odstranění zálohy se nezdařilo. Podrobnosti naleznete v protokolech.",
   "backup.backup_download_failed": "Stažení zálohy se nezdařilo",
   "backup.backup_exceeds_max_size": "Záloha ({{ backupSize }}) překračuje maximální velikost souboru pro obnovení {{ maxBackupSizeText }}",
