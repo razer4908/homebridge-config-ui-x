@@ -11,6 +11,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - move reset status layout button into row
 - expose unique id on accessory info modal + copy icon (@NorthernMan54)
 - add support for plugin ui i18n (from #2597) (@justjam2013)
+- add cpu temperature to widget on mac systems
 
 ### Other Changes
 

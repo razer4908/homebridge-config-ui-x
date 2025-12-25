@@ -114,11 +114,15 @@
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "semver": "7.7.3",
-    "systeminformation": "5.27.13",
+    "systeminformation": "5.28.0",
     "tail": "2.2.6",
     "tar": "7.5.2",
     "tcp-port-used": "1.0.2",
     "unzipper": "0.12.3"
+  },
+  "optionalDependencies": {
+    "macos-temperature-sensor": "1.0.4",
+    "osx-temperature-sensor": "1.0.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.1",
