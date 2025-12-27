@@ -6,7 +6,8 @@
         type="button"
         class="btn-close"
         data-bs-dismiss="modal"
-        [attr.aria-label]="'form.button_close' | translate"
+        aria-hidden="true"
+        tabindex="-1"
         (click)="dismissModal()"
       ></button>
     </div>
@@ -16,7 +17,7 @@
       </div>
       <ul class="list-group list-group-box mb-0">
         <li class="list-group-item d-flex flex-column flex-md-row align-items-center">
-          <label for="form-name" class="mb-2 mb-md-0 w-100 w-md-50">{{ 'accessories.room_name' | translate }}</label>
+          <span class="mb-2 mb-md-0 w-100 w-md-50" aria-hidden="true">{{ 'accessories.room_name' | translate }}</span>
           <div class="text-start text-md-end w-100 w-md-50">
             <input
               autocomplete="off"
@@ -27,6 +28,7 @@
               [(ngModel)]="roomName"
               [ngModelOptions]="{ standalone: true }"
               (keyup.enter)="closeModal(roomName)"
+              [attr.aria-label]="'accessories.room_name' | translate"
             />
           </div>
         </li>

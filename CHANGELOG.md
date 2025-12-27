@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - add support for plugin ui i18n (from #2597) (@justjam2013)
 - add cpu temperature to widget on mac systems
 - don't show `pointer: cursor;` on pending accessory tiles
+- a11y: improvements to accessory info/tile + add room (from #2677) (@rfiorentino1)
 
 ### Other Changes
 

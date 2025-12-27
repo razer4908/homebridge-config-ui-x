@@ -110,6 +110,8 @@
     &:active {
       .manage-accessory-button {
         opacity: 0.5;
+        background: none;
+        border: 0;
       }
     }
   }
