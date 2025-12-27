@@ -6,6 +6,7 @@
     'jammed': service.values.LockCurrentState === 2,
     'error': service.values.LockCurrentState === 3,
   }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (shortClick)="onClick()"
   (longClick)="onLongClick()"
   tabindex="0"

@@ -7,6 +7,7 @@
     'night': service.values.SecuritySystemCurrentState === 2,
     'triggered': service.values.SecuritySystemCurrentState === 4,
   }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (longClick)="onClick()"
   (shortClick)="onClick()"
   tabindex="0"

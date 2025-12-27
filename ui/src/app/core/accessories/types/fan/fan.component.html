@@ -1,6 +1,7 @@
 <div
   class="accessory-box"
   [ngClass]="{ 'accessory-on': service.values.On || service.values.Active }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (longClick)="onLongClick()"
   (shortClick)="onClick()"
   tabindex="0"

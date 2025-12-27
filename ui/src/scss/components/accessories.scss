@@ -13,7 +13,6 @@
 }
 
 .accessory-box {
-  cursor: pointer;
   height: 150px;
   width: 150px;
   margin: 20px 10px;
@@ -101,6 +100,8 @@
     .manage-accessory-button {
       opacity: 1 !important;
       filter: grayscale(100);
+      background: none;
+      border: 0;
     }
   }
 

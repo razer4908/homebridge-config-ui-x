@@ -12,6 +12,7 @@
     'stopped': service.values.CurrentDoorState === 4 && !service.values.ObstructionDetected,
     'obstructed': service.values.ObstructionDetected,
   }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (shortClick)="onClick()"
   tabindex="0"
 >

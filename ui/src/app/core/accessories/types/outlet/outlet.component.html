@@ -6,6 +6,7 @@
       || ('LockTargetState' in service.values && !service.values.LockTargetState)
       || ('CurrentDoorState' in service.values && [0, 2].includes(service.values.CurrentDoorState))
   }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (shortClick)="onClick()"
   tabindex="0"
 >

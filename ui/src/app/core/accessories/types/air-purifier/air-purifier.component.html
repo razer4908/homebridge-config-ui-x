@@ -8,6 +8,7 @@
       || (service.values.Active && 'CurrentAirPurifierState' in service.values && service.values.CurrentAirPurifierState === 2)
       || service.values.On,
   }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (longClick)="onLongClick()"
   (shortClick)="onClick()"
   tabindex="0"

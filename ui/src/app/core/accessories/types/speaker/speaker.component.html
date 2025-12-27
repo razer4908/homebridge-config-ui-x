@@ -7,6 +7,7 @@
     'paused': 'CurrentMediaState' in service.values && service.values.CurrentMediaState === 1,
     'muted': 'Mute' in service.values && service.values.Mute,
   }"
+  [style.cursor]="readyForControl ? 'pointer' : 'default'"
   (longClick)="onLongClick()"
   (shortClick)="onClick()"
   tabindex="0"
