@@ -12,6 +12,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - fix discord notifications on publish new version
 - add node/glib version references in `linux.ts` (@NorthernMan54)
+- use `curly': ['error', 'all']` eslint rule
 
 ### Homebridge Dependencies
 

@@ -656,26 +656,34 @@ export class PluginBridgeComponent implements OnInit {
       }
 
       // Check all bridge properties that require restart
-      if (block._bridge.name !== original.name)
+      if (block._bridge.name !== original.name) {
         return true
-      if (block._bridge.port !== original.port)
+      }
+      if (block._bridge.port !== original.port) {
         return true
-      if (block._bridge.model !== original.model)
+      }
+      if (block._bridge.model !== original.model) {
         return true
-      if (block._bridge.manufacturer !== original.manufacturer)
+      }
+      if (block._bridge.manufacturer !== original.manufacturer) {
         return true
-      if (block._bridge.firmwareRevision !== original.firmwareRevision)
+      }
+      if (block._bridge.firmwareRevision !== original.firmwareRevision) {
         return true
-      if (block._bridge.debugModeEnabled !== original.debugModeEnabled)
+      }
+      if (block._bridge.debugModeEnabled !== original.debugModeEnabled) {
         return true
+      }
 
       // Check env variables
       const currentEnv = block._bridge.env || {}
       const originalEnv = original.env || {}
-      if (currentEnv.DEBUG !== originalEnv.DEBUG)
+      if (currentEnv.DEBUG !== originalEnv.DEBUG) {
         return true
-      if (currentEnv.NODE_OPTIONS !== originalEnv.NODE_OPTIONS)
+      }
+      if (currentEnv.NODE_OPTIONS !== originalEnv.NODE_OPTIONS) {
         return true
+      }
     }
 
     return false
