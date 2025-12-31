@@ -77,6 +77,7 @@
   "accessories.control.unknown": "Bilinmeyen",
   "accessories.control.unlocked": "Kilidi Açıldı",
   "accessories.control_disabled": "Homebridge Aksesuar Kontrolü Devre Dışı Bırakıldı",
+  "accessories.core.access_code": "Access Code",
   "accessories.core.air_purifier": "Air Purifier",
   "accessories.core.air_quality_sensor": "Air Quality Sensor",
   "accessories.core.battery": "Battery",

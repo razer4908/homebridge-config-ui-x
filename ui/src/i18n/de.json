@@ -77,6 +77,7 @@
   "accessories.control.unknown": "Unbekannt",
   "accessories.control.unlocked": "Aufgeschlossen",
   "accessories.control_disabled": "Homebridge-Gerätesteuerung deaktiviert",
+  "accessories.core.access_code": "Access Code",
   "accessories.core.air_purifier": "Luftreiniger",
   "accessories.core.air_quality_sensor": "Luftqualitätssensor",
   "accessories.core.battery": "Batterie",

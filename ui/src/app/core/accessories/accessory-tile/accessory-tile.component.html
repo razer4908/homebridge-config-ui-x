@@ -34,6 +34,10 @@
   <app-air-purifier [service]="service" [readyForControl]="$accessories.readyForControl" class="w-100">
     {{ 'accessories.core.air_purifier' | translate }}
   </app-air-purifier>
+  } @case ('AccessCode') {
+  <app-access-code [service]="service" [readyForControl]="$accessories.readyForControl" class="w-100">
+    {{ 'accessories.core.access_code' | translate }}
+  </app-access-code>
   } @case ('Lightbulb') {
   <app-lightbulb [service]="service" [readyForControl]="$accessories.readyForControl">
     {{ 'accessories.core.lightbulb' | translate }}

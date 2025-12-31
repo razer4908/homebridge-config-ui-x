@@ -77,6 +77,7 @@
   "accessories.control.unknown": "未知",
   "accessories.control.unlocked": "已解锁",
   "accessories.control_disabled": "Homebridge 配件控制已禁用",
+  "accessories.core.access_code": "Access Code",
   "accessories.core.air_purifier": "空气净化器",
   "accessories.core.air_quality_sensor": "空气质量传感器",
   "accessories.core.battery": "电池",

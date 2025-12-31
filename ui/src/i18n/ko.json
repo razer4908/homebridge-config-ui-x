@@ -77,6 +77,7 @@
   "accessories.control.unknown": "알 수 없음",
   "accessories.control.unlocked": "잠금해제",
   "accessories.control_disabled": "Homebridge 액세서리 제어 비활성화 됨",
+  "accessories.core.access_code": "Access Code",
   "accessories.core.air_purifier": "Air Purifier",
   "accessories.core.air_quality_sensor": "Air Quality Sensor",
   "accessories.core.battery": "Battery",

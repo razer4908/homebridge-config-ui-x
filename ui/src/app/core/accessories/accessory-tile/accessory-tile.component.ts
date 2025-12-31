@@ -3,6 +3,7 @@ import { TranslatePipe } from '@ngx-translate/core'
 
 import { ServiceTypeX } from '@/app/core/accessories/accessories.interfaces'
 import { AccessoriesService } from '@/app/core/accessories/accessories.service'
+import { AccessCodeComponent } from '@/app/core/accessories/types/access-code/access-code.component'
 import { AirPurifierComponent } from '@/app/core/accessories/types/air-purifier/air-purifier.component'
 import { AirQualitySensorComponent } from '@/app/core/accessories/types/air-quality-sensor/air-quality-sensor.component'
 import { BatteryComponent } from '@/app/core/accessories/types/battery/battery.component'
@@ -84,6 +85,7 @@ import { WindowComponent } from '@/app/core/accessories/types/window/window.comp
     RobotVacuumComponent,
     WashingMachineComponent,
     TranslatePipe,
+    AccessCodeComponent,
   ],
 })
 export class AccessoryTileComponent {
