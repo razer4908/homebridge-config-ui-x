@@ -86,7 +86,7 @@ export class AccessoryInfoComponent implements OnInit {
     this.accessoryInformation = Object.entries(this.service.accessoryInformation).map(([key, value]) => ({ key, value }))
     this.matchedCachedAccessory = this.matchToCachedAccessory()
 
-    if (this.service.type === 'LockMechanism') {
+    if (this.service.type === 'LockMechanism' && this.service.linkedServices) {
       Object.values(this.service.linkedServices)
         .filter(service => service.type === 'LockManagement')
         .forEach(service => this.extraServices.push(service))
