@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common'
 import { Component, inject, Input, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
@@ -9,7 +8,7 @@ import { ServiceTypeX } from '@/app/core/accessories/accessories.interfaces'
 @Component({
   templateUrl: './security-system.manage.component.html',
   standalone: true,
-  imports: [FormsModule, TranslatePipe, NgClass],
+  imports: [FormsModule, TranslatePipe],
 })
 export class SecuritySystemManageComponent implements OnInit {
   private $activeModal = inject(NgbActiveModal)

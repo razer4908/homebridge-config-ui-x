@@ -10,6 +10,10 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - accessory info + icon for access code service
 - use back btn from release notes to manage version
 
+### Other Changes
+
+- remove unused import from security system component
+
 ### Homebridge Dependencies
 
 - `@homebridge/hap-client` @ `v3.1.2`
