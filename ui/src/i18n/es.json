@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Could not retrieve release notes, perhaps this version does not have a GitHub release.",
   "plugins.manage.online_updates": "Las actualizaciones en línea no están soportadas en Windows. Necesitarás actualizar manualmente la UI de Homebridge después de detener el servicio de Homebridge.",
   "plugins.manage.plugin_logs": "Logs del plugin",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Ocurrió un error. Puedes descargar los logs a continuación.",
   "plugins.manage.scoped.info_1": "Los plugins de Homebridge con ámbito tienen nombres que comienzan con {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Para más información sobre los plugins con ámbito y por qué cambiar, consulta la página wiki {{ link }}.",

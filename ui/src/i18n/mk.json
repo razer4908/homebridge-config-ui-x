@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Could not retrieve release notes, perhaps this version does not have a GitHub release.",
   "plugins.manage.online_updates": "Онлајн ажурирање не е поддржано на Windows. Ќе треба рачно да го надградите Homebridge по запирање на Homebridge сервисот.",
   "plugins.manage.plugin_logs": "Plugin Logs",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "An error occurred. You can download the logs below.",
   "plugins.manage.scoped.info_1": "Homebridge scoped plugins have names beginning with {{ prefix }}.",
   "plugins.manage.scoped.info_2": "For more information about scoped plugins and why to switch, see the wiki page {{ link }}.",

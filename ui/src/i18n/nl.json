@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Kon release notities niet ophalen, misschien heeft deze versie geen GitHub release.",
   "plugins.manage.online_updates": "Online updates worden niet ondersteund door Windows. Handmatige upgrade van Homebridge UI vereist na het stoppen van de Homebridge service.",
   "plugins.manage.plugin_logs": "Plugin Logs",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Er is een fout opgetreden. U kunt de logs hieronder downloaden.",
   "plugins.manage.scoped.info_1": "Homebridge scoped plugins hebben namen die beginnen met {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Voor meer informatie over scoped plugins en waarom overstappen, zie de wiki pagina {{ link }}.",

@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Could not retrieve release notes, perhaps this version does not have a GitHub release.",
   "plugins.manage.online_updates": "Онлайн-обновления не поддерживаются в Windows. Для обновления Homebridge необходимо остановить сервис и выполнить обновление вручную.",
   "plugins.manage.plugin_logs": "Журналы плагина",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Произошла ошибка. Вы можете скачать логи ниже.",
   "plugins.manage.scoped.info_1": "Scoped-плагины Homebridge имеют имена, начинающиеся с {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Подробнее о scoped-плагинах и причинах перехода вы можете узнать на нашей странице Wiki {{ link }}.",

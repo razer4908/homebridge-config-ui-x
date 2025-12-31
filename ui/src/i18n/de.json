@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Konnte Release Notes nicht abrufen, vielleicht hat diese Version kein GitHub-Release.",
   "plugins.manage.online_updates": "Online-Updates werden unter Windows nicht unterstützt. Du musst Homebridge manuell aktualisieren, nachdem du den Homebridge-Dienst beendet hast.",
   "plugins.manage.plugin_logs": "Plugin Logs",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Es ist ein Fehler aufgetreten. Du kannst die Logs unten herunterladen.",
   "plugins.manage.scoped.info_1": "Homebridge Scoped Plugins haben Namen, die mit {{ prefix }} beginnen.",
   "plugins.manage.scoped.info_2": "Weitere Informationen über Scoped Plugins und warum man wechseln sollte, findest du auf der Wiki-Seite {{ link }}.",

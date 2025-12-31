@@ -136,8 +136,13 @@ export class ManagePluginComponent implements OnInit, OnDestroy {
     switch (this.action) {
       case 'Install':
         void this.install()
-        this.presentTenseVerb = this.$translate.instant('plugins.manage.install')
-        this.pastTenseVerb = this.$translate.instant('plugins.manage.installed')
+        if (this.targetVersion === this.installedVersion) {
+          this.presentTenseVerb = this.$translate.instant('plugins.manage.reinstall')
+          this.pastTenseVerb = this.$translate.instant('plugins.manage.reinstalled')
+        } else {
+          this.presentTenseVerb = this.$translate.instant('plugins.manage.install')
+          this.pastTenseVerb = this.$translate.instant('plugins.manage.installed')
+        }
         break
       case 'Uninstall':
         this.uninstall()

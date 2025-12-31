@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "לא ניתן לאחזר הערות שחרור, יתכן שלגרסה זו אין שחרור GitHub.",
   "plugins.manage.online_updates": "עדכונים מקוונים לא נתמכים ב-Windows. תצטרך לשדרג את Homebridge באופן ידני לאחר עצירת שירות Homebridge.",
   "plugins.manage.plugin_logs": "לוגי התוסף",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "אירעה שגיאה. אתה יכול להוריד את הלוגים למטה.",
   "plugins.manage.scoped.info_1": "תוספי Homebridge מוגדרים הם בעלי שמות המתחילים ב-{{ prefix }}.",
   "plugins.manage.scoped.info_2": "למידע נוסף על תוספים מוגדרים ולמה לעבור, ראה דף הוויקי {{ link }}.",

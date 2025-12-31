@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Could not retrieve release notes, perhaps this version does not have a GitHub release.",
   "plugins.manage.online_updates": "Online aktualizace nejsou v systému Windows podporovány. Po zastavení služby Homebridge budete muset upgradovat Homebridge UI ručně.",
   "plugins.manage.plugin_logs": "Protokoly pluginu",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Došlo k chybě. Níže si můžete stáhnout logy.",
   "plugins.manage.scoped.info_1": "Homebridge scoped pluginy mají názvy začínající na {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Další informace o scoped pluginech a důvodech pro přechod naleznete na naší wiki stránce {{ link }}.",

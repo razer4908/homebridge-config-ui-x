@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "ไม่สามารถดึงข้อมูลหมายเหตุการเผยแพร่ อาจเป็นเพราะเวอร์ชันนี้ไม่มีการเผยแพร่บน GitHub",
   "plugins.manage.online_updates": "Windows ไม่รองรับการอัปเดตออนไลน์ คุณจะต้องอัปเกรด Homebridge ด้วยตนเองหลังจากหยุดบริการ Homebridge",
   "plugins.manage.plugin_logs": "ปลั๊กอิน Logs",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "เกิดข้อผิดพลาด คุณสามารถดาวน์โหลด log ได้ด้านล่าง",
   "plugins.manage.scoped.info_1": "ปลั๊กอินขอบเขต Homebridge มีชื่อเริ่มต้นด้วย {{ prefix }}",
   "plugins.manage.scoped.info_2": "สำหรับข้อมูลเพิ่มเติมเกี่ยวกับปลั๊กอินที่มีขอบเขตและเหตุใดจึงควรเปลี่ยน โปรดดูหน้าวิกิ {{ ลิงก์ }}",

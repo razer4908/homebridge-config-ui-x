@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Не вдалося отримати нотатки до випуску, можливо, ця версія не має випуску на GitHub.",
   "plugins.manage.online_updates": "Онлайн оновлення не підтримується в Windows. Вам необхідно оновити Homebridge UI вручную після зупинки служби Homebridge.",
   "plugins.manage.plugin_logs": "Журнали плагінів",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Сталася помилка. Ви можете завантажити журнали нижче.",
   "plugins.manage.scoped.info_1": "Назви модулів Homebridge починаються з {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Додаткову інформацію про обмежені плагіни та причини переходу див. на вікі-сторінці {{ link }}.",

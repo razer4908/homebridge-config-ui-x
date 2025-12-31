@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Impossibile recuperare le note di rilascio, forse questa versione non ha una release su GitHub.",
   "plugins.manage.online_updates": "Gli aggiornamenti in linea non sono supportati su Windows. Sarà necessario aggiornare manualmente Homebridge UI dopo aver fermato il servizio Homebridge.",
   "plugins.manage.plugin_logs": "Log del plugin",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Si è verificato un errore. Puoi scaricare i log qui sotto.",
   "plugins.manage.scoped.info_1": "I plugin 'scoped' di Homebridge hanno nomi che iniziano con {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Per maggiori informazioni sui plugin scoped e perché passare ad essi, vedi la pagina wiki {{ link }}.",

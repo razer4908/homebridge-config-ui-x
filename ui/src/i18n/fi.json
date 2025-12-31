@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Could not retrieve release notes, perhaps this version does not have a GitHub release.",
   "plugins.manage.online_updates": "Online päivitykset eivät toimi Windowsissa. Sinun on tehtävä päivitys käsin Homebridge palvelun pysäyttämisen jälkeen.",
   "plugins.manage.plugin_logs": "Laajennusten lokitiedot",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Virhe havaittu. Alapuolelta voit ladata lokitiedot.",
   "plugins.manage.scoped.info_1": "Homebridge scoped plugins have names beginning with {{ prefix }}.",
   "plugins.manage.scoped.info_2": "For more information about scoped plugins and why to switch, see the wiki page {{ link }}.",

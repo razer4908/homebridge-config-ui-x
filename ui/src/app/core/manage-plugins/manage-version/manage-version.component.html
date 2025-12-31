@@ -34,7 +34,12 @@
             <br />
             <small class="grey-text font-monospace">v{{ version.version }}</small>
           </span>
-          <button class="btn btn-primary m-0 ms-3 py-1" (click)="doInstall(version.version)">
+          <button
+            type="button"
+            class="btn btn-primary m-0 ms-3 py-1"
+            (click)="doInstall(version.version)"
+            [attr.aria-label]="(plugin.installedVersion === version.version ? ('plugins.manage.reinstall' | translate) : ('plugins.manage.install' | translate)) + ' v' + version.version"
+          >
             @if (plugin.installedVersion === version.version) {
             <i class="fas fa-rotate-right"></i>
             } @else {
@@ -47,7 +52,12 @@
           <div class="text-start" style="min-width: 50%">
             {{ 'plugins.manage.all_versions' | translate }}
             <br />
-            <select class="custom-select w-100 font-monospace" style="font-size: 0.875rem" [(ngModel)]="versionSelect">
+            <select
+              class="custom-select w-100 font-monospace"
+              style="font-size: 0.875rem"
+              [(ngModel)]="versionSelect"
+              [attr.aria-label]="'plugins.manage.all_versions' | translate"
+            >
               @for (version of versions; track version) {
               <option [value]="version.version" [selected]="versionSelect == version.version">
                 v{{ version.version }} @if (version.version == plugin.installedVersion) { ✓ }
@@ -56,7 +66,12 @@
             </select>
           </div>
           @if (versionSelect) {
-          <button class="btn btn-primary m-0 ms-3 py-1" (click)="doInstall(versionSelect)">
+          <button
+            type="button"
+            class="btn btn-primary m-0 ms-3 py-1"
+            (click)="doInstall(versionSelect)"
+            [attr.aria-label]="(plugin.installedVersion === versionSelect ? ('plugins.manage.reinstall' | translate) : ('plugins.manage.install' | translate))  + ' v' + versionSelect"
+          >
             @if (plugin.installedVersion === versionSelect) {
             <i class="fas fa-rotate-right"></i>
             } @else {
@@ -93,13 +108,7 @@
   <div class="modal-footer justify-content-between">
     <div class="text-start"></div>
     <div class="text-center">
-      <button
-        type="button"
-        class="btn btn-elegant"
-        data-bs-dismiss="modal"
-        (click)="dismissModal()"
-        [attr.aria-label]="'form.button_close' | translate"
-      >
+      <button type="button" class="btn btn-elegant" data-bs-dismiss="modal" (click)="dismissModal()">
         {{ 'form.button_close' | translate }}
       </button>
     </div>

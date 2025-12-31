@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "无法获取发布说明，可能此版本没有 GitHub 发布。",
   "plugins.manage.online_updates": "Windows 不支持在线更新。停止 Homebridge 服务后，您需要手动升级 Homebridge。",
   "plugins.manage.plugin_logs": "插件日志",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "发生错误。您可以在下方下载日志。",
   "plugins.manage.scoped.info_1": "Homebridge 作用域插件的名称以 {{ prefix }} 开头。",
   "plugins.manage.scoped.info_2": "关于作用域插件以及为何切换的更多信息，请参阅我们的 Wiki 页面 {{ link }}。",

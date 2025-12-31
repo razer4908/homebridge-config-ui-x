@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Nie można pobrać informacji o wydaniu, być może ta wersja nie ma wydania GitHub.",
   "plugins.manage.online_updates": "Aktualizacje online w systemie Windows nie są wspierane. Musisz zaktualizować Config UI X ręcznie po zatrzymaniu Homebridge.",
   "plugins.manage.plugin_logs": "Log wtyczki",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Wystąpił błąd. Możesz pobrać dzienniki poniżej.",
   "plugins.manage.scoped.info_1": "Wtyczki Scoped Homebridge mają nazwy zaczynające się od {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Aby uzyskać więcej informacji na temat wtyczek Scoped i dlaczego warto się przełączać, zobacz stronę wiki {{ link }}.",

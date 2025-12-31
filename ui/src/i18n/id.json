@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "Could not retrieve release notes, perhaps this version does not have a GitHub release.",
   "plugins.manage.online_updates": "Pembaruan online tidak didukung di Windows. Anda perlu memutakhirkan Homebridge UI secara manual setelah menghentikan layanan Homebridge.",
   "plugins.manage.plugin_logs": "Log plugin",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "Terjadi kesalahan.Anda dapat mengunduh log di bawah ini.",
   "plugins.manage.scoped.info_1": "Homebridge plugin terlingkup memiliki nama yang dimulai dengan {{ prefix }}.",
   "plugins.manage.scoped.info_2": "Untuk informasi lebih lanjut tentang plugin terlingkup dan mengapa harus beralih, lihat halaman wiki {{ link }}.",

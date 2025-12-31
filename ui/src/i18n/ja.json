@@ -376,6 +376,8 @@
   "plugins.manage.notes_none": "リリースノートを取得できませんでした。このバージョンにはGitHubリリースがない可能性があります。",
   "plugins.manage.online_updates": "Windowsではオンライン更新はサポートされません。Homebridgeサービスを停止後に手動でHomebridge UIをアップグレードしてください。",
   "plugins.manage.plugin_logs": "プラグインログ",
+  "plugins.manage.reinstall": "Reinstall",
+  "plugins.manage.reinstalled": "Reinstalled",
   "plugins.manage.scoped.error": "エラーが発生しました。下のログをダウンロードしてください。",
   "plugins.manage.scoped.info_1": "Homebridgeのスコープ付きプラグイン名は{{ prefix }}で始まります。",
   "plugins.manage.scoped.info_2": "スコープ付きプラグインと切り替え理由の詳細はWikiページ{{ link }}をご覧ください。",
