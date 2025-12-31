@@ -23,6 +23,7 @@ import { ApiService } from '@/app/core/api.service'
 import { RestartHomebridgeComponent } from '@/app/core/components/restart-homebridge/restart-homebridge.component'
 import { PluginsMarkdownDirective } from '@/app/core/directives/plugins.markdown.directive'
 import { ChildBridge } from '@/app/core/manage-plugins/manage-plugins.interfaces'
+import { ManageVersionComponent } from '@/app/core/manage-plugins/manage-version/manage-version.component'
 import { PluginLogsComponent } from '@/app/core/manage-plugins/plugin-logs/plugin-logs.component'
 import { SettingsService } from '@/app/core/settings.service'
 import { IoNamespace, WsService } from '@/app/core/ws.service'
@@ -75,6 +76,7 @@ export class ManagePluginComponent implements OnInit, OnDestroy {
   @Input() verifiedPlugin: boolean
   @Input() verifiedPlusPlugin: boolean
   @Input() funding: any
+  @Input() backToVersionModal: any = null // Plugin data to reopen ManageVersionComponent
 
   public targetVersionPretty = ''
   public actionComplete = false
@@ -297,6 +299,44 @@ export class ManagePluginComponent implements OnInit, OnDestroy {
 
   public dismissModal() {
     this.$activeModal.dismiss('Dismiss')
+  }
+
+  public async goBack() {
+    // Close current modal and reopen ManageVersionComponent
+    this.$activeModal.dismiss('Back')
+
+    const ref = this.$modal.open(ManageVersionComponent, {
+      size: 'lg',
+      backdrop: 'static',
+    })
+
+    ref.componentInstance.plugin = this.backToVersionModal
+    ref.componentInstance.onRefreshPluginList = this.onRefreshPluginList
+
+    try {
+      const { action, version } = await ref.result
+
+      // Reopen the manage plugin modal with the selected version
+      const newRef = this.$modal.open(ManagePluginComponent, {
+        size: 'lg',
+        backdrop: 'static',
+      })
+
+      newRef.componentInstance.action = action === 'alternate' ? 'Update' : 'Install'
+      newRef.componentInstance.pluginName = this.pluginName
+      newRef.componentInstance.pluginDisplayName = this.pluginDisplayName
+      newRef.componentInstance.targetVersion = version
+      newRef.componentInstance.latestVersion = this.latestVersion
+      newRef.componentInstance.installedVersion = this.installedVersion
+      newRef.componentInstance.isDisabled = this.isDisabled
+      newRef.componentInstance.onRefreshPluginList = this.onRefreshPluginList
+      newRef.componentInstance.verifiedPlugin = this.verifiedPlugin
+      newRef.componentInstance.verifiedPlusPlugin = this.verifiedPlusPlugin
+      newRef.componentInstance.funding = this.funding
+      newRef.componentInstance.backToVersionModal = this.backToVersionModal
+    } catch (e) {
+      // Modal was dismissed, do nothing
+    }
   }
 
   private install() {

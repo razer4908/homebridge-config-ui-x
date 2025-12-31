@@ -8,6 +8,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - fix lock accessory info with no linked services
 - accessory info + icon for access code service
+- use back btn from release notes to manage version
 
 ### Homebridge Dependencies
 

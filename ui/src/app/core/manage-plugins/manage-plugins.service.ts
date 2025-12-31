@@ -35,7 +35,7 @@ export class ManagePluginsService {
   private pluginListRefreshSubject = new Subject<void>()
   public onPluginListRefresh = this.pluginListRefreshSubject.asObservable()
 
-  async installPlugin(plugin: Plugin, targetVersion: string) {
+  async installPlugin(plugin: Plugin, targetVersion: string, backToVersionModal: Plugin = null) {
     const ref = this.$modal.open(ManagePluginComponent, {
       size: 'lg',
       backdrop: 'static',
@@ -44,6 +44,7 @@ export class ManagePluginsService {
     ref.componentInstance.pluginName = plugin.name
     ref.componentInstance.pluginDisplayName = plugin.displayName
     ref.componentInstance.targetVersion = targetVersion
+    ref.componentInstance.backToVersionModal = backToVersionModal
     ref.componentInstance.onRefreshPluginList = () => this.pluginListRefreshSubject.next()
 
     try {
@@ -83,7 +84,7 @@ export class ManagePluginsService {
     await this.updatePlugin(plugin, targetVersion)
   }
 
-  async updatePlugin(plugin: Plugin, targetVersion: string) {
+  async updatePlugin(plugin: Plugin, targetVersion: string, backToVersionModal: Plugin = null) {
     const ref = this.$modal.open(ManagePluginComponent, {
       size: 'lg',
       backdrop: 'static',
@@ -98,6 +99,7 @@ export class ManagePluginsService {
     ref.componentInstance.verifiedPlugin = plugin.verifiedPlugin
     ref.componentInstance.verifiedPlusPlugin = plugin.verifiedPlusPlugin
     ref.componentInstance.funding = plugin.funding
+    ref.componentInstance.backToVersionModal = backToVersionModal
     ref.componentInstance.onRefreshPluginList = () => this.pluginListRefreshSubject.next()
 
     try {
@@ -161,8 +163,8 @@ export class ManagePluginsService {
       }
 
       return plugin.installedVersion
-        ? await this.updatePlugin(plugin, version)
-        : this.installPlugin(plugin, version)
+        ? await this.updatePlugin(plugin, version, plugin)
+        : this.installPlugin(plugin, version, plugin)
     } catch (e) {
       // Do nothing
     }
