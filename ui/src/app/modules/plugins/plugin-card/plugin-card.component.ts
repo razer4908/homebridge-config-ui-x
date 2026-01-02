@@ -202,27 +202,27 @@ export class PluginCardComponent implements OnInit {
   }
 
   public checkAndUpdatePlugin() {
-    this.$plugin.checkAndUpdatePlugin(this.plugin, this.plugin.latestVersion)
+    void this.$plugin.checkAndUpdatePlugin(this.plugin, this.plugin.latestVersion)
   }
 
   public openSettings() {
-    this.$plugin.settings(this.plugin)
+    void this.$plugin.settings(this.plugin)
   }
 
   public openBridgeSettings() {
-    this.$plugin.bridgeSettings(this.plugin)
+    void this.$plugin.bridgeSettings(this.plugin)
   }
 
   public switchToScoped() {
-    this.$plugin.switchToScoped(this.plugin)
+    void this.$plugin.switchToScoped(this.plugin)
   }
 
   public installAlternateVersion() {
-    this.$plugin.installAlternateVersion(this.plugin)
+    void this.$plugin.installAlternateVersion(this.plugin)
   }
 
   public openJsonEditor() {
-    this.$plugin.jsonEditor(this.plugin)
+    void this.$plugin.jsonEditor(this.plugin)
   }
 
   public uninstallPlugin() {
@@ -230,6 +230,6 @@ export class PluginCardComponent implements OnInit {
   }
 
   public resetChildBridges() {
-    this.$plugin.resetChildBridges(this.setChildBridges)
+    void this.$plugin.resetChildBridges(this.setChildBridges)
   }
 }

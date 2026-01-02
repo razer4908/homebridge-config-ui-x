@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - remove unused import from security system component
+- optimise api calls on opening uninstall component
 
 ### Homebridge Dependencies
 

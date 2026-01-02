@@ -74,6 +74,7 @@ export class ManagePluginsService {
     ref.componentInstance.action = 'Uninstall'
     ref.componentInstance.plugin = plugin
     ref.componentInstance.childBridges = childBridges
+    ref.componentInstance.keepOrphans = this.$settings.keepOrphans
   }
 
   async checkAndUpdatePlugin(plugin: Plugin, targetVersion: string) {

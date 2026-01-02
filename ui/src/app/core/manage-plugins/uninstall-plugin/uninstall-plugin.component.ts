@@ -8,7 +8,6 @@ import { firstValueFrom } from 'rxjs'
 import { ApiService } from '@/app/core/api.service'
 import { ManagePluginComponent } from '@/app/core/manage-plugins/manage-plugin/manage-plugin.component'
 import { ChildBridge, Plugin } from '@/app/core/manage-plugins/manage-plugins.interfaces'
-import { SettingsService } from '@/app/core/settings.service'
 
 @Component({
   templateUrl: './uninstall-plugin.component.html',
@@ -23,13 +22,13 @@ export class UninstallPluginComponent implements OnInit {
   private $activeModal = inject(NgbActiveModal)
   private $api = inject(ApiService)
   private $modal = inject(NgbModal)
-  private $settings = inject(SettingsService)
   private $toastr = inject(ToastrService)
   private $translate = inject(TranslateService)
 
   @Input() plugin: Plugin
   @Input() childBridges: ChildBridge[]
   @Input() action: string
+  @Input() keepOrphans = false
 
   public loading = true
   public uninstalling = false
@@ -37,11 +36,13 @@ export class UninstallPluginComponent implements OnInit {
   public removeChildBridges = true
   public hasChildBridges = false
   public isConfigured = false
-  public pluginType: 'platform' | 'accessory'
-  public pluginAlias: string
+  public isConfiguredDynamicPlatform = false
+  public pluginType: 'platform' | 'accessory' | null = null
+  public pluginAlias: string | null = null
 
   public async ngOnInit() {
     try {
+      this.isConfigured = this.plugin.isConfigured
       if (this.childBridges.length) {
         this.hasChildBridges = true
       }
@@ -50,10 +51,18 @@ export class UninstallPluginComponent implements OnInit {
       this.pluginType = schema.pluginType
       this.pluginAlias = schema.pluginAlias
 
-      const existingConfig = await firstValueFrom(this.$api.get(`/config-editor/plugin/${encodeURIComponent(this.plugin.name)}`))
-      if (existingConfig.length) {
-        this.isConfigured = true
+      // Check if this is a dynamic platform
+      if (this.pluginType === 'platform' && this.pluginAlias) {
+        this.isConfiguredDynamicPlatform = true
       }
+
+      // When keepOrphans=true and dynamic platform, default to NOT removing config (keeping accessories)
+      if (this.keepOrphans && this.isConfiguredDynamicPlatform) {
+        this.removeConfig = false
+      }
+
+      // Always sync removeChildBridges with removeConfig on init
+      this.removeChildBridges = this.removeConfig
     } finally {
       this.loading = false
     }
@@ -98,7 +107,7 @@ export class UninstallPluginComponent implements OnInit {
     this.$activeModal.dismiss('Dismiss')
   }
 
-  private async getAlias() {
+  private async getAlias(): Promise<{ pluginType: 'platform' | 'accessory' | null, pluginAlias: string | null }> {
     return firstValueFrom(this.$api.get(`/plugins/alias/${encodeURIComponent(this.plugin.name)}`))
   }
 
