@@ -313,6 +313,32 @@ export class ConfigEditorService {
   /**
    * Set a specific property for the Homebridge UI
    */
+  /**
+   * Get a property from the UI config
+   */
+  public async getPropertyForUi(property: string) {
+    // 1. Get the current config for the Homebridge UI
+    const config = await this.getConfigFile()
+    const pluginConfig = config.platforms.find(x => x.platform === 'config')
+
+    // 2. Get the property value, supporting dot notation for nested properties
+    if (property.includes('.')) {
+      const properties = property.split('.')
+      let current = pluginConfig
+
+      for (const prop of properties) {
+        if (current && typeof current === 'object') {
+          current = current[prop]
+        } else {
+          return undefined
+        }
+      }
+      return current
+    }
+
+    return pluginConfig?.[property]
+  }
+
   public async setPropertyForUi(property: string, value: any) {
     // Cannot update the platform property
     if (property === 'platform') {

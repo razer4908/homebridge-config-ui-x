@@ -48,6 +48,68 @@
       </li>
     </ul>
 
+    <ul class="list-group list-group-box mt-3 mb-0">
+      <li class="list-group-item text-center">{{ 'status.widget.node_update_policy' | translate }}</li>
+      <button type="button" class="list-group-item d-flex align-items-center text-start" (click)="selectPolicy('all')">
+        <div class="me-3">
+          <i
+            class="fas fa-bell fa-fw fa-lg"
+            [class.primary-text]="nodeUpdatePolicyControl.value === 'all'"
+            [class.grey-text]="nodeUpdatePolicyControl.value !== 'all'"
+          ></i>
+        </div>
+        <div class="flex-grow-1">
+          <div>{{ 'status.widget.node_update_policy_all' | translate }}</div>
+          <div class="text-muted small">{{ 'status.widget.node_update_policy_all_desc' | translate }}</div>
+        </div>
+        @if (nodeUpdatePolicyControl.value === 'all') {
+        <div class="ms-3">
+          <i class="fas fa-check-circle primary-text"></i>
+        </div>
+        }
+      </button>
+      <button
+        type="button"
+        class="list-group-item d-flex align-items-center text-start"
+        (click)="selectPolicy('major')"
+      >
+        <div class="me-3">
+          <i
+            class="fas fa-bell-slash fa-fw fa-lg"
+            [class.primary-text]="nodeUpdatePolicyControl.value === 'major'"
+            [class.grey-text]="nodeUpdatePolicyControl.value !== 'major'"
+          ></i>
+        </div>
+        <div class="flex-grow-1">
+          <div>{{ 'status.widget.node_update_policy_major' | translate }}</div>
+          <div class="text-muted small">{{ 'status.widget.node_update_policy_major_desc' | translate }}</div>
+        </div>
+        @if (nodeUpdatePolicyControl.value === 'major') {
+        <div class="ms-3">
+          <i class="fas fa-check-circle primary-text"></i>
+        </div>
+        }
+      </button>
+      <button type="button" class="list-group-item d-flex align-items-center text-start" (click)="selectPolicy('none')">
+        <div class="me-3">
+          <i
+            class="fas fa-bell-slash fa-fw fa-lg"
+            [class.primary-text]="nodeUpdatePolicyControl.value === 'none'"
+            [class.grey-text]="nodeUpdatePolicyControl.value !== 'none'"
+          ></i>
+        </div>
+        <div class="flex-grow-1">
+          <div>{{ 'status.widget.node_update_policy_none' | translate }}</div>
+          <div class="text-muted small">{{ 'status.widget.node_update_policy_none_desc' | translate }}</div>
+        </div>
+        @if (nodeUpdatePolicyControl.value === 'none') {
+        <div class="ms-3">
+          <i class="fas fa-check-circle primary-text"></i>
+        </div>
+        }
+      </button>
+    </ul>
+
     @if (installedPlugins.length) {
     <ul class="list-group list-group-box mt-3 mb-0">
       <li class="list-group-item text-center">{{ 'menu.label_plugins' | translate }}</li>

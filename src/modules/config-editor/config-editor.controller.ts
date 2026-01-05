@@ -92,6 +92,14 @@ export class ConfigEditorController {
   }
 
   @UseGuards(AdminGuard)
+  @ApiOperation({ summary: 'Get a config property for the Homebridge UI.' })
+  @ApiParam({ name: 'key', type: 'string', description: 'The property key to retrieve (e.g., "nodeUpdatePolicy")' })
+  @Get('/ui/:key')
+  getPropertyForUi(@Param('key') key: string) {
+    return this.configEditorService.getPropertyForUi(key)
+  }
+
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update a config property for the Homebridge UI.' })
   @Put('/ui')
   setPropertyForUi(@Body() { key, value }) {
