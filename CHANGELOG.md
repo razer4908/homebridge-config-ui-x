@@ -11,6 +11,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - feat: add separate beta preferences for plugins (#2687) (@seidnerj)
 - further tweaks for node + plugin update preferences
 - fix manage plugin show back btn after plugin install
+- open accessory info on tile loading icon click
 
 ### Homebridge Dependencies
 
