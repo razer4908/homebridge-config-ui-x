@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - open accessory info on tile loading icon click
 - a11y: improvements to plugin markdown directive (from #2677) (@rfiorentino1)
 - first step of improvements to https settings (@donavanbecker)
+- a11y: improvements to plugin json schema forms (from #2677) (@rfiorentino1)
 
 ### Other Changes
 
