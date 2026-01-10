@@ -18,6 +18,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - update `@antfu/eslint-config` lint package to `v7`
+- upgrade `otplib` to `v13` + migrate code
 
 ### Homebridge Dependencies
 
