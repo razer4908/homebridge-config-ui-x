@@ -20,6 +20,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 - update `@antfu/eslint-config` lint package to `v7`
 - upgrade `otplib` to `v13` + migrate code
+- weather widget: put text into strings for i18n
 
 ### Homebridge Dependencies
 

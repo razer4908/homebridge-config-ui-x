@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "שרת",
   "status.widget.weather.label_config_required_help": "אנא בחר את עירך בהגדרות הווידג'ט",
   "status.widget.weather.label_search_for_your_city": "חפש את עירך:",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "מזג אוויר",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",

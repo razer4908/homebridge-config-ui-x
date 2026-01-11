@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "Server",
   "status.widget.weather.label_config_required_help": "Silakan pilih kota anda di pengaturan widget.",
   "status.widget.weather.label_search_for_your_city": "Cari kota anda:",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "Cuaca",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",

@@ -88,7 +88,9 @@
           </div>
         </div>
       </li>
-      <li class="list-group-item muted grey-text text-center">Weather data is provided by OpenWeather.</li>
+      <li class="list-group-item muted grey-text text-center">
+        {{ 'status.widget.weather.provider' | translate: { openWeather: 'OpenWeather' } }}
+      </li>
       } @case ('HomebridgeLogsWidgetComponent') {
       <li class="list-group-item d-flex flex-column flex-md-row align-items-center">
         <label class="mb-2 mb-md-0 w-100 w-md-50">{{ 'status.widget.font_size' | translate }}</label>

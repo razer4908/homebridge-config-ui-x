@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "Servidor",
   "status.widget.weather.label_config_required_help": "Por favor selecione a cidade nas definições do widget.",
   "status.widget.weather.label_search_for_your_city": "Procure pela cidade:",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "Tempo",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",

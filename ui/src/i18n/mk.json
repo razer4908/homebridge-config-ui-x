@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "Сервер",
   "status.widget.weather.label_config_required_help": "Одберете град во поставките за widget-от.",
   "status.widget.weather.label_search_for_your_city": "Најдете го Вашиот град:",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "Временски услови",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",

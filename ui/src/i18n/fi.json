@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "Palvelin",
   "status.widget.weather.label_config_required_help": "Ole hyvä ja valitse kaupunki sovelman asetuksissa.",
   "status.widget.weather.label_search_for_your_city": "Hae kaupunkia Englanniksi:",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "Sää",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",

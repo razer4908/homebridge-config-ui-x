@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "伺服器",
   "status.widget.weather.label_config_required_help": "請於 Widget 設定中選擇城市。",
   "status.widget.weather.label_search_for_your_city": "搜尋城市：",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "天氣",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",

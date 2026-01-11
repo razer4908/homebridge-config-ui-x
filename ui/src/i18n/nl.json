@@ -732,6 +732,7 @@
   "status.widget.uptime.label_server": "Server",
   "status.widget.weather.label_config_required_help": "Selecteer uw plaatsnaam in de widget instellingen.",
   "status.widget.weather.label_search_for_your_city": "Zoek naar uw plaatsnaam:",
+  "status.widget.weather.provider": "Weather data is provided by {{ openWeather }}.",
   "status.widget.weather.title_weather": "Weer",
   "support.dev.api": "Homebridge API",
   "support.dev.api_hap": "HAP-NodeJS API",
