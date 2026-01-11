@@ -143,10 +143,10 @@ hb-service start</pre
         type="button"
         class="btn btn-elegant"
         data-bs-dismiss="modal"
-        (click)="backToVersionModal ? goBack() : dismissModal()"
-        [attr.aria-label]="(backToVersionModal ? 'form.button_back' : 'form.button_close') | translate"
+        (click)="backToVersionModal && !actionComplete ? goBack() : dismissModal()"
+        [attr.aria-label]="(backToVersionModal && !actionComplete ? 'form.button_back' : 'form.button_close') | translate"
       >
-        {{ (backToVersionModal ? 'form.button_back' : 'form.button_close') | translate }}
+        {{ (backToVersionModal && !actionComplete ? 'form.button_back' : 'form.button_close') | translate }}
       </button>
       }
     </div>
