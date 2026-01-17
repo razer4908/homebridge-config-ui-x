@@ -14,6 +14,10 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - open accessory info on tile loading icon click
 - a11y: improvements to plugin markdown directive (from #2677) (@rfiorentino1)
 
+### Other Changes
+
+- update `@antfu/eslint-config` lint package to `v7`
+
 ### Homebridge Dependencies
 
 - `@homebridge/hap-client` @ `v3.1.2`
