@@ -190,6 +190,14 @@
       border: 1px solid rgba(0, 0, 0, 0.125);
     }
 
+    .plugin-icon-small {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      object-fit: contain;
+    }
+
     @media (max-width: 991px) {
       .plugin-icon-card {
         width: 60px;

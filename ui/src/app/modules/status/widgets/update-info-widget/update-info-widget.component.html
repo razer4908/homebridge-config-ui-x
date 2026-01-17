@@ -134,9 +134,9 @@
             <div class="mb-0 d-flex align-items-center">
               @if (!nodejsStatusDone) {
               <i class="fas fa-lg fa-circle-notch fa-spin primary-text"></i>
-              } @if (nodejsStatusDone) { @if (widget.hideNodeInfo) {
+              } @if (nodejsStatusDone) { @if (widget.hideNodeInfo || nodeUpdatePolicy === 'none') {
               <i class="fas fa-lg fa-circle green-text"></i>
-              } @if (!widget.hideNodeInfo) { @if (nodejsInfo.updateAvailable) {
+              } @else { @if (nodejsInfo.updateAvailable) {
               <i class="fas fa-lg fa-arrow-alt-circle-up orange-text"></i>
               } @if (nodejsInfo.showNodeUnsupportedWarning && !nodejsInfo.updateAvailable) {
               <i class="fas fa-lg fa-exclamation-circle orange-text"></i>
@@ -306,9 +306,9 @@
         <div class="mb-0 d-flex align-items-center">
           @if (!nodejsStatusDone) {
           <i class="fas fa-lg fa-circle-notch fa-spin primary-text"></i>
-          } @if (nodejsStatusDone) { @if (widget.hideNodeInfo) {
+          } @if (nodejsStatusDone) { @if (widget.hideNodeInfo || nodeUpdatePolicy === 'none') {
           <i class="fas fa-lg fa-circle green-text"></i>
-          } @if (!widget.hideNodeInfo) { @if (nodejsInfo.updateAvailable) {
+          } @else { @if (nodejsInfo.updateAvailable) {
           <i class="fas fa-lg fa-arrow-alt-circle-up orange-text"></i>
           } @if (nodejsInfo.showNodeUnsupportedWarning && !nodejsInfo.updateAvailable) {
           <i class="fas fa-lg fa-exclamation-circle orange-text"></i>

@@ -72,7 +72,7 @@ export class ManageVersionComponent implements OnInit {
     }
 
     // Check per-plugin beta preference
-    if (this.$settings.env.plugins?.alwaysShowBetasFor?.includes(this.plugin.name)) {
+    if (this.$settings.env.plugins?.showBetasFor?.includes(this.plugin.name)) {
       return 'beta'
     }
 
@@ -132,7 +132,7 @@ export class ManageVersionComponent implements OnInit {
           hideList = hideList.filter(x => x !== this.plugin.name)
         }
 
-        let betaList = this.$settings.env.plugins?.alwaysShowBetasFor || []
+        let betaList = this.$settings.env.plugins?.showBetasFor || []
         if (preferBetas && !betaList.includes(this.plugin.name)) {
           betaList = [...betaList, this.plugin.name].sort((a, b) => a.localeCompare(b))
         } else if (!preferBetas) {
@@ -143,11 +143,11 @@ export class ManageVersionComponent implements OnInit {
           body: hideList,
         }))
         await firstValueFrom(this.$api.put('/config-editor/ui', {
-          key: 'plugins.alwaysShowBetasFor',
+          key: 'plugins.showBetasFor',
           value: betaList,
         }))
         this.$settings.setEnvItem('plugins.hideUpdatesFor', hideList)
-        this.$settings.setEnvItem('plugins.alwaysShowBetasFor', betaList)
+        this.$settings.setEnvItem('plugins.showBetasFor', betaList)
 
         // Clear cache for regular plugins too
         await firstValueFrom(this.$api.post('/plugins/clear-cache', {}))

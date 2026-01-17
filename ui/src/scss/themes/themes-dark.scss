@@ -420,6 +420,14 @@
       border: 1px solid #222222;
     }
 
+    .plugin-icon-small {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid #222222;
+      object-fit: contain;
+    }
+
     @media (max-width: 991px) {
       .plugin-icon-card {
         width: 60px;

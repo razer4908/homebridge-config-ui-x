@@ -42,11 +42,14 @@ export class NodeVersionModalComponent implements OnInit {
 
   public loading = true
   public installedPlugins: PluginNodeCheck[] = []
+  public hasNode24OrAbove: boolean = false
   public nodeUpdatePolicyControl = new FormControl<'all' | 'none' | 'major'>('all')
+  public defaultIcon = 'assets/hb-icon.png'
 
   public async ngOnInit() {
     // Initialize the node update policy value
     this.nodeUpdatePolicyControl.setValue(this.$settings.env.nodeUpdatePolicy || 'all')
+    this.hasNode24OrAbove = satisfies(this.nodeVersion, '>=24.0.0', { includePrerelease: true })
 
     // Watch for changes and update the backend
     this.nodeUpdatePolicyControl.valueChanges
@@ -117,6 +120,7 @@ export class NodeVersionModalComponent implements OnInit {
             name: x.name,
             isSupported,
             isSupportedStr: `status.widget.update_node_${isSupported}`,
+            icon: x.icon || this.defaultIcon,
           }
         })
         .sort((a, b) => {
@@ -138,10 +142,15 @@ export class NodeVersionModalComponent implements OnInit {
         name: 'homebridge',
         isSupported: hbIsSupported,
         isSupportedStr: `status.widget.update_node_${hbIsSupported}`,
+        icon: this.defaultIcon,
       })
     } catch (error) {
       console.error(error)
       this.$toastr.error(this.$translate.instant('plugins.toast_failed_to_load_plugins'), this.$translate.instant('toast.title_error'))
     }
+  }
+
+  public handleIconError(plugin: PluginNodeCheck) {
+    plugin.icon = this.defaultIcon
   }
 }

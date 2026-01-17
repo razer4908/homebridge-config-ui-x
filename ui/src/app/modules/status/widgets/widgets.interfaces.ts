@@ -3,6 +3,7 @@ export interface PluginNodeCheck {
   name: string
   isSupported: string
   isSupportedStr: string
+  icon: string
 }
 
 export interface NodeJsInfo {
@@ -86,4 +87,5 @@ export interface Widget {
   }
   showNpmVersion?: boolean // update info widget
   dockerExpanded?: boolean // update info widget
+  hideNodeInfo?: boolean // update info widget
 }

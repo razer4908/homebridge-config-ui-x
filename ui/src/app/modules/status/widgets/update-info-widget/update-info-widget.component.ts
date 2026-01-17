@@ -48,6 +48,7 @@ export class UpdateInfoWidgetComponent implements OnInit {
   public homebridgePluginStatusDone = false
   public nodejsInfo: NodeJsInfo
   public nodejsStatusDone = false
+  public nodeUpdatePolicy: 'all' | 'major' | 'none' = 'all'
   public serverInfo: ServerInfo
   public isRunningHbV2 = false
   public isHbV2Loaded = false
@@ -64,6 +65,7 @@ export class UpdateInfoWidgetComponent implements OnInit {
 
   public async ngOnInit() {
     this.io = this.$ws.getExistingNamespace('status')
+    this.nodeUpdatePolicy = this.$settings.env.nodeUpdatePolicy || 'all'
 
     this.io.connected.subscribe(async () => {
       await this.getNodeInfo()
@@ -187,12 +189,14 @@ export class UpdateInfoWidgetComponent implements OnInit {
         this.io.request('nodejs-version-check'),
       )
 
+      // Refresh the policy from settings to ensure we have the latest value
+      this.nodeUpdatePolicy = this.$settings.env.nodeUpdatePolicy || 'all'
+
       // Apply frontend policy check to handle cached backend responses
       // This ensures the UI reflects policy changes even if backend data is cached
-      const policy = this.$settings.env.nodeUpdatePolicy || 'all'
-      if (policy === 'none') {
+      if (this.nodeUpdatePolicy === 'none') {
         this.nodejsInfo.updateAvailable = false
-      } else if (policy === 'major' && this.nodejsInfo.updateAvailable) {
+      } else if (this.nodeUpdatePolicy === 'major' && this.nodejsInfo.updateAvailable) {
         const currentMajor = Number.parseInt(
           this.serverInfo.nodeVersion.split('.')[0].replace('v', ''),
           10,

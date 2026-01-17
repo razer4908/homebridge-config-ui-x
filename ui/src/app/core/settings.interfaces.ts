@@ -54,7 +54,7 @@ export interface EnvInterface {
   }
   plugins?: {
     hideUpdatesFor?: string[]
-    alwaysShowBetasFor?: string[]
+    showBetasFor?: string[]
   }
   nodeUpdatePolicy?: 'all' | 'none' | 'major'
   homebridgeHideUpdates?: boolean
