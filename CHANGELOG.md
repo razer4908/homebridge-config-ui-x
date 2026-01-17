@@ -13,6 +13,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix manage plugin show back btn after plugin install
 - open accessory info on tile loading icon click
 - a11y: improvements to plugin markdown directive (from #2677) (@rfiorentino1)
+- first step of improvements to https settings (@donavanbecker)
 
 ### Other Changes
 
