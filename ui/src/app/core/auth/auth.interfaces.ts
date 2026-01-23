@@ -3,6 +3,7 @@ export interface UserInterface {
   name?: string
   admin?: boolean
   instanceId?: string
+  otpLegacySecret?: boolean
 }
 
 export interface TokenCacheEntry {

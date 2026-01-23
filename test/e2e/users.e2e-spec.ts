@@ -116,6 +116,7 @@ describe('UsersController (e2e)', () => {
       username: 'test',
       admin: false,
       otpActive: false,
+      otpLegacySecret: false,
     })
 
     // check the user was saved to the auth.json file
@@ -146,6 +147,7 @@ describe('UsersController (e2e)', () => {
       username: 'admin',
       admin: true,
       otpActive: false,
+      otpLegacySecret: false,
     })
 
     expect((await readJson(authFilePath))[0].name).toBe('New Name')
@@ -175,6 +177,7 @@ describe('UsersController (e2e)', () => {
       username: 'newUsername',
       admin: true,
       otpActive: false,
+      otpLegacySecret: false,
     })
 
     expect((await readJson(authFilePath))[0].name).toBe('New Name')

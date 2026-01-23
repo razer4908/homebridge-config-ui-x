@@ -790,6 +790,8 @@
   "users.toast_added_new_user": "Menambahkan Pengguna Baru",
   "users.toast_failed_to_add_user": "Gagal Menambah Pengguna",
   "users.toast_failed_to_delete_user": "Gagal Menghapus Pengguna",
+  "users.toast_legacy_otp_message": "Your 2FA secret is outdated. Click here to go to the Users page where you can disable and re-enable 2FA to upgrade your security.",
+  "users.toast_legacy_otp_title": "Outdated 2FA Secret",
   "users.toast_updated_user": "Pengguna yang Diperbarui",
   "users.toast_user_deleted": "Pengguna Dihapus"
 }

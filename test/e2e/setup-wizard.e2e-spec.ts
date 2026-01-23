@@ -83,6 +83,7 @@ describe('SetupWizard (e2e)', () => {
       username: 'test',
       admin: true,
       otpActive: false,
+      otpLegacySecret: false,
     })
 
     // check the user was saved to the auth.json file
@@ -111,6 +112,7 @@ describe('SetupWizard (e2e)', () => {
       username: 'test',
       admin: true,
       otpActive: false,
+      otpLegacySecret: false,
     })
 
     // check the user was saved to the auth.json file

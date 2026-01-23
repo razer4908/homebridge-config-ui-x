@@ -12,6 +12,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { createGuardrails } from '@otplib/core'
 import { pathExists, readJson, writeJson } from 'fs-extra/esm'
 import NodeCache from 'node-cache'
 import { generateSecret, generateURI, verify } from 'otplib'
@@ -23,6 +24,12 @@ import { Logger } from '../logger/logger.service.js'
 @Injectable()
 export class AuthService {
   private otpUsageCache = new NodeCache({ stdTTL: 90 })
+
+  // Custom guardrails for legacy 16-character OTP secrets (10 bytes when decoded)
+  private legacyOtpGuardrails = createGuardrails({
+    MIN_SECRET_BYTES: 10, // allow legacy 16-character Base32 secrets from otplib v12
+    MAX_SECRET_BYTES: 64,
+  })
 
   constructor(
     @Inject(JwtService) private readonly jwtService: JwtService,
@@ -62,6 +69,7 @@ export class AuthService {
           name: user.name,
           admin: user.admin,
           instanceId: this.configService.instanceId,
+          otpLegacySecret: user.otpLegacySecret || false,
         }
       }
     } catch (e) {
@@ -132,6 +140,7 @@ export class AuthService {
       name: user.name,
       admin: user.admin,
       instanceId: this.configService.instanceId,
+      otpLegacySecret: user.otpLegacySecret || false,
     })
 
     return {
@@ -170,6 +179,7 @@ export class AuthService {
       name: user.name,
       admin: user.admin,
       instanceId: user.instanceId,
+      otpLegacySecret: currentUser.otpLegacySecret || false,
     })
 
     return {
@@ -295,6 +305,7 @@ export class AuthService {
       username: user.username,
       admin: user.admin,
       otpActive: user.otpActive || false,
+      otpLegacySecret: user.otpLegacySecret || false,
     }
   }
 
@@ -496,11 +507,36 @@ export class AuthService {
       throw new BadRequestException('2FA has not been setup.')
     }
 
-    const { valid } = await verify({
-      token: code,
-      secret: user.otpSecret,
-      epochTolerance: 30,
-    })
+    let valid = false
+
+    try {
+      // Try with v13 (for 32-character secrets)
+      const result = await verify({
+        token: code,
+        secret: user.otpSecret,
+        epochTolerance: 30,
+      })
+      valid = result.valid
+    } catch (error: unknown) {
+      // If SecretTooShortError, use custom guardrails (shouldn't happen for new setups, but handle it)
+      if (error instanceof Error && error.name === 'SecretTooShortError' && user.otpSecret.length === 16) {
+        this.logger.warn(`${user.username} is attempting to activate a legacy 16-character OTP secret.`)
+
+        const result = await verify({
+          token: code,
+          secret: user.otpSecret,
+          epochTolerance: 30,
+          guardrails: this.legacyOtpGuardrails,
+        })
+        valid = result.valid
+
+        if (valid) {
+          user.otpLegacySecret = true
+        }
+      } else {
+        throw error
+      }
+    }
 
     if (valid) {
       user.otpActive = true
@@ -528,6 +564,7 @@ export class AuthService {
 
     user.otpActive = false
     delete user.otpSecret
+    delete user.otpLegacySecret
 
     await this.saveUserFile(authfile)
 
@@ -547,17 +584,65 @@ export class AuthService {
       return false
     }
 
-    const { valid } = await verify({
-      token: otp,
-      secret: user.otpSecret,
-      epochTolerance: 30,
-    })
+    try {
+      // Try with v13 (for 32-character secrets)
+      const { valid } = await verify({
+        token: otp,
+        secret: user.otpSecret,
+        epochTolerance: 30,
+      })
 
-    if (valid) {
-      this.otpUsageCache.set(otpCacheKey, 'true')
-      return true
+      if (valid) {
+        this.otpUsageCache.set(otpCacheKey, 'true')
+        return true
+      }
+    } catch (error: unknown) {
+      // If SecretTooShortError, this is a legacy 16-character secret from otplib v12
+      if (error instanceof Error && error.name === 'SecretTooShortError' && user.otpSecret.length === 16) {
+        this.logger.warn(`${user.username} is using a legacy 16-character OTP secret. They should re-setup 2FA for better security.`)
+
+        // Use custom guardrails to allow legacy 10-byte (16-character) secrets
+        const { valid } = await verify({
+          token: otp,
+          secret: user.otpSecret,
+          epochTolerance: 30,
+          guardrails: this.legacyOtpGuardrails,
+        })
+
+        if (valid) {
+          this.otpUsageCache.set(otpCacheKey, 'true')
+
+          // Set the flag on the user object immediately so it's included in the JWT
+          user.otpLegacySecret = true
+
+          // Persist the flag to the auth file (async, don't block login)
+          this.markUserAsLegacyOtp(user.username).catch((err: unknown) => {
+            const message = err instanceof Error ? err.message : 'Unknown error'
+            this.logger.error(`Failed to mark user ${user.username} as having legacy OTP: ${message}`)
+          })
+
+          return true
+        }
+      } else {
+        // Re-throw if it's a different error
+        throw error
+      }
     }
 
     return false
+  }
+
+  /**
+   * Mark a user as having a legacy OTP secret
+   */
+  private async markUserAsLegacyOtp(username: string) {
+    const authfile = await this.getUsers()
+    const user = authfile.find(x => x.username === username)
+
+    if (user && !user.otpLegacySecret) {
+      user.otpLegacySecret = true
+      await this.saveUserFile(authfile)
+      this.logger.warn(`Marked ${username} as having legacy OTP secret.`)
+    }
   }
 }

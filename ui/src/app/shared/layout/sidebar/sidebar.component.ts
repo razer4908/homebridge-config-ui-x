@@ -4,6 +4,7 @@ import { NavigationEnd, NavigationStart, Router, RouterLink, RouterLinkActive } 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { isStandalonePWA } from 'is-standalone-pwa'
+import { ToastrService } from 'ngx-toastr'
 
 import { AuthHelperService } from '@/app/core/auth/auth-helper.service'
 import { AuthService } from '@/app/core/auth/auth.service'
@@ -32,6 +33,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private $notification = inject(NotificationService)
   private $renderer = inject(Renderer2)
   private $router = inject(Router)
+  private $toastr = inject(ToastrService)
   private $translate = inject(TranslateService)
 
   @Input() isExpanded = false
@@ -41,6 +43,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public enableTerminalAccess = this.$settings.env.enableTerminalAccess
   public rPiCurrentlyUnderVoltage = false
   public rPiWasUnderVoltage = false
+  public legacyOtpToastShown = false
   public isMobile: any = false
   public freezeMenu = false
   public isPwa = isStandalonePWA()
@@ -98,6 +101,29 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.$notification.formAuthEnabled.subscribe((value) => {
       this.formAuth = value
+    })
+
+    this.$notification.legacyOtpDetected.subscribe((detected) => {
+      // Only show toast if detected is true and we haven't shown it yet
+      if (detected === true && !this.legacyOtpToastShown) {
+        this.legacyOtpToastShown = true
+
+        // Delay the toast by 5 seconds to avoid overwhelming the user on page load
+        setTimeout(() => {
+          const toast = this.$toastr.warning(
+            this.$translate.instant('users.toast_legacy_otp_message'),
+            this.$translate.instant('users.toast_legacy_otp_title'),
+            {
+              timeOut: 0,
+              tapToDismiss: true,
+              disableTimeOut: true,
+            },
+          )
+          toast.onTap.subscribe(() => {
+            void this.$router.navigate(['/users'])
+          })
+        }, 3000)
+      }
     })
 
     // Declare element for event listeners

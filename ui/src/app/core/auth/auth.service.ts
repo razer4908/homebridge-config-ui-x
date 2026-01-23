@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs'
 
 import { ApiService } from '@/app/core/api.service'
 import { UserInterface } from '@/app/core/auth/auth.interfaces'
+import { NotificationService } from '@/app/core/notification.service'
 import { SettingsService } from '@/app/core/settings.service'
 import { environment } from '@/environments/environment'
 
@@ -12,6 +13,7 @@ import { environment } from '@/environments/environment'
 export class AuthService {
   private $api = inject(ApiService)
   private $jwtHelper = inject(JwtHelperService)
+  private $notification = inject(NotificationService)
   private $settings = inject(SettingsService)
 
   public token: string
@@ -100,6 +102,12 @@ export class AuthService {
       this.user = this.$jwtHelper.decodeToken(token)
       this.token = token
       this.setLogoutTimer()
+
+      // Check if user has legacy OTP secret and emit notification
+      if (this.user.otpLegacySecret) {
+        this.$notification.legacyOtpDetected.next(true)
+      }
+
       return true
     } catch (e) {
       window.localStorage.removeItem(environment.jwt.tokenKey)
@@ -161,7 +169,7 @@ export class AuthService {
   /**
    * Refresh the current session by getting a new token
    */
-  private async refreshSession() {
+  public async refreshSession() {
     if (this.isRefreshing) {
       return
     }

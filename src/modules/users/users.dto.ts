@@ -61,6 +61,9 @@ export class UserDto {
   @Equals(undefined)
   @ApiProperty({ readOnly: true, type: Boolean })
   otpActive?: boolean
+
+  @Equals(undefined)
+  otpLegacySecret?: boolean
 }
 
 export class UserUpdatePasswordDto {

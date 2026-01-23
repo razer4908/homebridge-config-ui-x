@@ -790,6 +790,8 @@
   "users.toast_added_new_user": "Lagt till ny användare",
   "users.toast_failed_to_add_user": "Det gick inte att lägga till användare",
   "users.toast_failed_to_delete_user": "Det gick inte att radera användaren",
+  "users.toast_legacy_otp_message": "Your 2FA secret is outdated. Click here to go to the Users page where you can disable and re-enable 2FA to upgrade your security.",
+  "users.toast_legacy_otp_title": "Outdated 2FA Secret",
   "users.toast_updated_user": "Användare uppdaterad",
   "users.toast_user_deleted": "Användaren raderad"
 }

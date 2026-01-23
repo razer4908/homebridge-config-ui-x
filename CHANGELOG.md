@@ -4,9 +4,21 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 ## v5.15.1 (Unreleased)
 
+### ⚠️ 2FA Updates
+
+If you have two-factor authentication (2FA) enabled and set it up with an older version of the UI,
+you may see a notification asking you to upgrade your 2FA secret for improved security.
+
+Your current 2FA should continue to work, but we recommend following the prompt to disable
+and re-enable 2FA to upgrade to a more secure secret format. This is a one-time process
+and only affects users who initially set up 2FA before the recent security library update.
+
+If you do not use 2FA, or you do not see any prompts, no action is needed.
+
 ### UI Changes
 
 - i18n: add missing 'clear' language string (#2700) (@rfiorentino1)
+- fix support legacy otp secrets after `otplib` upgrade
 
 ### Other Changes
 

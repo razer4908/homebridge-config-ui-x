@@ -790,6 +790,8 @@
   "users.toast_added_new_user": "Neuen Benutzer hinzugefügt",
   "users.toast_failed_to_add_user": "Fehler beim Hinzufügen des Benutzers",
   "users.toast_failed_to_delete_user": "Fehler beim Löschen des Benutzers",
+  "users.toast_legacy_otp_message": "Your 2FA secret is outdated. Click here to go to the Users page where you can disable and re-enable 2FA to upgrade your security.",
+  "users.toast_legacy_otp_title": "Outdated 2FA Secret",
   "users.toast_updated_user": "Benutzer aktualisiert",
   "users.toast_user_deleted": "Benutzer gelöscht"
 }

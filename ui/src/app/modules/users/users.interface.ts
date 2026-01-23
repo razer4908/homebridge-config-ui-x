@@ -4,6 +4,7 @@ export interface User {
   username: string
   admin: boolean
   otpActive: boolean
+  otpLegacySecret?: boolean
   password?: string
   passwordConfirm?: string
 }
