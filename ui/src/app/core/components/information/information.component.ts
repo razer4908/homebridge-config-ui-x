@@ -7,7 +7,6 @@ import { PluginsMarkdownDirective } from '@/app/core/directives/plugins.markdown
 
 @Component({
   templateUrl: './information.component.html',
-  styleUrls: ['./information.component.scss'],
   standalone: true,
   imports: [
     TranslatePipe,
