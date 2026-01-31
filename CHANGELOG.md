@@ -9,6 +9,10 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - updates to the `uk.json` language file (#2715) (@xrust83)
 - fix docker update modal styles in dark mode
 
+### Other Changes
+
+- dependency updates
+
 ### Homebridge Dependencies
 
 - `@homebridge/hap-client` @ `v3.1.2`
