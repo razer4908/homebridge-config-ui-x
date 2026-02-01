@@ -2,6 +2,18 @@
 
 All notable changes to `homebridge-config-ui-x` will be documented in this file. This project tries to adhere to [Semantic Versioning](http://semver.org/).
 
+## 5.16.1 (Unreleased)
+
+### Other Changes
+
+- fix deprecation github workflow script
+
+### Homebridge Dependencies
+
+- `@homebridge/hap-client` @ `v3.1.3`
+- `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.3`
+
 ## v5.16.0 (2026-02-08)
 
 ### ⚠️ Update Info Widget Changes
