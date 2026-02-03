@@ -3,6 +3,7 @@ import antfu from '@antfu/eslint-config'
 export default antfu({
   ignores: ['dist', 'ui/.angular'],
   rules: {
+    'antfu/consistent-list-newline': 'off',
     'curly': ['error', 'all'],
     'jsdoc/check-alignment': 'error',
     'jsdoc/check-line-alignment': 'error',

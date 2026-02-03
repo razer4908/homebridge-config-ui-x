@@ -11,11 +11,15 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - refactor homebridge/ui update settings
 - show plugin icons on homebridge v2 update modal
 
+### Other Changes
+
+- dependency updates
+
 ### Homebridge Dependencies
 
-- `@homebridge/hap-client` @ `v3.1.2`
+- `@homebridge/hap-client` @ `v3.1.3`
 - `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
-- `@homebridge/plugin-ui-utils` @ `v2.1.2`
+- `@homebridge/plugin-ui-utils` @ `v2.1.3`
 
 ## v5.15.2 (2026-01-31)
 
