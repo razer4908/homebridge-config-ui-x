@@ -2,6 +2,19 @@
 
 All notable changes to `homebridge-config-ui-x` will be documented in this file. This project tries to adhere to [Semantic Versioning](http://semver.org/).
 
+## v5.15.3 (Unreleased)
+
+### UI Changes
+
+- adjust settings session timeout input elements (#2716) (@dnicolson)
+- fix settings display of mdns advertise option
+
+### Homebridge Dependencies
+
+- `@homebridge/hap-client` @ `v3.1.2`
+- `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
+- `@homebridge/plugin-ui-utils` @ `v2.1.2`
+
 ## v5.15.2 (2026-01-31)
 
 ### UI Changes

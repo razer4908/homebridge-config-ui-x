@@ -188,6 +188,7 @@ export class ConfigService {
         ...toReturn.env,
         enableAccessories: this.homebridgeInsecureMode,
         enableTerminalAccess: this.enableTerminalAccess,
+        enableMdnsAdvertise: Boolean(this.ui.enableMdnsAdvertise),
         nodeVersion: process.version,
         recommendChildBridges: this.recommendChildBridges,
         runningInDocker: this.runningInDocker,
