@@ -2,7 +2,14 @@
 
 All notable changes to `homebridge-config-ui-x` will be documented in this file. This project tries to adhere to [Semantic Versioning](http://semver.org/).
 
-## v5.15.3 (Unreleased)
+## v5.16.0 (2026-02-08)
+
+### ⚠️ Update Info Widget Changes
+
+- If you had previously set an update preference for Homebridge or Homebridge UI, you will need to set this preference again.
+  Please open the _Manage Version_ modal (by clicking on _Homebridge_ or _Homebridge UI_ in the _Update Info Widget_) and set your preference again in the _Update Preferences_ section.
+- The _Hide Node Info_ widget setting on the _Update Info Widget_ has been removed.
+  Please open the _Node Info_ modal (by clicking on _Node.js_) and set a preference in the _Update Preferences_ section for the same functionality.
 
 ### UI Changes
 
