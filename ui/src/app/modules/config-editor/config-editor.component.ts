@@ -990,44 +990,113 @@ export class ConfigEditorComponent implements OnInit, OnDestroy {
                         },
                         nodeUpdatePolicy: {
                           type: 'string',
-                          title: this.$translate.instant('plugins.manage.notifications'),
-                          description: 'Controls when Node.js update notifications are shown.',
+                          title: `${this.$translate.instant('plugins.manage.notifications')} (Node.js)`,
+                          description: this.$translate.instant('plugins.manage.notifications_desc', {
+                            pluginName: 'Node.js',
+                          }),
                           default: 'all',
                           enum: ['all', 'major', 'none'],
                           oneOf: [
                             {
                               title: this.$translate.instant('plugins.manage.notifications_all'),
+                              description: this.$translate.instant('plugins.manage.notifications_all_desc_for', {
+                                pluginName: 'Node.js',
+                              }),
                               const: 'all',
                             },
                             {
                               title: this.$translate.instant('plugins.manage.notifications_major'),
+                              description: this.$translate.instant('plugins.manage.notifications_major_desc_for', {
+                                pluginName: 'Node.js',
+                              }),
                               const: 'major',
                             },
                             {
                               title: this.$translate.instant('plugins.manage.notifications_none'),
+                              description: this.$translate.instant('plugins.manage.notifications_none_desc_for', {
+                                pluginName: 'Node.js',
+                              }),
                               const: 'none',
                             },
                           ],
                         },
-                        homebridgeHideUpdates: {
-                          type: 'boolean',
-                          title: `${this.$translate.instant('plugins.manage.hide_updates')} (Homebridge)`,
-                          description: 'Hide Homebridge update notifications.',
+                        homebridgeUpdatePolicy: {
+                          type: 'string',
+                          title: `${this.$translate.instant('plugins.manage.notifications')} (Homebridge)`,
+                          description: this.$translate.instant('plugins.manage.notifications_desc', {
+                            pluginName: 'Homebridge',
+                          }),
+                          default: 'all',
+                          enum: ['all', 'beta', 'major', 'none'],
+                          oneOf: [
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_all'),
+                              description: this.$translate.instant('plugins.manage.notifications_all_desc_for', {
+                                pluginName: 'Homebridge',
+                              }),
+                              const: 'all',
+                            },
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_beta'),
+                              description: this.$translate.instant('plugins.manage.notifications_beta_desc_for', {
+                                pluginName: 'Homebridge',
+                              }),
+                              const: 'beta',
+                            },
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_major'),
+                              description: this.$translate.instant('plugins.manage.notifications_major_desc_for', {
+                                pluginName: 'Homebridge',
+                              }),
+                              const: 'major',
+                            },
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_none'),
+                              description: this.$translate.instant('plugins.manage.notifications_none_desc_for', {
+                                pluginName: 'Homebridge',
+                              }),
+                              const: 'none',
+                            },
+                          ],
                         },
-                        homebridgeAlwaysShowBetas: {
-                          type: 'boolean',
-                          title: `${this.$translate.instant('settings.display.show_betas')} (Homebridge)`,
-                          description: 'Show beta releases as available updates for Homebridge.',
-                        },
-                        homebridgeUiHideUpdates: {
-                          type: 'boolean',
-                          title: `${this.$translate.instant('plugins.manage.hide_updates')} (Homebridge UI)`,
-                          description: 'Hide Homebridge UI update notifications.',
-                        },
-                        homebridgeUiAlwaysShowBetas: {
-                          type: 'boolean',
-                          title: `${this.$translate.instant('settings.display.show_betas')} (Homebridge UI)`,
-                          description: 'Show beta releases as available updates for Homebridge UI.',
+                        homebridgeUiUpdatePolicy: {
+                          type: 'string',
+                          title: `${this.$translate.instant('plugins.manage.notifications')} (Homebridge UI)`,
+                          description: this.$translate.instant('plugins.manage.notifications_desc', {
+                            pluginName: 'Homebridge UI',
+                          }),
+                          default: 'all',
+                          enum: ['all', 'beta', 'major', 'none'],
+                          oneOf: [
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_all'),
+                              description: this.$translate.instant('plugins.manage.notifications_all_desc_for', {
+                                pluginName: 'Homebridge UI',
+                              }),
+                              const: 'all',
+                            },
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_beta'),
+                              description: this.$translate.instant('plugins.manage.notifications_beta_desc_for', {
+                                pluginName: 'Homebridge UI',
+                              }),
+                              const: 'beta',
+                            },
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_major'),
+                              description: this.$translate.instant('plugins.manage.notifications_major_desc_for', {
+                                pluginName: 'Homebridge UI',
+                              }),
+                              const: 'major',
+                            },
+                            {
+                              title: this.$translate.instant('plugins.manage.notifications_none'),
+                              description: this.$translate.instant('plugins.manage.notifications_none_desc_for', {
+                                pluginName: 'Homebridge UI',
+                              }),
+                              const: 'none',
+                            },
+                          ],
                         },
                         bridges: {
                           type: 'array',

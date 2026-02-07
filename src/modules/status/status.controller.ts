@@ -72,8 +72,8 @@ export class StatusController {
 
   @ApiOperation({ summary: 'Return current Node.js version and update availability information.' })
   @Get('/nodejs')
-  async getNodeJsVersionInfo() {
-    return this.statusService.getNodeJsVersionInfo()
+  async getNodeVersionInfo() {
+    return this.statusService.getNodeVersionInfo()
   }
 
   @ApiOperation({ summary: 'Returns throttled status for Raspberry Pi.' })

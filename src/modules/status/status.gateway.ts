@@ -73,9 +73,9 @@ export class StatusGateway {
   }
 
   @SubscribeMessage('nodejs-version-check')
-  async nodeJsVersionCheck() {
+  async nodeVersionCheck() {
     try {
-      return await this.statusService.getNodeJsVersionInfo()
+      return await this.statusService.getNodeVersionInfo()
     } catch (e) {
       return new WsException(e.message)
     }

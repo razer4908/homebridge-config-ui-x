@@ -428,14 +428,21 @@ export class StatusService {
    * Used when Node.js update policy changes
    */
   public clearNodeJsVersionCache() {
-    this.statusCache.del('nodeJsVersion')
+    // Clear cache for all policy variants
+    this.statusCache.del('nodeVersion:all')
+    this.statusCache.del('nodeVersion:none')
+    this.statusCache.del('nodeVersion:major')
   }
 
   /**
    * Checks the current version of Node.js and compares to the latest LTS
    */
-  public async getNodeJsVersionInfo() {
-    const cachedResult = this.statusCache.get('nodeJsVersion')
+  public async getNodeVersionInfo() {
+    // Get the current policy to include in cache key
+    const nodeUpdatePolicy = this.configService.getNodeUpdatePolicy()
+    const cacheKey = `nodeVersion:${nodeUpdatePolicy}`
+
+    const cachedResult = this.statusCache.get(cacheKey)
 
     if (cachedResult) {
       return cachedResult
@@ -518,22 +525,40 @@ export class StatusService {
       // Apply node update policy
       const nodeUpdatePolicy = this.configService.getNodeUpdatePolicy()
       let finalUpdateAvailable = updateAvailable
+      let finalLatestVersion = latestVersion
 
       if (nodeUpdatePolicy === 'none') {
         // Hide all Node.js update notifications
         finalUpdateAvailable = false
-      } else if (nodeUpdatePolicy === 'major' && updateAvailable) {
-        // Hide major version updates, only show updates within the same major version
+      } else if (nodeUpdatePolicy === 'major') {
+        // Only show updates within the same major version
         const currentMajor = Number.parseInt(process.version.split('.')[0].replace('v', ''), 10)
         const latestMajor = Number.parseInt(latestVersion.split('.')[0].replace('v', ''), 10)
+
         if (latestMajor > currentMajor) {
-          finalUpdateAvailable = false
+          // The suggested version is a major upgrade, find the latest within current major
+          const latestInCurrentMajor = versionList
+            .filter((x: { version: string }) => x.version.startsWith(`v${currentMajor}`))
+            .sort((a: { version: string }, b: { version: string }) => {
+              // Sort by version descending
+              return b.version.localeCompare(a.version, undefined, { numeric: true, sensitivity: 'base' })
+            })[0]
+
+          if (latestInCurrentMajor && gt(latestInCurrentMajor.version, process.version)) {
+            // There's a newer version in the current major
+            finalLatestVersion = latestInCurrentMajor.version
+            finalUpdateAvailable = true
+          } else {
+            // No newer version in current major
+            finalUpdateAvailable = false
+          }
         }
+        // If latestMajor === currentMajor, the existing latestVersion is already correct
       }
 
       const versionInformation = {
         currentVersion: process.version,
-        latestVersion,
+        latestVersion: finalLatestVersion,
         updateAvailable: finalUpdateAvailable,
         showNodeUnsupportedWarning,
         installPath: dirname(process.execPath),
@@ -542,7 +567,7 @@ export class StatusService {
         supportsNodeJs24: isNodeJs24Supported,
       }
 
-      this.statusCache.set('nodeJsVersion', versionInformation, 86400)
+      this.statusCache.set(cacheKey, versionInformation, 86400)
       return versionInformation
     } catch (e) {
       this.logger.log(`Failed to check for Node.js version updates (check your internet connection) as ${e.message}.`)
@@ -554,7 +579,7 @@ export class StatusService {
         architecture: process.arch,
         supportsNodeJs24: isNodeJs24Supported,
       }
-      this.statusCache.set('nodeJsVersion', versionInformation, 3600)
+      this.statusCache.set(cacheKey, versionInformation, 3600)
       return versionInformation
     }
   }

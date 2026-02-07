@@ -11,6 +11,7 @@ import { AuthService } from '@/app/core/auth/auth.service'
 import { InformationComponent } from '@/app/core/components/information/information.component'
 import { Plugin } from '@/app/core/manage-plugins/manage-plugins.interfaces'
 import { ManagePluginsService } from '@/app/core/manage-plugins/manage-plugins.service'
+import { HomebridgeUiUpdatePolicy, HomebridgeUpdatePolicy, nodeUpdatePolicy } from '@/app/core/settings.interfaces'
 import { SettingsService } from '@/app/core/settings.service'
 import { IoNamespace, WsService } from '@/app/core/ws.service'
 import { HbV2ModalComponent } from '@/app/modules/status/widgets/update-info-widget/hb-v2-modal/hb-v2-modal.component'
@@ -43,12 +44,18 @@ export class UpdateInfoWidgetComponent implements OnInit {
   @Input() widget: Widget
 
   public homebridgePkg: Plugin = {} as Plugin
+  public homebridgeUpdatePolicy: HomebridgeUpdatePolicy = 'all'
+
   public homebridgeUiPkg: Plugin = {} as Plugin
+  public homebridgeUiUpdatePolicy: HomebridgeUiUpdatePolicy = 'all'
+
   public homebridgePluginStatus: Plugin[] = []
   public homebridgePluginStatusDone = false
+
   public nodejsInfo: NodeJsInfo
   public nodejsStatusDone = false
-  public nodeUpdatePolicy: 'all' | 'major' | 'none' = 'all'
+  public nodeUpdatePolicy: nodeUpdatePolicy = 'all'
+
   public serverInfo: ServerInfo
   public isRunningHbV2 = false
   public isHbV2Loaded = false
@@ -66,6 +73,8 @@ export class UpdateInfoWidgetComponent implements OnInit {
   public async ngOnInit() {
     this.io = this.$ws.getExistingNamespace('status')
     this.nodeUpdatePolicy = this.$settings.env.nodeUpdatePolicy || 'all'
+    this.homebridgeUiUpdatePolicy = this.$settings.env.homebridgeUiUpdatePolicy || 'all'
+    this.homebridgeUpdatePolicy = this.$settings.env.homebridgeUpdatePolicy || 'all'
 
     this.io.connected.subscribe(async () => {
       await this.getNodeInfo()
@@ -95,9 +104,7 @@ export class UpdateInfoWidgetComponent implements OnInit {
       const allHb2Ready = installedPlugins
         .filter((x: any) => x.name !== 'homebridge-config-ui-x')
         .every((x: any) => {
-          const hbEngines
-            = x.engines?.homebridge?.split('||').map((s: string) => s.trim())
-              || []
+          const hbEngines = x.engines?.homebridge?.split('||').map((s: string) => s.trim()) || []
           return hbEngines.some(
             (v: string) => v.startsWith('^2') || v.startsWith('>=2'),
           )
@@ -116,12 +123,9 @@ export class UpdateInfoWidgetComponent implements OnInit {
 
     ref.componentInstance.nodeVersion = this.serverInfo.nodeVersion
     ref.componentInstance.latestVersion = compareVersion
-    ref.componentInstance.showNodeUnsupportedWarning
-      = this.nodejsInfo.showNodeUnsupportedWarning
-    ref.componentInstance.homebridgeRunningInSynologyPackage
-      = this.serverInfo.homebridgeRunningInSynologyPackage
-    ref.componentInstance.homebridgeRunningInDocker
-      = this.serverInfo.homebridgeRunningInDocker
+    ref.componentInstance.showNodeUnsupportedWarning = this.nodejsInfo.showNodeUnsupportedWarning
+    ref.componentInstance.homebridgeRunningInSynologyPackage = this.serverInfo.homebridgeRunningInSynologyPackage
+    ref.componentInstance.homebridgeRunningInDocker = this.serverInfo.homebridgeRunningInDocker
     ref.componentInstance.homebridgePkg = this.homebridgePkg
     ref.componentInstance.architecture = this.nodejsInfo.architecture
     ref.componentInstance.supportsNodeJs24 = this.nodejsInfo.supportsNodeJs24
@@ -157,20 +161,109 @@ export class UpdateInfoWidgetComponent implements OnInit {
     this.$plugin.upgradeHomebridge(pkg, pkg.latestVersion)
   }
 
+  public getHomebridgeIconClass() {
+    if (!this.homebridgePkg.installedVersion) {
+      return {
+        'fa-circle-notch': true,
+        'fa-spin': true,
+        'primary-text': true,
+      }
+    }
+
+    if (this.homebridgeUpdatePolicy === 'none' || (this.homebridgeUpdatePolicy === 'major' && !this.homebridgePkg.updateAvailable)) {
+      return {
+        'fa-circle': true,
+        'green-text': true,
+      }
+    }
+
+    return {
+      'fa-check-circle': !this.homebridgePkg.updateAvailable,
+      'green-text': !this.homebridgePkg.updateAvailable,
+      'fa-arrow-alt-circle-up': this.homebridgePkg.updateAvailable,
+      'orange-text': this.homebridgePkg.updateAvailable,
+    }
+  }
+
+  public getHomebridgeUiIconClass() {
+    if (!this.homebridgeUiPkg.installedVersion) {
+      return {
+        'fa-circle-notch': true,
+        'fa-spin': true,
+        'primary-text': true,
+      }
+    }
+
+    if (this.homebridgeUiUpdatePolicy === 'none' || (this.homebridgeUiUpdatePolicy === 'major' && !this.homebridgeUiPkg.updateAvailable)) {
+      return {
+        'fa-circle': true,
+        'green-text': true,
+      }
+    }
+
+    return {
+      'fa-check-circle': !this.homebridgeUiPkg.updateAvailable,
+      'green-text': !this.homebridgeUiPkg.updateAvailable,
+      'fa-arrow-alt-circle-up': this.homebridgeUiPkg.updateAvailable,
+      'orange-text': this.homebridgeUiPkg.updateAvailable,
+    }
+  }
+
+  public getPluginsIconClass() {
+    if (!this.homebridgePluginStatusDone) {
+      return {
+        'fa-circle-notch': true,
+        'fa-spin': true,
+        'primary-text': true,
+      }
+    }
+    return {
+      'fa-arrow-alt-circle-up': this.homebridgePluginStatus.length,
+      'orange-text': this.homebridgePluginStatus.length,
+      'fa-check-circle': !this.homebridgePluginStatus.length,
+      'green-text': !this.homebridgePluginStatus.length,
+    }
+  }
+
+  public getNodejsIconClass() {
+    if (!this.nodejsStatusDone) {
+      return {
+        'fa-circle-notch': true,
+        'fa-spin': true,
+        'primary-text': true,
+      }
+    }
+
+    if (this.nodeUpdatePolicy === 'none' || (this.nodeUpdatePolicy === 'major' && !this.nodejsInfo.updateAvailable)) {
+      return {
+        'fa-circle': true,
+        'green-text': true,
+      }
+    }
+
+    if (this.nodejsInfo.showNodeUnsupportedWarning) {
+      return {
+        'fa-exclamation-circle': true,
+        'orange-text': true,
+      }
+    }
+
+    return {
+      'fa-arrow-alt-circle-up': this.nodejsInfo.updateAvailable,
+      'orange-text': this.nodejsInfo.updateAvailable,
+      'fa-check-circle': !this.nodejsInfo.updateAvailable,
+      'green-text': !this.nodejsInfo.updateAvailable,
+    }
+  }
+
   private async checkHomebridgeVersion() {
     try {
-      const response = await firstValueFrom(
-        this.io.request('homebridge-version-check'),
-      )
+      const response = await firstValueFrom(this.io.request('homebridge-version-check'))
       this.homebridgePkg = response
       this.homebridgePkg.displayName = 'Homebridge'
       this.$settings.env.homebridgeVersion = response.installedVersion
+      this.homebridgeUpdatePolicy = this.$settings.env.homebridgeUpdatePolicy || 'all'
       this.isRunningHbV2 = response.installedVersion.startsWith('2.')
-
-      // Apply hide updates setting for Homebridge
-      if (this.$settings.env.homebridgeHideUpdates) {
-        this.homebridgePkg.updateAvailable = false
-      }
     } catch (error) {
       console.error(error)
       this.$toastr.error(
@@ -192,24 +285,8 @@ export class UpdateInfoWidgetComponent implements OnInit {
       // Refresh the policy from settings to ensure we have the latest value
       this.nodeUpdatePolicy = this.$settings.env.nodeUpdatePolicy || 'all'
 
-      // Apply frontend policy check to handle cached backend responses
-      // This ensures the UI reflects policy changes even if backend data is cached
-      if (this.nodeUpdatePolicy === 'none') {
-        this.nodejsInfo.updateAvailable = false
-      } else if (this.nodeUpdatePolicy === 'major' && this.nodejsInfo.updateAvailable) {
-        const currentMajor = Number.parseInt(
-          this.serverInfo.nodeVersion.split('.')[0].replace('v', ''),
-          10,
-        )
-        const latestMajor = Number.parseInt(
-          this.nodejsInfo.latestVersion.split('.')[0].replace('v', ''),
-          10,
-        )
-        if (latestMajor > currentMajor) {
-          this.nodejsInfo.updateAvailable = false
-        }
-      }
-
+      // Backend handles the policy logic and returns the appropriate version
+      // No additional filtering needed here
       this.nodejsStatusDone = true
     } catch (error) {
       console.error(error)
@@ -227,12 +304,8 @@ export class UpdateInfoWidgetComponent implements OnInit {
       )
       this.homebridgeUiPkg = response
       this.$settings.env.homebridgeUiVersion = response.installedVersion
+      this.homebridgeUiUpdatePolicy = this.$settings.env.homebridgeUiUpdatePolicy || 'all'
       if (!environment.production) {
-        this.homebridgeUiPkg.updateAvailable = false
-      }
-
-      // Apply hide updates setting for Homebridge UI
-      if (this.$settings.env.homebridgeUiHideUpdates) {
         this.homebridgeUiPkg.updateAvailable = false
       }
     } catch (error) {

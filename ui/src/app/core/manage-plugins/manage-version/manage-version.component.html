@@ -90,20 +90,20 @@
         <button
           type="button"
           class="list-group-item d-flex align-items-center text-start"
-          (click)="selectUpdatePreference('stable')"
+          (click)="selectUpdatePreference('all')"
         >
           <div class="me-3">
             <i
               class="fas fa-bell fa-2x"
-              [class.primary-text]="updatePreferenceControl.value === 'stable'"
-              [class.grey-text]="updatePreferenceControl.value !== 'stable'"
+              [class.primary-text]="updatePreferenceControl.value === 'all'"
+              [class.grey-text]="updatePreferenceControl.value !== 'all'"
             ></i>
           </div>
           <div class="flex-grow-1">
-            <div>{{ 'plugins.manage.update_pref_stable' | translate }}</div>
-            <small class="grey-text">{{ 'plugins.manage.update_pref_stable_desc' | translate }}</small>
+            <div>{{ 'plugins.manage.notifications_all' | translate }}</div>
+            <small class="grey-text">{{ 'plugins.manage.notifications_all_desc' | translate }}</small>
           </div>
-          @if (updatePreferenceControl.value === 'stable') {
+          @if (updatePreferenceControl.value === 'all') {
           <div class="ms-3">
             <i class="fas fa-xl fa-check-circle primary-text"></i>
           </div>
@@ -122,8 +122,8 @@
             ></i>
           </div>
           <div class="flex-grow-1">
-            <div>{{ 'plugins.manage.update_pref_beta' | translate }}</div>
-            <small class="grey-text">{{ 'plugins.manage.update_pref_beta_desc' | translate }}</small>
+            <div>{{ 'plugins.manage.notifications_beta' | translate }}</div>
+            <small class="grey-text">{{ 'plugins.manage.notifications_beta_desc' | translate }}</small>
           </div>
           @if (updatePreferenceControl.value === 'beta') {
           <div class="ms-3">
@@ -131,6 +131,30 @@
           </div>
           }
         </button>
+        @if (plugin.name === 'homebridge' || plugin.name === 'homebridge-config-ui-x') {
+        <button
+          type="button"
+          class="list-group-item d-flex align-items-center text-start"
+          (click)="selectUpdatePreference('major')"
+        >
+          <div class="me-3">
+            <i
+              class="far fa-bell fa-fw fa-2x"
+              [class.primary-text]="updatePreferenceControl.value === 'major'"
+              [class.grey-text]="updatePreferenceControl.value !== 'major'"
+            ></i>
+          </div>
+          <div class="flex-grow-1">
+            <div>{{ 'plugins.manage.notifications_major' | translate }}</div>
+            <small class="grey-text">{{ 'plugins.manage.notifications_major_desc' | translate }}</small>
+          </div>
+          @if (updatePreferenceControl.value === 'major') {
+          <div class="ms-3">
+            <i class="fas fa-xl fa-check-circle primary-text"></i>
+          </div>
+          }
+        </button>
+        }
         <button
           type="button"
           class="list-group-item d-flex align-items-center text-start"
@@ -144,8 +168,8 @@
             ></i>
           </div>
           <div class="flex-grow-1">
-            <div>{{ 'plugins.manage.update_pref_none' | translate }}</div>
-            <small class="grey-text">{{ 'plugins.manage.update_pref_none_desc' | translate }}</small>
+            <div>{{ 'plugins.manage.notifications_none' | translate }}</div>
+            <small class="grey-text">{{ 'plugins.manage.notifications_none_desc' | translate }}</small>
           </div>
           @if (updatePreferenceControl.value === 'none') {
           <div class="ms-3">

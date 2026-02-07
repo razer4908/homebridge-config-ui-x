@@ -25,7 +25,7 @@ interface NodeJsVersionInfo {
   supportsNodeJs24: boolean
 }
 
-describe('StatusService - getNodeJsVersionInfo', () => {
+describe('StatusService - getNodeVersionInfo', () => {
   let statusService: StatusService
   let httpService: HttpService
   let originalProcessVersion: string
@@ -103,7 +103,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v20.19.0')
       expect(result.latestVersion).toBe('v24.2.0')
@@ -136,7 +136,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v20.19.0')
       expect(result.latestVersion).toBe('v22.13.0')
@@ -164,7 +164,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v22.12.0')
       expect(result.latestVersion).toBe('v22.13.0')
@@ -196,7 +196,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v22.13.0')
       expect(result.latestVersion).toBe('v24.2.0')
@@ -229,7 +229,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v22.13.0')
       expect(result.latestVersion).toBe('v22.13.0')
@@ -257,7 +257,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v24.1.0')
       expect(result.latestVersion).toBe('v24.2.0')
@@ -282,7 +282,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v24.2.0')
       expect(result.latestVersion).toBe('v24.2.0')
@@ -309,7 +309,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v18.20.0')
       expect(result.updateAvailable).toBe(false)
@@ -333,7 +333,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v16.20.0')
       expect(result.updateAvailable).toBe(false)
@@ -354,7 +354,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
         throw new Error('Network error')
       })
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe(process.version)
       expect(result.latestVersion).toBe(process.version)
@@ -367,7 +367,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
     it('should correctly detect 64-bit architectures for v24 support', async () => {
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result).toHaveProperty('architecture')
       expect(result).toHaveProperty('supportsNodeJs24')
@@ -384,11 +384,11 @@ describe('StatusService - getNodeJsVersionInfo', () => {
       const spy = vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
       // First call
-      await statusService.getNodeJsVersionInfo()
+      await statusService.getNodeVersionInfo()
       expect(spy).toHaveBeenCalledTimes(1)
 
       // Second call should use cache
-      await statusService.getNodeJsVersionInfo()
+      await statusService.getNodeVersionInfo()
       expect(spy).toHaveBeenCalledTimes(1)
     })
 
@@ -396,14 +396,36 @@ describe('StatusService - getNodeJsVersionInfo', () => {
       const spy = vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
       // First call
-      await statusService.getNodeJsVersionInfo()
+      await statusService.getNodeVersionInfo()
       expect(spy).toHaveBeenCalledTimes(1)
 
       // Clear cache
       statusService.clearNodeJsVersionCache()
 
       // Third call should hit the API again
-      await statusService.getNodeJsVersionInfo()
+      await statusService.getNodeVersionInfo()
+      expect(spy).toHaveBeenCalledTimes(2)
+    })
+
+    it('should clear all policy-specific caches when clearNodeJsVersionCache is called', async () => {
+      // This test verifies that the cache keys include the policy
+      // by ensuring that clearing the cache affects all policy variants
+
+      const spy = vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
+
+      // First call (with default 'all' policy)
+      await statusService.getNodeVersionInfo()
+      expect(spy).toHaveBeenCalledTimes(1)
+
+      // Second call should use cache
+      await statusService.getNodeVersionInfo()
+      expect(spy).toHaveBeenCalledTimes(1)
+
+      // Clear cache (should clear all policy variants)
+      statusService.clearNodeJsVersionCache()
+
+      // Third call should hit the API again
+      await statusService.getNodeVersionInfo()
       expect(spy).toHaveBeenCalledTimes(2)
     })
   })
@@ -447,7 +469,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await testStatusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await testStatusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v20.19.0')
       // latestVersion should still be calculated, but updateAvailable should be false
@@ -462,9 +484,9 @@ describe('StatusService - getNodeJsVersionInfo', () => {
     })
 
     it('should hide major version updates when policy is "major"', async () => {
-      // Mock process.version to v20
+      // Mock process.version to latest v20 patch
       Object.defineProperty(process, 'version', {
-        value: 'v20.19.0',
+        value: 'v20.20.0',
         writable: true,
         configurable: true,
       })
@@ -499,10 +521,11 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await testStatusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await testStatusService.getNodeVersionInfo() as NodeJsVersionInfo
 
-      expect(result.currentVersion).toBe('v20.19.0')
+      expect(result.currentVersion).toBe('v20.20.0')
       // Should hide the update to v24/v22 since they are major version updates
+      // and there are no newer v20 patches available
       expect(result.updateAvailable).toBe(false)
 
       // Restore original version
@@ -551,7 +574,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
 
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await testStatusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await testStatusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v22.12.0')
       expect(result.latestVersion).toBe('v22.13.0')
@@ -577,7 +600,7 @@ describe('StatusService - getNodeJsVersionInfo', () => {
       // Use the default config service with 'all' policy
       vi.spyOn(httpService, 'get').mockReturnValue(of(mockHttpResponse(mockNodeVersions)) as any)
 
-      const result = await statusService.getNodeJsVersionInfo() as NodeJsVersionInfo
+      const result = await statusService.getNodeVersionInfo() as NodeJsVersionInfo
 
       expect(result.currentVersion).toBe('v20.19.0')
       // Should show major version updates

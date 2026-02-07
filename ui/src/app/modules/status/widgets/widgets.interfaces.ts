@@ -87,5 +87,4 @@ export interface Widget {
   }
   showNpmVersion?: boolean // update info widget
   dockerExpanded?: boolean // update info widget
-  hideNodeInfo?: boolean // update info widget
 }

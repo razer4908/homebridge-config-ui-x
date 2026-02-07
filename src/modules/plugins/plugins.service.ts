@@ -39,7 +39,7 @@ import _ from 'lodash'
 import NodeCache from 'node-cache'
 import pLimit from 'p-limit'
 import { firstValueFrom } from 'rxjs'
-import { gt, lt, parse, satisfies } from 'semver'
+import { gt, lt, parse, rcompare, satisfies } from 'semver'
 
 import { ConfigService } from '../../core/config/config.service.js'
 import { HomebridgeIpcService } from '../../core/homebridge-ipc/homebridge-ipc.service.js'
@@ -740,12 +740,37 @@ export class PluginsService {
       return homebridge
     }
 
-    // Check for beta updates using Homebridge-specific preference
-    await this.checkForBetaUpdates(
-      homebridge,
-      'homebridge',
-      this.configService.ui.homebridgeAlwaysShowBetas || false,
-    )
+    // Apply update policy for Homebridge
+    const updatePolicy = this.configService.ui.homebridgeUpdatePolicy || 'all'
+
+    if (updatePolicy === 'none') {
+      homebridge.updateAvailable = false
+      homebridge.latestVersion = null
+    } else if (updatePolicy === 'major') {
+      // Find the latest version within the same major version
+      const currentMajor = Number.parseInt(homebridge.installedVersion.split('.')[0], 10)
+      const versions = await this.getAvailablePluginVersions('homebridge')
+
+      // Filter to versions in the same major and not deprecated
+      const sameMajorVersions = Object.keys(versions.versions)
+        .filter((version) => {
+          const versionMajor = Number.parseInt(version.split('.')[0], 10)
+          return versionMajor === currentMajor
+        })
+        .sort(rcompare) // Sort descending (highest first)
+
+      if (sameMajorVersions.length > 0 && gt(sameMajorVersions[0], homebridge.installedVersion)) {
+        // There's a newer version in the same major
+        homebridge.latestVersion = sameMajorVersions[0]
+        homebridge.updateAvailable = true
+        homebridge.updateEngines = versions.versions[sameMajorVersions[0]]?.engines || null
+      } else {
+        // No newer version in same major
+        homebridge.updateAvailable = false
+      }
+    } else if (updatePolicy === 'beta') {
+      await this.checkForBetaUpdates(homebridge, 'homebridge', true)
+    }
 
     this.configService.homebridgeVersion = homebridge.installedVersion
 
@@ -969,12 +994,37 @@ export class PluginsService {
       return uiPackage
     }
 
-    // Check for beta updates using Homebridge UI-specific preference
-    await this.checkForBetaUpdates(
-      uiPackage,
-      this.configService.name,
-      this.configService.ui.homebridgeUiAlwaysShowBetas || false,
-    )
+    // Apply update policy for Homebridge UI
+    const updatePolicy = this.configService.ui.homebridgeUiUpdatePolicy || 'all'
+
+    if (updatePolicy === 'none') {
+      uiPackage.updateAvailable = false
+      uiPackage.latestVersion = null
+    } else if (updatePolicy === 'major') {
+      // Find the latest version within the same major version
+      const currentMajor = Number.parseInt(uiPackage.installedVersion.split('.')[0], 10)
+      const versions = await this.getAvailablePluginVersions(this.configService.name)
+
+      // Filter to versions in the same major and not deprecated
+      const sameMajorVersions = Object.keys(versions.versions)
+        .filter((version) => {
+          const versionMajor = Number.parseInt(version.split('.')[0], 10)
+          return versionMajor === currentMajor
+        })
+        .sort(rcompare) // Sort descending (highest first)
+
+      if (sameMajorVersions.length > 0 && gt(sameMajorVersions[0], uiPackage.installedVersion)) {
+        // There's a newer version in the same major
+        uiPackage.latestVersion = sameMajorVersions[0]
+        uiPackage.updateAvailable = true
+        uiPackage.updateEngines = versions.versions[sameMajorVersions[0]]?.engines || null
+      } else {
+        // No newer version in same major
+        uiPackage.updateAvailable = false
+      }
+    } else if (updatePolicy === 'beta') {
+      await this.checkForBetaUpdates(uiPackage, this.configService.name, true)
+    }
 
     return uiPackage
   }
@@ -1684,11 +1734,6 @@ export class PluginsService {
   }
 
   /**
-   * Convert the package.json into a HomebridgePlugin
-   * @param pkgJson
-   * @param installPath
-   */
-  /**
    * Shared method to check for beta version updates
    * Modifies the plugin object in place if a beta update is found
    * @param plugin - The plugin object to check and update
@@ -1729,6 +1774,11 @@ export class PluginsService {
     }
   }
 
+  /**
+   * Convert the package.json into a HomebridgePlugin
+   * @param pkgJson
+   * @param installPath
+   */
   private async parsePackageJson(pkgJson: IPackageJson, installPath: string): Promise<HomebridgePlugin> {
     const plugin: HomebridgePlugin = {
       name: pkgJson.name,

@@ -2,6 +2,10 @@ export interface FeatureFlags {
   [key: string]: boolean
 }
 
+export type nodeUpdatePolicy = 'all' | 'major' | 'none'
+export type HomebridgeUpdatePolicy = 'all' | 'beta' | 'major' | 'none'
+export type HomebridgeUiUpdatePolicy = 'all' | 'beta' | 'major' | 'none'
+
 export interface BridgeConfig {
   username: string
   hideHapAlert?: boolean
@@ -58,11 +62,9 @@ export interface EnvInterface {
     hideUpdatesFor?: string[]
     showBetasFor?: string[]
   }
-  nodeUpdatePolicy?: 'all' | 'none' | 'major'
-  homebridgeHideUpdates?: boolean
-  homebridgeAlwaysShowBetas?: boolean
-  homebridgeUiHideUpdates?: boolean
-  homebridgeUiAlwaysShowBetas?: boolean
+  nodeUpdatePolicy?: nodeUpdatePolicy
+  homebridgeUpdatePolicy?: HomebridgeUpdatePolicy
+  homebridgeUiUpdatePolicy?: HomebridgeUiUpdatePolicy
   scheduledRestartCron?: string | null
   bridges?: BridgeConfig[]
   linux?: {

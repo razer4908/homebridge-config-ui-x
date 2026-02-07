@@ -10,6 +10,7 @@ import { satisfies } from 'semver'
 
 import { ApiService } from '@/app/core/api.service'
 import { Plugin } from '@/app/core/manage-plugins/manage-plugins.interfaces'
+import { nodeUpdatePolicy } from '@/app/core/settings.interfaces'
 import { SettingsService } from '@/app/core/settings.service'
 import { PluginNodeCheck } from '@/app/modules/status/widgets/widgets.interfaces'
 
@@ -43,7 +44,7 @@ export class NodeVersionModalComponent implements OnInit {
   public loading = true
   public installedPlugins: PluginNodeCheck[] = []
   public hasNode24OrAbove: boolean = false
-  public nodeUpdatePolicyControl = new FormControl<'all' | 'none' | 'major'>('all')
+  public nodeUpdatePolicyControl = new FormControl<nodeUpdatePolicy>('all')
   public defaultIcon = 'assets/hb-icon.png'
 
   public async ngOnInit() {
@@ -54,17 +55,17 @@ export class NodeVersionModalComponent implements OnInit {
     // Watch for changes and update the backend
     this.nodeUpdatePolicyControl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe(value => this.updateNodeUpdatePolicy(value))
+      .subscribe(value => this.updatenodeUpdatePolicy(value))
 
     await this.loadInstalledPlugins()
     this.loading = false
   }
 
-  public selectPolicy(value: 'all' | 'none' | 'major') {
+  public selectPolicy(value: nodeUpdatePolicy) {
     this.nodeUpdatePolicyControl.setValue(value)
   }
 
-  public async updateNodeUpdatePolicy(value: 'all' | 'none' | 'major') {
+  public async updatenodeUpdatePolicy(value: nodeUpdatePolicy) {
     try {
       await firstValueFrom(this.$api.put('/config-editor/ui', {
         key: 'nodeUpdatePolicy',

@@ -11,6 +11,7 @@ import { rcompare } from 'semver'
 
 import { ApiService } from '@/app/core/api.service'
 import { Plugin } from '@/app/core/manage-plugins/manage-plugins.interfaces'
+import { HomebridgeUpdatePolicy } from '@/app/core/settings.interfaces'
 import { SettingsService } from '@/app/core/settings.service'
 
 @Component({
@@ -33,7 +34,7 @@ export class ManageVersionComponent implements OnInit {
   @Input() onRefreshPluginList: () => void
   @Input() onSettingsChange?: () => void
 
-  public updatePreferenceControl = new FormControl<'stable' | 'beta' | 'none'>('stable')
+  public updatePreferenceControl = new FormControl<HomebridgeUpdatePolicy>('all')
   public loading = true
   public versions: Array<VersionData> = []
   public versionsWithTags: Array<{ version: string, tag: string }> = []
@@ -48,38 +49,32 @@ export class ManageVersionComponent implements OnInit {
     this.updatePreferenceControl.setValue(currentPref)
     this.updatePreferenceControl.valueChanges
       .pipe(debounceTime(500))
-      .subscribe((value: 'stable' | 'beta' | 'none') => this.updatePreference(value))
+      .subscribe((value: HomebridgeUpdatePolicy) => this.updatePreference(value))
   }
 
-  private getCurrentUpdatePreference(): 'stable' | 'beta' | 'none' {
-    // Check hide updates first (takes precedence)
-    if (this.plugin.name === 'homebridge' && this.$settings.env.homebridgeHideUpdates) {
-      return 'none'
+  private getCurrentUpdatePreference(): HomebridgeUpdatePolicy {
+    // For Homebridge and UI, use new policy
+    if (this.plugin.name === 'homebridge') {
+      return this.$settings.env.homebridgeUpdatePolicy || 'all'
     }
-    if (this.plugin.name === 'homebridge-config-ui-x' && this.$settings.env.homebridgeUiHideUpdates) {
-      return 'none'
+
+    if (this.plugin.name === 'homebridge-config-ui-x') {
+      return this.$settings.env.homebridgeUiUpdatePolicy || 'all'
     }
+
+    // For regular plugins, use the existing 3-option system
     if (this.$settings.env.plugins?.hideUpdatesFor?.includes(this.plugin.name)) {
       return 'none'
     }
 
-    // Check beta preference
-    if (this.plugin.name === 'homebridge' && this.$settings.env.homebridgeAlwaysShowBetas) {
-      return 'beta'
-    }
-    if (this.plugin.name === 'homebridge-config-ui-x' && this.$settings.env.homebridgeUiAlwaysShowBetas) {
-      return 'beta'
-    }
-
-    // Check per-plugin beta preference
     if (this.$settings.env.plugins?.showBetasFor?.includes(this.plugin.name)) {
       return 'beta'
     }
 
-    return 'stable'
+    return 'all'
   }
 
-  public selectUpdatePreference(value: 'stable' | 'beta' | 'none') {
+  public selectUpdatePreference(value: HomebridgeUpdatePolicy) {
     this.updatePreferenceControl.setValue(value)
   }
 
@@ -92,38 +87,29 @@ export class ManageVersionComponent implements OnInit {
     })
   }
 
-  private async updatePreference(value: 'stable' | 'beta' | 'none') {
+  private async updatePreference(value: HomebridgeUpdatePolicy) {
     try {
-      // Map the new 3-option preference to the existing boolean fields
-      const hideUpdates = value === 'none'
-      const preferBetas = value === 'beta'
-
       // Update based on package type
       if (this.plugin.name === 'homebridge') {
+        // Use new unified policy
         await firstValueFrom(this.$api.put('/config-editor/ui', {
-          key: 'homebridgeHideUpdates',
-          value: hideUpdates,
+          key: 'homebridgeUpdatePolicy',
+          value,
         }))
-        await firstValueFrom(this.$api.put('/config-editor/ui', {
-          key: 'homebridgeAlwaysShowBetas',
-          value: preferBetas,
-        }))
-        this.$settings.env.homebridgeHideUpdates = hideUpdates
-        this.$settings.env.homebridgeAlwaysShowBetas = preferBetas
+        this.$settings.env.homebridgeUpdatePolicy = value
         await firstValueFrom(this.$api.post('/plugins/clear-cache', {}))
       } else if (this.plugin.name === 'homebridge-config-ui-x') {
+        // Use new unified policy
         await firstValueFrom(this.$api.put('/config-editor/ui', {
-          key: 'homebridgeUiHideUpdates',
-          value: hideUpdates,
+          key: 'homebridgeUiUpdatePolicy',
+          value,
         }))
-        await firstValueFrom(this.$api.put('/config-editor/ui', {
-          key: 'homebridgeUiAlwaysShowBetas',
-          value: preferBetas,
-        }))
-        this.$settings.env.homebridgeUiHideUpdates = hideUpdates
-        this.$settings.env.homebridgeUiAlwaysShowBetas = preferBetas
+        this.$settings.env.homebridgeUiUpdatePolicy = value
         await firstValueFrom(this.$api.post('/plugins/clear-cache', {}))
       } else {
+        // Regular plugins - use existing array-based preferences (no 'major' option)
+        const hideUpdates = value === 'none'
+        const preferBetas = value === 'beta'
         // Regular plugins - use array-based preferences
         let hideList = this.$settings.env.plugins?.hideUpdatesFor || []
         if (hideUpdates && !hideList.includes(this.plugin.name)) {

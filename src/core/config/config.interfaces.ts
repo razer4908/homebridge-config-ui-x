@@ -115,10 +115,8 @@ export interface HomebridgeUiConfig {
     showBetasFor?: string[]
   }
   nodeUpdatePolicy?: 'all' | 'none' | 'major'
-  homebridgeHideUpdates?: boolean
-  homebridgeAlwaysShowBetas?: boolean
-  homebridgeUiHideUpdates?: boolean
-  homebridgeUiAlwaysShowBetas?: boolean
+  homebridgeUpdatePolicy?: 'all' | 'beta' | 'major' | 'none'
+  homebridgeUiUpdatePolicy?: 'all' | 'beta' | 'major' | 'none'
   scheduledRestartCron?: string
   bridges?: HomebridgeUiBridgeConfig[]
   temp?: string
