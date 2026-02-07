@@ -10,6 +10,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix settings display of mdns advertise option
 - refactor homebridge/ui update settings
 - show plugin icons on homebridge v2 update modal
+- update min version for homebridge v2
 
 ### Other Changes
 

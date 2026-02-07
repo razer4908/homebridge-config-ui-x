@@ -49,7 +49,7 @@ export class HbV2ModalComponent implements OnInit {
   private async checkHomebridgeUiVersion() {
     try {
       const { nodeVersion } = await firstValueFrom(this.io.request('get-homebridge-server-info'))
-      this.nodeReady = satisfies(nodeVersion, '>=20')
+      this.nodeReady = satisfies(nodeVersion, '>=22')
     } catch (error) {
       console.error(error)
       this.$toastr.error(error.message, this.$translate.instant('toast.title_error'))
