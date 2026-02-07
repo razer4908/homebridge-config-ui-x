@@ -9,6 +9,7 @@ import { satisfies } from 'semver'
 import { ApiService } from '@/app/core/api.service'
 import { SettingsService } from '@/app/core/settings.service'
 import { IoNamespace, WsService } from '@/app/core/ws.service'
+import { PluginNodeCheck } from '@/app/modules/status/widgets/widgets.interfaces'
 
 @Component({
   templateUrl: './hb-v2-modal.component.html',
@@ -34,6 +35,7 @@ export class HbV2ModalComponent implements OnInit {
   public installedPlugins: any = []
   public allPluginsSupported = true
   public nodeReady = false
+  public defaultIcon = 'assets/hb-icon.png'
 
   public async ngOnInit() {
     this.io = this.$ws.getExistingNamespace('status')
@@ -84,6 +86,10 @@ export class HbV2ModalComponent implements OnInit {
       console.error(error)
       this.$toastr.error(this.$translate.instant('plugins.toast_failed_to_load_plugins'), this.$translate.instant('toast.title_error'))
     }
+  }
+
+  public handleIconError(plugin: PluginNodeCheck) {
+    plugin.icon = this.defaultIcon
   }
 
   public closeModal(reason: string) {

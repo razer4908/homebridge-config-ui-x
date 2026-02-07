@@ -9,6 +9,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - adjust settings session timeout input elements (#2716) (@dnicolson)
 - fix settings display of mdns advertise option
 - refactor homebridge/ui update settings
+- show plugin icons on homebridge v2 update modal
 
 ### Homebridge Dependencies
 
