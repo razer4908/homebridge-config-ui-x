@@ -1069,7 +1069,7 @@ export class PluginsService {
       && pluginAction.version !== 'latest'
     ) {
       try {
-        const repoVersion = pluginAction.name.startsWith('@') ? 'v1.0.0-1' : 'v1.0.0'
+        const repoVersion = this.getPluginReleaseTag(pluginAction.name)
         await firstValueFrom(this.httpService.head(`https://github.com/homebridge/plugins/releases/download/${repoVersion}/${pluginAction.name.replace('/', '@')}-${pluginAction.version}.sha256`))
         return true
       } catch (e) {
@@ -1087,14 +1087,23 @@ export class PluginsService {
    */
   public async doPluginBundleUpdate(pluginAction: PluginActionDto, client: EventEmitter) {
     const pluginUpgradeInstallScriptPath = join(process.env.UIX_BASE_PATH, 'scripts/upgrade-install-plugin.sh')
+    const repoVersion = this.getPluginReleaseTag(pluginAction.name)
     await this.runNpmCommand(
-      [pluginUpgradeInstallScriptPath, pluginAction.name, pluginAction.version, this.configService.customPluginPath],
+      [pluginUpgradeInstallScriptPath, pluginAction.name, pluginAction.version, this.configService.customPluginPath, repoVersion],
       this.configService.storagePath,
       client,
       pluginAction.termCols,
       pluginAction.termRows,
     )
     return true
+  }
+
+  private getPluginReleaseTag(pluginName: string): string {
+    if (pluginName.startsWith('@')) {
+      return 'v2.0.0'
+    }
+    const ch = pluginName.startsWith('homebridge-') ? pluginName.charAt(11) : pluginName.charAt(0)
+    return ch < 'n' ? 'v2.0.0-1' : 'v2.0.0-2'
   }
 
   /**

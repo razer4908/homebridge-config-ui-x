@@ -7,6 +7,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### Other Changes
 
 - fix deprecation github workflow script
+- update to use `v2` release plugin bundles
 
 ### Homebridge Dependencies
 
