@@ -762,6 +762,8 @@
   "support.dev.template": "Repo เทมเพลตปลั๊กอิน",
   "support.dev.template_sub": "เทมเพลตปลั๊กอิน Homebridge ที่สามารถใช้เป็นฐานเพื่อช่วยให้คุณเริ่มพัฒนาปลั๊กอินของคุณเองได้",
   "support.dev.title": "นักพัฒนา",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "ตรวจสอบโดย Homebridge",
   "support.dev.verified_sub": "โปรแกรม Verified By Homebridge ช่วยให้ผู้พัฒนาปลั๊กอินสามารถตรวจสอบและรับรองปลั๊กอินของตนได้จากทีมงานโครงการ Homebridge",
   "support.links.discord": "เซิร์ฟเวอร์ Discord",

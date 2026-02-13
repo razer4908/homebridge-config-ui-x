@@ -762,6 +762,8 @@
   "support.dev.template": "Repozytorium szablonu wtyczki",
   "support.dev.template_sub": "Szablon wtyczki Homebridge, który może być używany jako podstawa aby pomóc Ci rozpocząć tworzenie własnej wtyczki.",
   "support.dev.title": "Deweloper",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Zweryfikowane przez Homebridge",
   "support.dev.verified_sub": "Program weryfikacji przez Homebridge pozwala twórcom wtyczek na sprawdzenie i zatwierdzenie ich przez zespół projektowy Homebridge.",
   "support.links.discord": "Serwer Discord",

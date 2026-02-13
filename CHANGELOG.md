@@ -7,6 +7,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 ### UI Changes
 
 - improvements for homebridge v2
+- add a link to unmaintained plugins in dev support
 
 ### Other Changes
 

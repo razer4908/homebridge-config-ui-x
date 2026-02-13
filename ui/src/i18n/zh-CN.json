@@ -762,6 +762,8 @@
   "support.dev.template": "插件模板仓库",
   "support.dev.template_sub": "一个可用作基础的 Homebridge 插件模板，帮助您开始开发自己的插件。",
   "support.dev.title": "开发者",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Homebridge 认证",
   "support.dev.verified_sub": "“Verified By Homebridge” 计划允许插件开发者让其插件由 Homebridge 项目团队审核并背书。",
   "support.links.discord": "Discord 服务器",

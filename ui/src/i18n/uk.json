@@ -762,6 +762,8 @@
   "support.dev.template": "Репозиторій шаблону плагіна",
   "support.dev.template_sub": "Шаблон плагіна Homebridge, який можна використовувати як основу, щоб допомогти Вам розпочати розробку власного плагіна.",
   "support.dev.title": "Розробники",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Перевірено Homebridge",
   "support.dev.verified_sub": "Програма Verified By Homebridge дозволяє розробникам плагінів отримувати перевірку та схвалення своїх плагінів командою проекту Homebridge.",
   "support.links.discord": "Сервер Discord",

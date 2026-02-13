@@ -762,6 +762,8 @@
   "support.dev.template": "Repo Template Plugin",
   "support.dev.template_sub": "Plugin Template Homebridge yang dapat digunakan sebagai dasar dalam membantu Anda untuk mulai mengembangkan plugin Anda sendiri.",
   "support.dev.title": "Pengembang",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Diverifikasi oleh Homebridge",
   "support.dev.verified_sub": "Program yang diverifikasi oleh Homebridge memungkinkan pengembang plugin untuk  membuat plugin mereka ditinjau dan didukung oleh tim proyek Homebridge.",
   "support.links.discord": "Server Discord",

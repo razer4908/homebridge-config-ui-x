@@ -762,6 +762,8 @@
   "support.dev.template": "플러그인 템플릿 저장소",
   "support.dev.template_sub": "자체 플러그인 개발을 시작하는 데 도움이 되는 기본 Homebridge 플러그인 템플릿입니다.",
   "support.dev.title": "개발자",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Homebridge 인증",
   "support.dev.verified_sub": "Homebridge 인증 프로그램을 통해 플러그인 개발자는 Homebridge 프로젝트 팀의 검토와 인증을 받을 수 있습니다.",
   "support.links.discord": "Discord 서버",

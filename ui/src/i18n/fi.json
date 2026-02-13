@@ -762,6 +762,8 @@
   "support.dev.template": "Plugin Template Repo",
   "support.dev.template_sub": "Malli Homebridge-laajennus, jota voidaan käyttää pohjana oman laajennuksen kehittämiseen.",
   "support.dev.title": "Kehittäjät",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Verified By Homebridge",
   "support.dev.verified_sub": "Verified By Homebridge -ohjelman avulla laajennuskehittäjät voivat saada Homebridge-projektitiimin tarkistamaan ja hyväksymään lisäosat.",
   "support.links.discord": "Discord Palvelin",

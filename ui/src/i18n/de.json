@@ -762,6 +762,8 @@
   "support.dev.template": "Plugin Template Repo",
   "support.dev.template_sub": "Eine Vorlage für ein Homebridge-Plugin, die als Basis für die Entwicklung eines eigenen Plugins verwendet werden kann.",
   "support.dev.title": "Entwickler",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Verified By Homebridge",
   "support.dev.verified_sub": "Das Verified By Homebridge Programm ermöglicht es Plugin-Entwicklern, ihre Plugins vom Homebridge-Projektteam prüfen und bestätigen zu lassen.",
   "support.links.discord": "Discord-Server",

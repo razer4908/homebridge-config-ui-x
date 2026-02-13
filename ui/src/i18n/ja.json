@@ -762,6 +762,8 @@
   "support.dev.template": "プラグインテンプレートリポジトリ",
   "support.dev.template_sub": "独自プラグイン開発のベースとなるHomebridgeプラグインテンプレートです。",
   "support.dev.title": "開発者向け",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Homebridgeによる検証済み",
   "support.dev.verified_sub": "Verified By Homebridgeプログラムではプラグイン開発者がHomebridgeプロジェクトチームのレビューと承認を受けられます。",
   "support.links.discord": "Discordサーバー",

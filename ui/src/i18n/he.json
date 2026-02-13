@@ -762,6 +762,8 @@
   "support.dev.template": "מאגר תבנית תוסף",
   "support.dev.template_sub": "תוסף Homebridge תבנית שיכול לשמש כבסיס לעזור לך להתחיל לפתח תוסף משלך.",
   "support.dev.title": "מפתחים",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "מאומת על ידי Homebridge",
   "support.dev.verified_sub": "תוכנית המאומתת על ידי Homebridge מאפשרת למפתחי תוספים לקבל את התוספים שלהם נבדקים ומומלצים על ידי צוות פרויקט Homebridge.",
   "support.links.discord": "שרת Discord",

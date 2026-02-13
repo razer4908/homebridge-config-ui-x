@@ -762,6 +762,8 @@
   "support.dev.template": "Plugin Sjabloon Repo",
   "support.dev.template_sub": "Een voorbeeld Homebridge plugin kan gebruikt worden als een basis om u op weg te helpen bij het ontwikkelen van uw eigen plugin.",
   "support.dev.title": "Developers",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Verified By Homebridge",
   "support.dev.verified_sub": "Het Verified By Homebridge programma biedt plugin ontwikkelaars de mogelijkheid om hun plugins te laten reviewen en certificeren door het Homebridge project team.",
   "support.links.discord": "Discord Server",

@@ -762,6 +762,8 @@
   "support.dev.template": "Šablona Pluginu",
   "support.dev.template_sub": "Šablona Homebridge pluginu, která může sloužit jako základ pro vývoj vlastního pluginu.",
   "support.dev.title": "Vývojáři",
+  "support.dev.unmaintained": "Unmaintained Plugins",
+  "support.dev.unmaintained_sub": "These plugins are looking for new maintainers. A great opportunity for developers wanting to contribute to the Homebridge community.",
   "support.dev.verified": "Ověřeno Homebridge",
   "support.dev.verified_sub": "Program Ověřeno Homebridge umožňuje vývojářům pluginů, aby prošli recenzí a získali schválení od týmu Homebridge.",
   "support.links.discord": "Discord Server",
