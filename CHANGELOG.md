@@ -9,12 +9,13 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - fix deprecation github workflow script
 - update to use `v2` release plugin bundles
 - replace accessories screenshot in readme
+- updated dependencies
 
 ### Homebridge Dependencies
 
-- `@homebridge/hap-client` @ `v3.1.3`
+- `@homebridge/hap-client` @ `v3.3.0`
 - `@homebridge/node-pty-prebuilt-multiarch` @ `v0.13.1`
-- `@homebridge/plugin-ui-utils` @ `v2.1.3`
+- `@homebridge/plugin-ui-utils` @ `v2.2.0`
 
 ## v5.16.0 (2026-02-08)
 

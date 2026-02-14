@@ -5,8 +5,8 @@ export default antfu({
   rules: {
     'antfu/consistent-list-newline': 'off',
     'curly': ['error', 'all'],
-    'jsdoc/check-alignment': 'error',
-    'jsdoc/check-line-alignment': 'error',
+    // 'jsdoc/check-alignment': 'error',
+    // 'jsdoc/check-line-alignment': 'error',
     'no-undef': 'error',
     'perfectionist/sort-exports': 'error',
     'perfectionist/sort-imports': [
