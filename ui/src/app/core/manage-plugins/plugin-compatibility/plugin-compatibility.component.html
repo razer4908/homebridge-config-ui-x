@@ -10,7 +10,7 @@
     ></button>
   </div>
   <div class="modal-body">
-    <!-- plugins -->
+    <! -- plugins - ->
     @if (!['homebridge', 'homebridge-config-ui-x'].includes(plugin.name)) {
     <div class="text-center mb-3">
       <i
@@ -46,7 +46,7 @@
     </ngb-alert>
     }
 
-    <!-- homebridge -->
+    <! -- homebridge - ->
     @if (plugin.name === 'homebridge') {
     <div class="text-center mb-3">
       <i class="fab fa-node-js primary-text" style="font-size: 75px"></i>
@@ -72,7 +72,7 @@
     </ngb-alert>
     }
 
-    <!-- homebridge ui -->
+    <! -- homebridge ui - ->
     @if (plugin.name === 'homebridge-config-ui-x') {
     <div class="text-center mb-3">
       <i class="fab fa-node-js primary-text" style="font-size: 75px"></i>

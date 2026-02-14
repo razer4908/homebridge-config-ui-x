@@ -59,8 +59,8 @@
               [attr.aria-label]="'plugins.manage.all_versions' | translate"
             >
               @for (version of versions; track version) {
-              <option [value]="version.version" [selected]="versionSelect == version.version">
-                v{{ version.version }} @if (version.version == plugin.installedVersion) { ✓ }
+              <option [value]="version.version" [selected]="versionSelect === version.version">
+                v{{ version.version }} @if (version.version === plugin.installedVersion) { ✓ }
               </option>
               }
             </select>

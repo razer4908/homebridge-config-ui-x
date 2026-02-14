@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core'
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
@@ -14,7 +14,7 @@ import { environment } from '@/environments/environment'
   standalone: true,
   imports: [ReactiveFormsModule, TranslatePipe],
 })
-export class WallpaperComponent {
+export class WallpaperComponent implements OnInit {
   private $activeModal = inject(NgbActiveModal)
   private $api = inject(ApiService)
   private $settings = inject(SettingsService)

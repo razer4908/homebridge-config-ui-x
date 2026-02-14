@@ -1,5 +1,5 @@
 import { DecimalPipe, NgClass, UpperCasePipe } from '@angular/common'
-import { Component, inject, Input } from '@angular/core'
+import { Component, inject, Input, OnInit } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { TranslatePipe } from '@ngx-translate/core'
 
@@ -23,7 +23,7 @@ import { SettingsService } from '@/app/core/settings.service'
     UpperCasePipe,
   ],
 })
-export class HeaterCoolerComponent {
+export class HeaterCoolerComponent implements OnInit {
   private $modal = inject(NgbModal)
   private $settings = inject(SettingsService)
   private $accessories = inject(AccessoriesService)

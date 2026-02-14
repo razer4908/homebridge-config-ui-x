@@ -6,21 +6,21 @@
   tabindex="0"
 >
   <div class="d-flex flex-column h-100">
-    <!-- Window Covering Icon -->
+    <! -- Window Covering Icon - ->
     @if (isWindowCovering) {
     <div [attr.aria-label]="'accessories.core.window_covering' | translate" class="accessory-svg">
       <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <!-- outer frame -->
+        <! -- outer frame - ->
         <rect x="1" y="0.8" width="30" height="30.2" rx="0.5" stroke="#7f7f7f" fill="none" stroke-width="1.5" />
-        <!-- left window frame -->
+        <! -- left window frame - ->
         <rect x="2.8" y="2.6" width="12.4" height="26.6" stroke="#7f7f7f" fill="none" stroke-width="1" />
-        <!-- left window divider -->
+        <! -- left window divider - ->
         <rect x="3.66" y="15.65" width="10.68" height="0.5" stroke="#7f7f7f" fill="none" stroke-width="0.5" rx="2" />
-        <!-- right window frame -->
+        <! -- right window frame - ->
         <rect x="16.8" y="2.6" width="12.4" height="26.6" stroke="#7f7f7f" fill="none" stroke-width="1" />
-        <!-- right window divider -->
+        <! -- right window divider - ->
         <rect x="17.66" y="15.65" width="10.68" height="0.5" stroke="#7f7f7f" fill="none" stroke-width="0.5" rx="2" />
-        <!-- blind -->
+        <! -- blind - ->
         <rect
           class="c-blinds"
           x="2.3"
@@ -33,7 +33,7 @@
           stroke-opacity="0.9"
           fill-opacity="0.9"
         />
-        <!-- light -->
+        <! -- light - ->
         <rect
           class="c-light"
           x="2.05"
@@ -49,13 +49,13 @@
       </svg>
     </div>
     }
-    <!-- Door Icon -->
+    <! -- Door Icon - ->
     @if (isDoor) {
     <div [attr.aria-label]="'accessories.core.door' | translate" class="accessory-svg">
       <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <!-- outer frame -->
+        <! -- outer frame - ->
         <rect x="7.8" y="0.8" width="16.4" height="30.2" rx="0.5" stroke="#7f7f7f" fill="none" stroke-width="1.5" />
-        <!-- door outline -->
+        <! -- door outline - ->
         <rect
           class="outline"
           x="9.6"
@@ -66,7 +66,7 @@
           fill="none"
           stroke-width="1"
         />
-        <!-- top panel -->
+        <! -- top panel - ->
         <rect
           class="panel"
           x="11.2"
@@ -78,7 +78,7 @@
           stroke-width="0.5"
           rx="0.25"
         />
-        <!-- bottom panel -->
+        <! -- bottom panel - ->
         <rect
           class="panel"
           x="11.2"
@@ -90,9 +90,9 @@
           stroke-width="0.5"
           rx="0.25"
         />
-        <!-- wider floor -->
+        <! -- wider floor - ->
         <line x1="0" y1="31" x2="32" y2="31" stroke="#7f7f7f" stroke-width="1.5" />
-        <!-- door handle -->
+        <! -- door handle - ->
         <rect
           class="handle"
           x="19.25"
@@ -107,13 +107,13 @@
       </svg>
     </div>
     }
-    <!-- Window Icon -->
+    <! -- Window Icon - ->
     @if (isWindow) {
     <div [attr.aria-label]="'accessories.core.window' | translate" class="accessory-svg">
       <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <!-- outer frame -->
+        <! -- outer frame - ->
         <rect x="1" y="0.8" width="30" height="30.2" rx="0.5" stroke="#7f7f7f" fill="none" stroke-width="1.5" />
-        <!-- left window frame -->
+        <! -- left window frame - ->
         <rect
           class="outline-left"
           x="2.8"
@@ -124,7 +124,7 @@
           fill="none"
           stroke-width="1"
         />
-        <!-- left window divider -->
+        <! -- left window divider - ->
         <rect
           class="divider-left"
           x="3.66"
@@ -136,7 +136,7 @@
           stroke-width="0.5"
           ry="2"
         />
-        <!-- left window handle -->
+        <! -- left window handle - ->
         <rect
           class="handle-left"
           x="15.16"
@@ -148,7 +148,7 @@
           stroke-width="0.5"
           ry="2"
         />
-        <!-- right window frame -->
+        <! -- right window frame - ->
         <rect
           class="outline-right"
           x="16.8"
@@ -159,7 +159,7 @@
           fill="none"
           stroke-width="1"
         />
-        <!-- right window divider -->
+        <! -- right window divider - ->
         <rect
           class="divider-right"
           x="17.66"
@@ -171,7 +171,7 @@
           stroke-width="0.5"
           ry="2"
         />
-        <!-- right window handle -->
+        <! -- right window handle - ->
         <rect
           class="handle-right"
           x="16.76"

@@ -1,5 +1,5 @@
 import { NgClass, NgOptimizedImage, NgStyle } from '@angular/common'
-import { Component, inject } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Title } from '@angular/platform-browser'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
@@ -24,7 +24,7 @@ import { environment } from '@/environments/environment'
     NgStyle,
   ],
 })
-export class SetupWizardComponent {
+export class SetupWizardComponent implements OnInit {
   private $api = inject(ApiService)
   private $auth = inject(AuthService)
   private $settings = inject(SettingsService)

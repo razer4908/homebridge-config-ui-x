@@ -1,6 +1,6 @@
 import { KeyValuePipe } from '@angular/common'
 /* global NodeJS */
-import { Component, inject, Input, OnInit, signal, WritableSignal } from '@angular/core'
+import { Component, inject, Input, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CharacteristicType } from '@homebridge/hap-client'
 import { Enums } from '@homebridge/hap-client/dist/hap-types'
@@ -27,7 +27,7 @@ import { RemoveIndividualAccessoriesComponent } from '@/app/modules/settings/rem
     ServiceToTranslationStringPipe,
   ],
 })
-export class AccessoryInfoComponent implements OnInit {
+export class AccessoryInfoComponent implements OnInit, OnDestroy {
   private $activeModal = inject(NgbActiveModal)
   private $modal = inject(NgbModal)
   private copyTimeouts = new Map<WritableSignal<boolean>, NodeJS.Timeout>()

@@ -24,7 +24,7 @@
     <markdown class="plugin-md" [data]="schema.headerDisplay | interpolateMd" />
     }
 
-    <!-- MULTIPLE CONFIG BLOCKS-->
+    <! -- MULTIPLE CONFIG BLOCKS- ->
     @if (!loading && canConfigure) {
     <div ngbAccordion [closeOthers]="true">
       @for (block of pluginConfig; track block) {

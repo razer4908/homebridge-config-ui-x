@@ -14,6 +14,7 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 - update to use `v2` release plugin bundles
 - replace accessories screenshot in readme
 - updated dependencies
+- use angular eslint rules in ui folder + fix lint
 
 ### Homebridge Dependencies
 

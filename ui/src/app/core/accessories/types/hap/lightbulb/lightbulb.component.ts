@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common'
-import { Component, inject, Input } from '@angular/core'
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { TranslatePipe } from '@ngx-translate/core'
 import { BehaviorSubject } from 'rxjs'
@@ -20,7 +20,7 @@ import { LongClickDirective } from '@/app/core/directives/long-click.directive'
     TranslatePipe,
   ],
 })
-export class LightbulbComponent {
+export class LightbulbComponent implements OnInit, OnDestroy {
   private $accessories = inject(AccessoriesService)
   private $modal = inject(NgbModal)
   private intervalId: any
