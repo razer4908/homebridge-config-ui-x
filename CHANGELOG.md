@@ -4,6 +4,10 @@ All notable changes to `homebridge-config-ui-x` will be documented in this file.
 
 ## 5.16.1 (Unreleased)
 
+### UI Changes
+
+- improvements for homebridge v2
+
 ### Other Changes
 
 - fix deprecation github workflow script

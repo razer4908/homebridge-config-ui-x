@@ -9,6 +9,7 @@ export type HomebridgeUiUpdatePolicy = 'all' | 'beta' | 'major' | 'none'
 export interface BridgeConfig {
   username: string
   hideHapAlert?: boolean
+  hideMatterAlert?: boolean
   scheduledRestartCron?: string
 }
 
